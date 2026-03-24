@@ -151,12 +151,12 @@ export default function Hero() {
                 p-6 lg:p-10 flex flex-col justify-between relative"
           >
             {/* CONTENT */}
-            <div className="mt-7 lg:mt-16 text-center lg:text-left">
+            <div className="mt-8 lg:mt-16 text-center lg:text-left">
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="text-2xl md:text-2xl lg:text-4xl font-bold md:font-bold lg:font-bold leading-tight lg:pt-20 tracking-tight"
+                className="text-3xl md:text-2xl lg:text-4xl font-bold md:font-bold lg:font-bold leading-tight lg:pt-20 tracking-tight"
               >
                 “From Land to Lifestyle <br />
                 Your Complete Home Solution.”
@@ -172,8 +172,7 @@ export default function Hero() {
                   />
 
                   {/* TOP SHADOW (Spreading towards Navbar) */}
-                  <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-black/60 to-transparent z-10"></div>
-
+                  {/* <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-black/60 to-transparent z-10"></div> */}
                   {/* BOTTOM SHADOW (Spreading towards Content) */}
                   <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#f5f3ef] via-[#f5f3ef]/40 to-transparent z-10"></div>
                 </div>
@@ -240,7 +239,7 @@ export default function Hero() {
                 </div>
               </div>
               {/* Slightly larger disclaimer text */}
-              <p className="mt-3 text-[12px] text-center opacity-60">
+              <p className="mt-3 text-[12px] text-center opacity-90">
                 T & C Apply | CGI Artist Impression
               </p>
             </div>
