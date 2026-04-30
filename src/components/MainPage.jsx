@@ -81,13 +81,21 @@ export default function MainPage() {
         {/* Background */}
         <div className="absolute inset-0">
           <img
-            src="/hd.png"
+            src="/hd (1).webp"
             alt="hero"
-            className="w-full h-full object-cover object-[65%_center] lg:object-contain lg:scale-105"
+            className="w-full h-full object-cover object-[64%_center] lg:object-contain lg:scale-105"
           />
 
           {/* Main cinematic smooth overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#04120f]/95 via-[#0a1d18]/15 via-[60%] to-transparent" />
+          <div
+            className="absolute inset-0 
+  bg-gradient-to-r 
+  from-[#04120f]/95 
+  via-[#0a1d18]/15 
+  via-[20%] 
+  md:via-[60%] 
+  to-transparent"
+          />
 
           {/* Soft vignette */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_38%,rgba(255,200,120,0.16),transparent_34%),radial-gradient(circle_at_18%_45%,rgba(0,0,0,0.55),transparent_48%)]" />
@@ -97,31 +105,40 @@ export default function MainPage() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 w-full max-w-7xl px-4 md:px-0 pt-28 md:pt-10">
-          <div className="max-w-3xl text-left">
+        <div className="relative z-10 w-full max-w-7xl px-4 md:px-0 pt-16 md:pt-10 lg:pt-28">
+          <div className="max-w-3xl text-left [filter:drop-shadow(0_0_8px_rgba(0,0,0,0.9))_drop-shadow(0_0_18px_rgba(0,0,0,0.75))_drop-shadow(0_0_30px_rgba(0,0,0,0.6))]">
             {/* Top text */}
-            <p className="text-[#D8A33B] text-lg md:text-2xl font-medium tracking-wide">
+            {/* <p className="text-[#D8A33B] text-lg md:text-2xl font-medium tracking-wide ">
               Find. Choose. Own.
-            </p>
+            </p> */}
+
+            <span className=" text-[28px] sm:text-[50px] md:text-[25px] font-semibold relative whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-b from-[#fff6cf] via-[#e0b347] to-[#9a6815] ">
+              Find. Choose. Own.
+            </span>
 
             {/* Heading */}
-            <h1 className="mt-5 leading-[1.12] font-semibold">
+            <h1 className="mt-3 leading-[1.12] font-semibold">
               {/* Search Luxury */}
-              <span className="mb-1 block text-[34px] sm:text-[48px] md:text-[62px] font-serif text-[#F7F3EC] [text-shadow:_0_3px_8px_rgba(0,0,0,0.45)]">
+              <span className="mb-1 block text-[34px] sm:text-[48px] md:text-[62px] font-serif text-[#F7F3EC] ">
                 Search Affordable
+                <br className="block md:hidden" />
+                <span className="block mt-2 mb-2 md:mt-0 md:mb-0">
+                  Homes in Bangalore
+                </span>
               </span>
 
               {/* Homes */}
-              <span className="mt-2 block text-[42px] sm:text-[60px] md:text-[62px] font-serif font-semibold relative whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-b from-[#fff6cf] via-[#e0b347] to-[#9a6815] [filter:drop-shadow(0_0_8px_rgba(0,0,0,0.9))_drop-shadow(0_0_18px_rgba(0,0,0,0.75))_drop-shadow(0_0_30px_rgba(0,0,0,0.6))]">
-                Homes in Banglore
-              </span>
+              {/* <span className="mt-2 block text-[42px] sm:text-[60px] md:text-[62px] font-serif font-semibold relative whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-b from-[#fff6cf] via-[#e0b347] to-[#9a6815] ">
+                Homes in <br className="block md:hidden" />
+                Bangalore
+              </span> */}
             </h1>
 
             {/* Gold line */}
-            <div className="w-16 md:w-20 h-[3px] bg-[#D8A33B] rounded-full mt-5"></div>
+            <div className="w-26 md:w-20 h-[3px] bg-[#D8A33B] rounded-full mt-5"></div>
 
             {/* Paragraph */}
-            <p className="text-white/90 mt-5 text-base md:text-xl leading-relaxed max-w-xl">
+            <p className="text-white/90 mt-8 text-base md:text-xl leading-relaxed max-w-xl">
               Thousands of luxury home enthusiasts just like you
               <br className="hidden md:block" />
               visit our website.
@@ -129,13 +146,23 @@ export default function MainPage() {
 
             <div className="mt-6 w-full flex justify-left">
               <div className="w-full max-w-md bg-white rounded-full text-black shadow-lg flex flex-row items-center overflow-hidden border border-orange-300">
-                <input
-                  type="text"
-                  placeholder="Search by location"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="flex-1 px-4 py-3 outline-none text-black text-sm min-w-0"
-                />
+                <div className="relative flex items-center w-full">
+                  {/* ICON */}
+                  <MapPin
+                    size={18}
+                    className="absolute left-3 text-gray-500"
+                    strokeWidth={1.5} // 👈 makes it thinner (important)
+                  />
+
+                  {/* INPUT */}
+                  <input
+                    type="text"
+                    placeholder="Search by location eg. Hoskote"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="flex-1 pl-10 pr-4 py-3 outline-none text-black text-sm rounded-full"
+                  />
+                </div>
 
                 <button className="bg-[#B97715] hover:bg-orange-600 text-white p-4 mr-1 my-1 rounded-full flex items-center justify-center shrink-0 transition-colors">
                   <Search size={18} />

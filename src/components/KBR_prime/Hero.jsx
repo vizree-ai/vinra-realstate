@@ -37,8 +37,7 @@ export default function Hero() {
     ${className}`}
     >
       <Image
-        src="/hoskote.webp
-        "
+        src="/Vinra KBR Prime.webp"
         alt="House construction services in Bangalore by Vinra Construction"
         fill
         priority
