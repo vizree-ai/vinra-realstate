@@ -93,7 +93,7 @@ export default function Navbar({ variant = "home" }) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <button className="flex items-center gap-2 border border-[#D8A33B] text-[#D8A33B] px-5 py-2.5 rounded-xl bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all duration-300">
+                  <button className="flex items-center gap-2 border-2 border-[#D8A33B] text-[#D8A33B] px-5 py-2.5 rounded-xl bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all duration-300">
                     <FaWhatsapp size={20} />
                     Connect with us
                   </button>

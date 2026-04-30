@@ -98,7 +98,7 @@ export default function MainPage() {
           />
 
           {/* Soft vignette */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_38%,rgba(255,200,120,0.16),transparent_34%),radial-gradient(circle_at_18%_45%,rgba(0,0,0,0.55),transparent_48%)]" />
+          {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_38%,rgba(255,200,120,0.16),transparent_34%),radial-gradient(circle_at_18%_45%,rgba(0,0,0,0.55),transparent_48%)]" /> */}
 
           {/* Bottom depth */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
@@ -200,63 +200,12 @@ export default function MainPage() {
             </div>
           </div>
         </div>
-        {/* 
-        <div className="relative z-10 text-center px-4 w-full max-w-5xl">
-          <h1 className="text-white font-bold text-3xl sm:text-4xl md:text-6xl">
-            Search Luxury Homes
-          </h1>
-
-          <p className="text-white/90 mt-3 text-sm sm:text-base md:text-lg">
-            Thousands of luxury home enthusiasts just like you visit our
-            website.
-          </p>
-
-          <div className="mt-6 w-full flex justify-center px-2">
-            <div className="w-full max-w-md bg-white rounded-full text-black shadow-lg flex flex-row items-center overflow-hidden border border-orange-300">
-              <input
-                type="text"
-                placeholder="Search by location"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="flex-1 px-4 py-3 outline-none text-black text-sm min-w-0"
-              />
-
-              <button className="bg-[#B97715] hover:bg-orange-600 text-white p-4 mr-1 my-1 rounded-full flex items-center justify-center shrink-0 transition-colors">
-                <Search size={18} />
-              </button>
-            </div>
-
-            {search && (
-              <div className="absolute top-full mt-2 w-full max-w-md bg-amber-50 text-gray-900 rounded-2xl rounded-2xl shadow-lg border z-50">
-                {filteredListings.length > 0 ? (
-                  filteredListings.map((item) => (
-                    <Link
-                      key={item.id}
-                      href={item.link || "/KBR_prime"}
-                      className="flex items-center gap-3 px-4 py-3 hover:bg-gray-200 cursor-pointer hover:rounded-2xl"
-                    >
-                      <img
-                        src={item.image}
-                        className="w-12 h-12 rounded-md object-cover"
-                      />
-                      <div className="text-left">
-                        <p className="text-sm font-semibold">{item.title}</p>
-                        <p className="text-sm text-gray-700">
-                          {item.location || "Bangalore"}
-                        </p>
-                      </div>
-                    </Link>
-                  ))
-                ) : (
-                  <p className="p-3 text-sm text-gray-500">No results found</p>
-                )}
-              </div>
-            )}
-          </div>
-        </div> */}
       </section>
 
-      <section className="w-full bg-[#F7F3EC] py-12 px-4 md:px-10">
+      <section
+        className="w-full   bg-[url('/bg.jpg')] 
+  bg-cover bg-center bg-no-repeat py-12 px-4 md:px-10"
+      >
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-5xl font-bold text-gray-800">
             Properties in Banglore 🏡
