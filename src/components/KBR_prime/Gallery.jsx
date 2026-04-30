@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import EnquiryForm from "../EnquiryForm";
 
 const images = [
   "/1.jpeg",
-  "/banner.jpeg",
+  "/house.jpeg",
   "/home.jpg",
   "/house.jpeg",
   "/1.jpeg",
@@ -29,7 +30,7 @@ export default function Gallery() {
         <div className="max-w-7xl mx-auto px-6 text-center">
           {/* TITLE */}
           <h2 className="text-3xl font-semibold text-[#5b3d2e] mb-10">
-            Gallery
+            Visualize Your Future Home
           </h2>
 
           {/* SLIDER */}
@@ -108,40 +109,10 @@ export default function Gallery() {
           </div>
 
           {/* DOWNLOAD */}
-          <div className="mt-12">
-            <h3 className="text-2xl text-[#5b3d2e] mb-4">Project Resources</h3>
-            <div className="mt-4">
-              <div className="bg-white/50 lg:bg-[#f3f1ed] text-[#5b3d2e] grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center rounded-xl shadow-lg font-bold border border-white/20">
-                <div className="text-center py-3">
-                  <p className="text-base lg:text-xl">Expansive</p>
-                  <p className="text-[10px] lg:text-base opacity-70">
-                    Balconies
-                  </p>
-                </div>
-                <div className="h-8 w-[1px] bg-[#5b3d2e]/20"></div>
-                <div className="text-center py-3">
-                  <p className="text-base lg:text-xl">25+</p>
-                  <p className="text-[10px] lg:text-base opacity-70">
-                    Amenities
-                  </p>
-                </div>
-                <div className="h-8 w-[1px] bg-[#5b3d2e]/20"></div>
-                <div className="text-center py-3">
-                  <p className="text-base lg:text-xl">Exclusive</p>
-                  <p className="text-[10px] lg:text-base opacity-70">
-                    Lawn & Terrace
-                  </p>
-                </div>
-              </div>
-              <p className="mt-2 text-[10px] text-center opacity-60">
-                T & C Apply | CGI Artist Impression
-              </p>
-            </div>
 
-            <button className="border-3 border-dashed border-[#5b3d2e] px-6 py-3 rounded-full hover:bg-[#5b3d2e] hover:text-white transition">
-              📄 Download Broucher
-            </button>
-          </div>
+          <button className="text-[#5b3d2e] mt-12 bg-amber-100 border-3 border-dashed border-[#5b3d2e] px-6 py-3 rounded-full hover:bg-[#5b3d2e] hover:text-white transition">
+            📄 Download Broucher
+          </button>
         </div>
       </section>
       <section className="bg-[#5b3d2e] py-20 text-white">
@@ -243,45 +214,7 @@ export default function Gallery() {
         </div>
       </div>
       <section className="w-full">
-        {/* TOP FORM SECTION */}
-        {/* Reduced py-10 to py-8 on mobile */}
-        <div className="bg-[#9c8c7f] py-8 md:py-10 text-center px-5">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            /* Reduced text-3xl to text-2xl on mobile and lowered margin */
-            className="text-2xl md:text-4xl text-white mb-6 md:mb-10 font-medium px-4"
-          >
-            Request For Site Visit
-          </motion.h2>
-
-          {/* Reduced gap from 6 to 3 for tighter stacking on mobile */}
-          <div className="max-w-5xl mx-auto px-6 flex flex-col lg:flex-row gap-3 md:gap-6 justify-center items-center">
-            {/* Reduced py-4 to py-3 for shorter input fields on mobile */}
-            <input
-              type="text"
-              placeholder="Name*"
-              className="w-full lg:w-1/3 px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base"
-            />
-
-            <input
-              type="tel"
-              placeholder="Phone no*"
-              className="w-full lg:w-1/3 px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base"
-            />
-
-            <input
-              type="email"
-              placeholder="Email*"
-              className="w-full lg:w-1/3 px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base"
-            />
-          </div>
-
-          {/* BUTTON: Slightly smaller padding and margin for mobile */}
-          <button className="mt-6 md:mt-8 bg-[#5b3d2e] text-white px-8 md:px-10 py-2.5 md:py-3 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition text-sm md:text-base font-semibold">
-            ENQUIRE
-          </button>
-        </div>
+        <EnquiryForm variant="visit" />
 
         {/* BOTTOM DISCLAIMER */}
         {/* Reduced py-14 to py-8 for a much shorter footer on mobile */}

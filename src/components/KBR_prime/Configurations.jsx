@@ -51,7 +51,7 @@ export default function Configurations() {
     >
       <div className="fixed md:fixed inset-0 -z-10 w-full h-full">
         <img
-          src="/banner.jpeg"
+          src="/house.jpeg"
           className="w-full h-full object-cover"
           alt="Background"
         />
