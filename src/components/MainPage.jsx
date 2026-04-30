@@ -83,7 +83,7 @@ export default function MainPage() {
           <img
             src="/hd.png"
             alt="hero"
-            className="w-full h-full object-contain scale-105"
+            className="w-full h-full object-cover object-[65%_center] lg:object-contain lg:scale-105"
           />
 
           {/* Main cinematic smooth overlay */}
