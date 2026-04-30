@@ -37,7 +37,8 @@ export default function Hero() {
     ${className}`}
     >
       <Image
-        src="/check.png"
+        src="/hoskote.webp
+        "
         alt="House construction services in Bangalore by Vinra Construction"
         fill
         priority
