@@ -16,7 +16,7 @@ export default function Navbar({ variant = "home" }) {
     <>
       {/* ================= NAVBAR ================= */}
       <div
-        className={`w-full z-50 ${
+        className={`w-full z-[100] ${
           isHome
             ? "absolute top-0 left-0 px-4 md:px-10 pt-4"
             : "relative lg:absolute lg:top-0 lg:left-0 px-3 lg:px-7 bg-[#F7F3EC] lg:bg-transparent"
@@ -124,7 +124,7 @@ export default function Navbar({ variant = "home" }) {
           {/* ================= MOBILE BUTTON ================= */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden lg:hidden flex items-center bg-[#9f773c] rounded-full px-4 py-1 text-white text-3xl"
+            className="md:hidden cursor-pointer lg:hidden z-[101] flex items-center bg-[#9f773c] rounded-full px-4 py-1 text-white text-3xl"
           >
             {isOpen ? "✕" : "☰"}
           </button>
@@ -138,7 +138,7 @@ export default function Navbar({ variant = "home" }) {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-[90] bg-[#C4934A] backdrop-blur-xl flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[90] bg-[#deb06c] backdrop-blur-xl flex flex-col items-center justify-center"
           >
             <div className="flex flex-col gap-8 text-[#1E3D34] text-2xl font-semibold">
               {isHome ? (

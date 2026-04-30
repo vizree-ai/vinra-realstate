@@ -112,14 +112,14 @@ export default function MainPage() {
               Find. Choose. Own.
             </p> */}
 
-            <span className=" text-[28px] sm:text-[50px] md:text-[25px] font-semibold relative whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-b from-[#fff6cf] via-[#e0b347] to-[#9a6815] ">
+            <span className=" text-[26px] sm:text-[40px] md:text-[25px] font-semibold relative whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-b from-[#fff6cf] via-[#e0b347] to-[#9a6815] ">
               Find. Choose. Own.
             </span>
 
             {/* Heading */}
             <h1 className="mt-3 leading-[1.12] font-semibold">
               {/* Search Luxury */}
-              <span className="mb-1 block text-[34px] sm:text-[48px] md:text-[62px] font-serif text-[#F7F3EC] ">
+              <span className="mb-1 block text-[30px] sm:text-[48px] md:text-[62px] font-serif text-[#F7F3EC] ">
                 Search Affordable
                 <br className="block md:hidden" />
                 <span className="block mt-2 mb-2 md:mt-0 md:mb-0">
@@ -138,8 +138,8 @@ export default function MainPage() {
             <div className="w-26 md:w-20 h-[3px] bg-[#D8A33B] rounded-full mt-5"></div>
 
             {/* Paragraph */}
-            <p className="text-white/90 mt-8 text-base md:text-xl leading-relaxed max-w-xl">
-              Thousands of luxury home enthusiasts just like you
+            <p className="text-white/90 mt-8 text-lg md:text-xl leading-relaxed max-w-xl">
+              Thousands of luxury home enthusiasts just like you{" "}
               <br className="hidden md:block" />
               visit our website.
             </p>

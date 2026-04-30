@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { User, Phone, Building } from "lucide-react";
 
 export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
   const [name, setName] = useState("");
@@ -101,34 +102,74 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
         <h2 className="text-2xl md:text-4xl font-semibold text-[#1E3D34] leading-tight md:leading-snug">
           Interested? Let's talk!
         </h2>
-
+        <div className="w-26 md:w-20 h-[3px] bg-[#b78a31] rounded-full mt-2"></div>
         <form
           onSubmit={handleSubmit}
           className="mt-5 md:mt-8 space-y-3 md:space-y-4"
         >
-          <input
-            type="text"
-            placeholder="Name*"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full px-5 py-2.5 md:py-3 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] text-[#5b3d2e] bg-transparent placeholder-[#5b3d2e]/60 outline-none focus:ring-1 focus:ring-[#5b3d2e]"
-            required
-          />
-
-          <input
-            type="tel"
-            placeholder="Phone no*"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="w-full px-5 py-2.5 md:py-3 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] text-[#5b3d2e] bg-transparent placeholder-[#5b3d2e]/60 outline-none focus:ring-1 focus:ring-[#5b3d2e]"
-            required
-          />
-
+          {/* NAME */}
           <div className="relative">
+            <User
+              size={20}
+              strokeWidth={1.5}
+              className="absolute left-4 top-1/2 -translate-y-1/2  text-[#b78a31] z-10 pointer-events-none"
+            />
+            <input
+              type="text"
+              placeholder="Name*"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full pl-12 pr-5 py-3 rounded-xl md:rounded-2xl 
+                 border border-[#1E3D34]
+                    text-[#1E3D34] placeholder-[#1E3D34]/70 
+                    outline-none 
+                    focus:border-[#C8A96A] focus:ring-2 focus:ring-[#C8A96A]/30 
+                    transition-all"
+              required
+            />
+          </div>
+
+          {/* PHONE */}
+          <div className="relative">
+            <Phone
+              size={20}
+              strokeWidth={1.5}
+              className="absolute left-4 top-1/2 -translate-y-1/2 
+      text-[#b78a31] z-10 pointer-events-none"
+            />
+            <input
+              type="tel"
+              placeholder="Phone no*"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="w-full pl-12 pr-5 py-3 rounded-xl md:rounded-2xl 
+      border border-[#1E3D34] 
+      text-[#1E3D34] placeholder-[#1E3D34]/70 
+      outline-none 
+      focus:border-[#C8A96A] focus:ring-2 focus:ring-[#C8A96A]/30 
+      transition-all"
+              required
+            />
+          </div>
+
+          {/* SELECT */}
+          <div className="relative">
+            <Building
+              size={20}
+              strokeWidth={1.5}
+              className="absolute left-4 top-1/2 -translate-y-1/2 
+      text-[#b78a31] z-10 pointer-events-none"
+            />
+
             <select
               value={bhk}
               onChange={(e) => setBhk(e.target.value)}
-              className="block w-full px-4 py-3 rounded-xl border-2 border-[#5b3d2e] bg-transparent text-[#5b3d2e]/60 outline-none focus:ring-1 focus:ring-[#5b3d2e] appearance-none cursor-pointer"
+              className="block w-full pl-12 pr-10 py-3 rounded-xl 
+    border border-[#1E3D34]
+      text-[#1E3D34]/70 
+      outline-none 
+      focus:border-[#C8A96A] focus:ring-2 focus:ring-[#C8A96A]/30 
+      appearance-none cursor-pointer transition-all"
               required
             >
               <option value="" disabled hidden>
@@ -138,14 +179,23 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
               <option value="3 BHK">3 BHK</option>
             </select>
 
-            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#5b3d2e]">
+            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#1E3D34]">
               ▼
             </span>
           </div>
 
+          {/* BUTTON */}
           <button
             type="submit"
-            className="w-full bg-[#5b3d2e] text-white py-3 md:py-4 rounded-xl font-semibold tracking-wide active:scale-95 md:hover:scale-105 hover:shadow-lg "
+            className="w-full 
+bg-gradient-to-r from-[#b07a1d] to-[#c69636] 
+text-white py-3 md:py-4 
+rounded-xl font-semibold tracking-wide 
+shadow-md 
+hover:shadow-lg 
+active:scale-95 md:hover:scale-[1.02] 
+transition-all 
+relative overflow-hidden"
           >
             ENQUIRE
           </button>
