@@ -14,6 +14,16 @@ export default function MainPage() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    if (!window.location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchListings = async () => {
       const { data, error } = await supabase
         .from("properties")
@@ -58,14 +68,13 @@ export default function MainPage() {
 
         {/* Background */}
         <div className="absolute inset-0">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/hd (1).webp"
             alt="hero"
-            fill
-            priority
             fetchPriority="high"
-            quality={80}
-            sizes="100vw"
+            loading="eager"
+            decoding="sync"
             className="w-full h-full object-cover object-[64%_center]"
           />
 
