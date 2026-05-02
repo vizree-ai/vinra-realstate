@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa";
@@ -10,8 +10,33 @@ import { Building2, Home, Ruler, Handshake } from "lucide-react";
 export default function Navbar({ variant = "home" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  const [isNavbarHidden, setIsNavbarHidden] = useState(false);
+  const lastScrollY = useRef(0);
+  const lastMenuScrollY = useRef(0);
 
   const isHome = variant === "home";
+
+  const updateNavbarVisibility = (currentScrollY, lastScrollRef) => {
+    if (currentScrollY <= 10) {
+      setIsNavbarHidden(false);
+    } else if (currentScrollY > lastScrollRef.current + 6) {
+      setIsNavbarHidden(true);
+    } else if (currentScrollY < lastScrollRef.current - 6) {
+      setIsNavbarHidden(false);
+    }
+
+    lastScrollRef.current = currentScrollY;
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      updateNavbarVisibility(window.scrollY, lastScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleExploreProjects = () => {
     setIsOpen(false);
@@ -21,14 +46,25 @@ export default function Navbar({ variant = "home" }) {
     });
   };
 
+  const handleMenuToggle = () => {
+    setIsNavbarHidden(false);
+    setIsOpen((current) => !current);
+  };
+
+  const handleMobileMenuScroll = (event) => {
+    updateNavbarVisibility(event.currentTarget.scrollTop, lastMenuScrollY);
+  };
+
   return (
     <>
       {/* ================= NAVBAR ================= */}
       <div
-        className={`scroll-auto top-0 left-0 w-full z-[100] ${
+        className={`fixed top-0 left-0 w-full z-[100] transition-transform duration-300 ease-out ${
+          isNavbarHidden ? "-translate-y-full" : "translate-y-0"
+        } ${
           isHome
-            ? "absolute top-0 left-0 px-4 md:px-10 pt-4"
-            : "relative lg:absolute lg:top-0 lg:left-0 px-3 lg:px-7 bg-[#F7F3EC] lg:bg-transparent"
+            ? "px-4 md:px-10 pt-4"
+            : "px-3 lg:px-7 bg-[#F7F3EC] lg:bg-transparent"
         }`}
       >
         <div
@@ -43,7 +79,7 @@ export default function Navbar({ variant = "home" }) {
             width={110}
             height={60}
             className={`object-contain ${
-              isHome ? "mt-6 w-[90px] md:w-[110px]" : "w-[85px] lg:w-[100px]"
+              isHome ? " w-[90px] md:w-[110px]" : "w-[85px] lg:w-[100px]"
             }`}
           />
 
@@ -132,7 +168,7 @@ export default function Navbar({ variant = "home" }) {
 
           {/* ================= MOBILE BUTTON ================= */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={handleMenuToggle}
             className="md:hidden cursor-pointer lg:hidden z-[101] flex items-center bg-[#9f773c] rounded-full px-4 py-1 text-white text-3xl"
           >
             {isOpen ? "✕" : "☰"}
@@ -147,6 +183,7 @@ export default function Navbar({ variant = "home" }) {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
+            onScroll={handleMobileMenuScroll}
             className="fixed inset-0 z-[90] bg-[#deb06c] backdrop-blur-xl overflow-y-auto px-6 py-24"
           >
             <div className="flex flex-col gap-8 text-[#1E3D34] text-2xl font-semibold">
