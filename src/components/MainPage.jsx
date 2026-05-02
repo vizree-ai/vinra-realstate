@@ -2,11 +2,19 @@
 import { Search } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, BedDouble, Ruler, Building2 } from "lucide-react";
+import {
+  MapPin,
+  BedDouble,
+  Ruler,
+  Building2,
+  Home,
+  Handshake,
+} from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import Navbar from "./CommonNavbar";
 import EnquiryForm from "./EnquiryForm";
+import MobileStickyContact from "./MobileStickyContact";
 
 export default function MainPage() {
   const [listings, setListings] = useState([]);
@@ -28,7 +36,7 @@ export default function MainPage() {
       const { data, error } = await supabase
         .from("properties")
         .select("*")
-        .order("id", { ascending: false });
+        .order("display_order", { ascending: false });
 
       if (error) {
         console.error(error);
@@ -62,7 +70,7 @@ export default function MainPage() {
     <>
       <section className="relative w-full h-[85vh] md:h-[99vh] flex items-center justify-center overflow-visible">
         {/* Top smooth overlay */}
-        <div className="absolute top-0 left-0 w-full h-36 md:h-44 bg-gradient-to-b from-black/75 via-black/35 to-transparent z-20" />
+        <div className="absolute top-0 left-0 w-full h-36 md:h-44 bg-gradient-to-b from-yellow/85 via-yellow/45 to-transparent z-20" />
 
         <Navbar variant="home" />
 
@@ -81,19 +89,19 @@ export default function MainPage() {
           {/* Main cinematic smooth overlay */}
           <div
             className="absolute inset-0 
-  bg-gradient-to-r 
-  from-[#04120f]/95 
-  via-[#0a1d18]/15 
-  via-[20%] 
-  md:via-[60%] 
-  to-transparent"
+                     bg-gradient-to-r 
+                     from-[#04120f]/95 
+                     via-[#0a1d18]/15 
+                     via-[20%] 
+                     md:via-[60%] 
+                     to-transparent"
           />
 
           {/* Soft vignette */}
           {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_38%,rgba(255,200,120,0.16),transparent_34%),radial-gradient(circle_at_18%_45%,rgba(0,0,0,0.55),transparent_48%)]" /> */}
 
           {/* Bottom depth */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-yellow/55 via-transparent to-transparent" />
         </div>
 
         {/* Content */}
@@ -323,155 +331,139 @@ export default function MainPage() {
         </div>
       </section>
 
-      {/* <section className="w-full bg-[#f5f5f5] py-12 px-4 md:px-12">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
-          <div>
-            <p className="text-sm tracking-widest text-yellow-600 font-semibold mb-3">
-              ABOUT VINRA GROUP
-            </p>
+      <section
+        id="about"
+        className="relative w-full scroll-mt-10 overflow-hidden bg-[#f6f1e8] px-4 py-16 md:px-12 md:py-20"
+      >
+        <div className="absolute inset-0 opacity-60 [background-image:linear-gradient(90deg,rgba(30,61,52,0.08)_1px,transparent_1px),linear-gradient(180deg,rgba(30,61,52,0.06)_1px,transparent_1px)] [background-size:44px_44px]" />
+        <div className="absolute -right-24 top-10 h-72 w-72 rounded-full border border-[#c9a14a]/35" />
+        <div className="absolute -left-20 bottom-12 h-52 w-52 rounded-full border border-[#1E3D34]/20" />
 
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 leading-snug">
-              Crafting Turnkey Real Estate Engineering
-            </h2>
+        <div className="relative mx-auto max-w-7xl">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+            <div>
+              <p className="mb-3 text-xs font-bold tracking-[3px] text-[#9f773c]">
+                ABOUT VINRA GROUP
+              </p>
 
-            <p className="mt-5 text-gray-600 text-sm md:text-base leading-relaxed">
-              With over 15+ years of industry experience, Vinra Group stands
-              tall as one of the most reputable builders in Bangalore. What
-              began as a small construction firm has now evolved into a leading
-              force in real estate, construction, and interior design across
-              Karnataka.
-            </p>
+              <h2 className="max-w-3xl font-serif text-3xl font-semibold leading-tight text-gray-950 md:text-5xl">
+                Crafting Turnkey Real Estate Excellence
+              </h2>
 
-            <p className="mt-4 text-gray-600 text-sm md:text-base leading-relaxed">
-              We are proud to be recognized among the trusted builders in
-              Bangalore, known for our commitment to quality, customer
-              satisfaction, and innovation.
-            </p>
+              <div className="my-5 flex items-center gap-3">
+                <span className="h-[2px] w-14 bg-[#c9a14a]" />
+                <span className="h-2 w-2 rounded-full bg-[#1E3D34]" />
+                <span className="h-[2px] w-8 bg-[#c9a14a]" />
+              </div>
+
+              <div className="max-w-2xl space-y-4 text-sm leading-relaxed text-gray-700 md:text-base">
+                <p>
+                  With over 15+ years of experience, Vinra Group has grown into
+                  one of Bangalore&apos;s most trusted real estate brands. From
+                  construction to interiors, we deliver complete property
+                  solutions tailored for modern living.
+                </p>
+                <p>
+                  Our focus on quality, innovation, and customer satisfaction
+                  has made us a preferred choice for homebuyers and investors
+                  alike.
+                </p>
+              </div>
+
+              <button
+                onClick={() =>
+                  document.getElementById("projects")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+                className="mt-7 rounded-full bg-[#1E3D34] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(30,61,52,0.22)] transition hover:bg-[#163027] hover:shadow-[0_18px_36px_rgba(30,61,52,0.28)]"
+              >
+                Explore Our Projects
+              </button>
+            </div>
+
+            <div className="relative pb-28 md:pb-24">
+              <div className="relative h-[320px] overflow-hidden rounded-2xl shadow-[0_24px_55px_rgba(30,61,52,0.22)] md:h-[430px]">
+                <Image
+                  src="/house.jpeg"
+                  alt="Vinra Group real estate construction"
+                  fill
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1E3D34]/55 via-transparent to-transparent" />
+                <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/25 bg-white/15 p-4 text-white backdrop-blur-md">
+                  <p className="text-sm font-semibold">
+                    Building trust through real estate excellence.
+                  </p>
+                  <p className="mt-1 text-xs text-white/80">
+                    Quality construction, premium living spaces, and complete
+                    property solutions.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="relative mt-10 md:-mt-20 z-10 px-2 md:px-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { value: "15+", label: "Years Experience", Icon: Building2 },
+                  { value: "3,000+", label: "Projects Completed", Icon: Home },
+                  { value: "1M+", label: "SqFt Built", Icon: Ruler },
+                  { value: "100+", label: "Ongoing Projects", Icon: Handshake },
+                ].map(({ value, label, Icon }) => (
+                  <div
+                    key={label}
+                    className="group rounded-2xl border border-white/30 bg-white/60 backdrop-blur-xl p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition duration-300 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
+                  >
+                    <Icon className="mb-3 h-6 w-6 text-[#c4934a] group-hover:scale-110 transition" />
+                    <h3 className="text-2xl md:text-3xl font-bold text-[#1E3D34]">
+                      {value}
+                    </h3>
+                    <p className="mt-1 text-xs font-semibold text-[#9f773c] tracking-wide">
+                      {label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div className="grid grid-cols-2 gap-8 relative">
-            <div className="hidden lg:block absolute left-0 top-0 h-full w-[1px] bg-yellow-600/40"></div>
-
-            <div className="pl-0 lg:pl-8">
-              <h3 className="text-4xl font-semibold text-gray-800">15+</h3>
-              <p className="text-sm text-yellow-700 mt-1">
-                Years of Excellence
+        <div className="mt-10 grid gap-5 md:mt-16 md:grid-cols-3">
+          {[
+            {
+              title: "Complete Solutions",
+              text: "Vinra Group offers end-to-end real estate solutions, from property investment to construction and interior design.",
+              Icon: Building2,
+            },
+            {
+              title: "Spaces That Last",
+              text: "We do not just build structures. We create spaces that inspire, perform, and stay valuable for years.",
+              Icon: Home,
+            },
+            {
+              title: "Seamless Execution",
+              text: "Our expert team ensures smooth delivery and world-class standards in every project we take forward.",
+              Icon: Handshake,
+            },
+          ].map(({ title, text, Icon }) => (
+            <div
+              key={title}
+              className="rounded-2xl border border-[#e4d6bc] bg-white/80 p-6 shadow-[0_14px_34px_rgba(30,61,52,0.08)] backdrop-blur-md transition hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(30,61,52,0.12)]"
+            >
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#1E3D34] text-white">
+                <Icon className="h-5 w-5" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-950">{title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-gray-700">
+                {text}
               </p>
             </div>
-
-            <div>
-              <h3 className="text-4xl font-semibold text-gray-800">3,000+</h3>
-              <p className="text-sm text-yellow-700 mt-1">Projects Completed</p>
-            </div>
-
-            <div className="pl-0 lg:pl-8">
-              <h3 className="text-4xl font-semibold text-gray-800">1M+</h3>
-              <p className="text-sm text-yellow-700 mt-1">SqFt Transacted</p>
-            </div>
-
-            <div>
-              <h3 className="text-4xl font-semibold text-gray-800">100+</h3>
-              <p className="text-sm text-yellow-700 mt-1">Ongoing Projects</p>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      <section className="w-full bg-[#f5f5f5] py-16 px-4 md:px-12">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          {/* LEFT CONTENT */}
-          <div>
-            <p className="text-xs tracking-[3px] text-[#c9a14a] font-semibold mb-3">
-              ABOUT VINRA GROUP
-            </p>
-
-            <h2 className="text-3xl md:text-5xl font-serif font-semibold text-gray-900 leading-tight">
-              Crafting Turnkey Real Estate Excellence
-            </h2>
-
-            <p className="mt-6 text-gray-600 text-sm md:text-base leading-relaxed">
-              With over 15+ years of experience, Vinra Group has grown into one
-              of Bangalore’s most trusted real estate brands. From construction
-              to interiors, we deliver complete property solutions tailored for
-              modern living.
-            </p>
-
-            <p className="mt-4 text-gray-600 text-sm md:text-base leading-relaxed">
-              Our focus on quality, innovation, and customer satisfaction has
-              made us a preferred choice for homebuyers and investors alike.
-            </p>
-          </div>
-
-          {/* RIGHT STATS */}
-          <div className="grid grid-cols-2 gap-6">
-            {[
-              { value: "15+", label: "Years Experience" },
-              { value: "3,000+", label: "Projects Completed" },
-              { value: "1M+", label: "SqFt Built" },
-              { value: "100+", label: "Ongoing Projects" },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="bg-white/60 backdrop-blur-md border border-white/40 rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition"
-              >
-                <h3 className="text-3xl md:text-4xl font-bold text-[#c9a14a]">
-                  {item.value}
-                </h3>
-                <p className="text-sm text-gray-600 mt-2">{item.label}</p>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
       </section>
-      {/* 
-      <section className="w-full bg-[#e8ded8] py-10 px-4 md:px-12">
-        <div className="max-w-7xl mx-auto space-y-6 text-gray-700 text-sm md:text-base leading-relaxed">
-          <p>
-            Vinra Group is a full-service real estate development company
-            offering a wide spectrum of services from property investment and
-            building construction to premium interior design and property
-            management. As one of the best construction firms in Bangalore, we
-            deliver turnkey solutions for residential, commercial, and
-            industrial projects. We don’t just build structures, we build trust,
-            relationships, and lasting value.
-          </p>
 
-          <p>
-            Our journey is rooted in a passion for building better spaces,
-            whether it’s homes, offices, commercial spaces, or lifestyle
-            communities. Today, Vinra Group continues to redefine excellence as
-            one of the best real estate developers in Bangalore, with a growing
-            presence outside Karnataka as well.
-          </p>
-
-          <p>
-            Our dynamic team of experts is what sets us apart from other famous
-            builders in Bangalore. With architects, engineers, interior
-            designers, and project managers under one roof, we ensure seamless
-            execution, creative design, and world-class quality in every
-            project.
-          </p>
-        </div>
-      </section> */}
-      <section className="w-full bg-[#e8ded8] py-14 px-4 md:px-12">
-        <div className="max-w-5xl mx-auto text-center space-y-6 text-gray-700">
-          <p className="text-sm md:text-base leading-relaxed">
-            Vinra Group offers end-to-end real estate solutions, from property
-            investment to construction and interior design. We don’t just build
-            structures — we create spaces that inspire and last.
-          </p>
-
-          <p className="text-sm md:text-base leading-relaxed">
-            With a passion for quality and innovation, we continue to redefine
-            modern living through thoughtfully designed residential and
-            commercial projects.
-          </p>
-
-          <p className="text-sm md:text-base leading-relaxed">
-            Our expert team ensures seamless execution and world-class standards
-            in every project we deliver.
-          </p>
-        </div>
-      </section>
       <footer className="w-full bg-[#1a1a1a] text-white py-12 px-6 md:px-12">
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-10">
           {/* BRAND */}
@@ -529,6 +521,7 @@ export default function MainPage() {
           © {new Date().getFullYear()} Vinra Group. All rights reserved.
         </div>
       </footer>
+      <MobileStickyContact setOpen={setOpen} />
       <EnquiryForm open={open} setOpen={setOpen} />
     </>
   );

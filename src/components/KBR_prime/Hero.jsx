@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 import EnquiryForm from "../EnquiryForm";
+import MobileStickyContact from "../MobileStickyContact";
 
 function HeroImage({ className = "" }) {
   return (
@@ -214,6 +215,7 @@ export default function Hero() {
       </div>
 
       <EnquiryForm open={open} setOpen={setOpen} />
+      <MobileStickyContact setOpen={setOpen} />
     </section>
   );
 }

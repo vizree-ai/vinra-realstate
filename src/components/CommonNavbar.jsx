@@ -1,70 +1,61 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa";
 import EnquiryForm from "./EnquiryForm";
-import { Building2, Home, Ruler, Handshake } from "lucide-react";
 
 export default function Navbar({ variant = "home" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
-  const [isNavbarHidden, setIsNavbarHidden] = useState(false);
-  const lastScrollY = useRef(0);
-  const lastMenuScrollY = useRef(0);
+  const [isMobileMenuNavbarHidden, setIsMobileMenuNavbarHidden] =
+    useState(false);
+  const lastMobileMenuScrollY = useRef(0);
 
   const isHome = variant === "home";
 
-  const updateNavbarVisibility = (currentScrollY, lastScrollRef) => {
-    if (currentScrollY <= 10) {
-      setIsNavbarHidden(false);
-    } else if (currentScrollY > lastScrollRef.current + 6) {
-      setIsNavbarHidden(true);
-    } else if (currentScrollY < lastScrollRef.current - 6) {
-      setIsNavbarHidden(false);
-    }
-
-    lastScrollRef.current = currentScrollY;
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      updateNavbarVisibility(window.scrollY, lastScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const handleExploreProjects = () => {
     setIsOpen(false);
+    setIsMobileMenuNavbarHidden(false);
     document.getElementById("projects")?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
   };
 
-  const handleMenuToggle = () => {
-    setIsNavbarHidden(false);
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuNavbarHidden(false);
+    lastMobileMenuScrollY.current = 0;
     setIsOpen((current) => !current);
   };
 
   const handleMobileMenuScroll = (event) => {
-    updateNavbarVisibility(event.currentTarget.scrollTop, lastMenuScrollY);
+    const currentScrollY = event.currentTarget.scrollTop;
+
+    if (currentScrollY <= 10) {
+      setIsMobileMenuNavbarHidden(false);
+    } else if (currentScrollY > lastMobileMenuScrollY.current + 6) {
+      setIsMobileMenuNavbarHidden(true);
+    } else if (currentScrollY < lastMobileMenuScrollY.current - 6) {
+      setIsMobileMenuNavbarHidden(false);
+    }
+
+    lastMobileMenuScrollY.current = currentScrollY;
   };
 
   return (
     <>
       {/* ================= NAVBAR ================= */}
       <div
-        className={`fixed top-0 left-0 w-full z-[100] transition-transform duration-300 ease-out ${
-          isNavbarHidden ? "-translate-y-full" : "translate-y-0"
+        className={`top-0 left-0 w-full z-[100] transition-transform duration-300 ease-out ${
+          isOpen && isMobileMenuNavbarHidden
+            ? "-translate-y-full"
+            : "translate-y-0"
         } ${
           isHome
-            ? "px-4 md:px-10 pt-4"
-            : "px-3 lg:px-7 bg-[#F7F3EC] lg:bg-transparent"
+            ? "absolute top-0 left-0 px-4 md:px-10 pt-4"
+            : "relative lg:absolute lg:top-0 lg:left-0 px-3 lg:px-7 bg-[#F7F3EC] lg:bg-transparent"
         }`}
       >
         <div
@@ -138,7 +129,7 @@ export default function Navbar({ variant = "home" }) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <button className="flex items-center gap-2 border-2 border-[#D8A33B] text-[#D8A33B] px-5 py-2.5 rounded-xl bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all duration-300">
+                  <button className="flex items-center gap-2 border-2 border-[#D8A33B] font-bold text-[#f0b53d] px-5 py-2.5 rounded-xl bg-white/30 backdrop-blur-md hover:bg-white/20 transition-all duration-300">
                     <FaWhatsapp size={20} />
                     Connect with us
                   </button>
@@ -168,7 +159,7 @@ export default function Navbar({ variant = "home" }) {
 
           {/* ================= MOBILE BUTTON ================= */}
           <button
-            onClick={handleMenuToggle}
+            onClick={handleMobileMenuToggle}
             className="md:hidden cursor-pointer lg:hidden z-[101] flex items-center bg-[#9f773c] rounded-full px-4 py-1 text-white text-3xl"
           >
             {isOpen ? "✕" : "☰"}
@@ -189,119 +180,7 @@ export default function Navbar({ variant = "home" }) {
             <div className="flex flex-col gap-8 text-[#1E3D34] text-2xl font-semibold">
               {isHome ? (
                 <>
-                  <section
-                    id="about"
-                    className="w-full bg-[#deb06c] py-16 px-12"
-                  >
-                    <div className="max-w-7xl mx-auto">
-                      {/* HEADING */}
-                      <div className="text-center max-w-3xl mx-auto mb-12">
-                        <p className="text-[#5b4922] tracking-[3px] text-xs md:text-sm font-bold mb-3">
-                          ABOUT VINRA GROUP
-                        </p>
-
-                        <h2 className="text-3xl md:text-5xl font-serif font-semibold text-gray-900 leading-tight">
-                          Building Trust Through Real Estate Excellence
-                        </h2>
-
-                        <div className="flex items-center justify-center gap-3 my-4">
-                          <span className="w-10 h-[1px] bg-[#cd9316]"></span>
-                          <span className="text-[#cd9316] text-lg">✦</span>
-                          <span className="w-10 h-[1px] bg-[#cd9316]"></span>
-                        </div>
-
-                        <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-                          Vinra Group is a trusted name in Bangalore real
-                          estate, delivering quality construction, premium
-                          living spaces, and complete property solutions for
-                          modern lifestyles.
-                        </p>
-                      </div>
-
-                      {/* ICON CARDS */}
-                      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {/* CARD 1 */}
-                        <div className="group backdrop-blur-xl bg-white/10  border border-white/20 rounded-2xl p-6 text-center shadow-lg hover:shadow-2xl hover:-translate-y-2 transition duration-300">
-                          <div className="w-14 h-14 mx-auto flex items-center justify-center rounded-full bg-[#c9a14a]/20 mb-4 group-hover:scale-110 transition">
-                            <Building2 className="w-6 h-6 text-[#c9a14a]" />
-                          </div>
-
-                          <h3 className="font-semibold text-lg text-gray-900">
-                            15+ Years Experience
-                          </h3>
-
-                          <p className="text-sm text-gray-700 mt-2">
-                            Proven expertise in construction and real estate
-                            development.
-                          </p>
-                        </div>
-
-                        {/* CARD 2 */}
-                        <div className="group backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-6 text-center shadow-lg hover:shadow-2xl hover:-translate-y-2 transition duration-300">
-                          <div className="w-14 h-14 mx-auto flex items-center justify-center rounded-full bg-[#c9a14a]/20 mb-4 group-hover:scale-110 transition">
-                            <Home className="w-6 h-6 text-[#c9a14a]" />
-                          </div>
-
-                          <h3 className="font-semibold text-lg text-gray-900">
-                            3000+ Properties
-                          </h3>
-
-                          <p className="text-sm text-gray-700 mt-2">
-                            Successfully delivered residential and commercial
-                            projects.
-                          </p>
-                        </div>
-
-                        {/* CARD 3 */}
-                        <div className="group backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-6 text-center shadow-lg hover:shadow-2xl hover:-translate-y-2 transition duration-300">
-                          <div className="w-14 h-14 mx-auto flex items-center justify-center rounded-full bg-[#c9a14a]/20 mb-4 group-hover:scale-110 transition">
-                            <Ruler className="w-6 h-6 text-[#c9a14a]" />
-                          </div>
-
-                          <h3 className="font-semibold text-lg text-gray-900">
-                            1M+ Sq.ft Built
-                          </h3>
-
-                          <p className="text-sm text-gray-700 mt-2">
-                            High-quality construction with modern architecture.
-                          </p>
-                        </div>
-
-                        {/* CARD 4 */}
-                        <div className="group backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-6 text-center shadow-lg hover:shadow-2xl hover:-translate-y-2 transition duration-300">
-                          <div className="w-14 h-14 mx-auto flex items-center justify-center rounded-full bg-[#c9a14a]/20 mb-4 group-hover:scale-110 transition">
-                            <Handshake className="w-6 h-6 text-[#c9a14a]" />
-                          </div>
-
-                          <h3 className="font-semibold text-lg text-gray-900">
-                            Customer First
-                          </h3>
-
-                          <p className="text-sm text-gray-700 mt-2">
-                            Focused on trust, transparency, and long-term
-                            relationships.
-                          </p>
-                        </div>
-                      </div>
-                      <div className="mt-16 text-center max-w-2xl mx-auto">
-                        <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-                          Vinra Group is not just about building homes — it’s
-                          about creating lifestyles. Every project reflects our
-                          commitment to quality, innovation, and long-term value
-                          for our customers.
-                        </p>
-                        {/* CTA */}
-
-                        <button
-                          onClick={handleExploreProjects}
-                          className="mt-6 px-6 py-2 rounded-full bg-[#c9a14a] text-white font-medium hover:bg-[#b8933f] transition"
-                        >
-                          Explore Our Projects
-                        </button>
-                      </div>
-                    </div>
-                  </section>
-                  {/* <a onClick={() => setIsOpen(false)}>Home</a>
+                  <a onClick={() => setIsOpen(false)}>Home</a>
                   <a href="#about" onClick={() => setIsOpen(false)}>
                     About Us
                   </a>
@@ -313,7 +192,7 @@ export default function Navbar({ variant = "home" }) {
                   </a>
                   <a href="#blogs" onClick={() => setIsOpen(false)}>
                     Blogs
-                  </a> */}
+                  </a>
                 </>
               ) : (
                 <>
