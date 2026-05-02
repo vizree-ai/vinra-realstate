@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { useRef } from "react";
 
 // 1. Create a separate Card component to handle individual animations
@@ -50,10 +51,12 @@ export default function Configurations() {
       className="relative h-auto md:h-[80vh] px-6 md:px-11 py-16 md:py-0 overflow-hidden"
     >
       <div className="fixed md:fixed inset-0 -z-10 w-full h-full">
-        <img
+        <Image
           src="/house.jpeg"
-          className="w-full h-full object-cover"
           alt="Background"
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-black/50"></div>
       </div>

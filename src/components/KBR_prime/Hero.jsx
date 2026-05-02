@@ -15,19 +15,8 @@ import {
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 import EnquiryForm from "../EnquiryForm";
 
-export default function Hero() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "Amenities", href: "#amenities" },
-    { name: "Gallery", href: "#gallery" },
-    { name: "Location", href: "#location" },
-    { name: "Contact", href: "#contact" },
-  ];
-
-  const HeroImage = ({ className = "" }) => (
+function HeroImage({ className = "" }) {
+  return (
     <div
       className={`relative overflow-hidden w-full
     h-[30vh]
@@ -53,6 +42,19 @@ export default function Hero() {
       />
     </div>
   );
+}
+
+export default function Hero() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const navLinks = [
+    { name: "Home", href: "#" },
+    { name: "Amenities", href: "#amenities" },
+    { name: "Gallery", href: "#gallery" },
+    { name: "Location", href: "#location" },
+    { name: "Contact", href: "#contact" },
+  ];
 
   return (
     <section className="w-full flex justify-center items-center relative overflow-hidden">

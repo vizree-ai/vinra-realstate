@@ -2,77 +2,55 @@
 import { Search } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, BedDouble, Ruler } from "lucide-react";
-import { useEffect, useState } from "react";
+import { MapPin, BedDouble, Ruler, Building2 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./CommonNavbar";
 import EnquiryForm from "./EnquiryForm";
 
 export default function MainPage() {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
   const [listings, setListings] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    fetchListings();
-  }, []);
-
-  const fetchListings = async () => {
-    const { data, error } = await supabase.from("properties").select("*");
-
-    console.log("DATA:", data);
-    console.log("ERROR:", error);
-
-    if (error) {
-      console.log(error);
-    } else {
-      setListings(data);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const { data, error } = await supabase.from("enquiries").insert([
-      {
-        name: name,
-        email: email,
-        phone: phone,
-      },
-    ]);
-
-    if (error) {
-      console.log(error);
-      alert("Error submitting form ❌");
-    } else {
-      alert("Submitted successfully ✅");
-
-      setName("");
-      setPhone("");
-      setEmail("");
-      setOpen(false);
-    }
-  };
-
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
 
-  const filteredListings = listings.filter((item) => {
+  useEffect(() => {
+    const fetchListings = async () => {
+      const { data, error } = await supabase
+        .from("properties")
+        .select("*")
+        .order("id", { ascending: false });
+
+      if (error) {
+        console.error(error);
+      } else {
+        setListings(data);
+      }
+    };
+
+    fetchListings();
+  }, []);
+
+  const filteredListings = useMemo(() => {
     const searchTerm = search.toLowerCase().trim();
 
-    return Object.values(item).join(" ").toLowerCase().includes(searchTerm);
-  });
+    return listings.filter((item) =>
+      Object.values(item).join(" ").toLowerCase().includes(searchTerm),
+    );
+  }, [listings, search]);
 
-  const remainingListings = listings.filter(
-    (item) => !item.title.toLowerCase().includes(search.toLowerCase()),
+  const orderedListings = useMemo(
+    () => [
+      ...filteredListings,
+      ...listings.filter(
+        (item) => !filteredListings.some((f) => f.id === item.id),
+      ),
+    ],
+    [filteredListings, listings],
   );
 
   return (
     <>
-      <section className="relative w-full h-[85vh] md:h-[99vh] flex items-center justify-center overflow-hidden">
+      <section className="relative w-full h-[85vh] md:h-[99vh] flex items-center justify-center overflow-visible">
         {/* Top smooth overlay */}
         <div className="absolute top-0 left-0 w-full h-36 md:h-44 bg-gradient-to-b from-black/75 via-black/35 to-transparent z-20" />
 
@@ -80,10 +58,15 @@ export default function MainPage() {
 
         {/* Background */}
         <div className="absolute inset-0">
-          <img
+          <Image
             src="/hd (1).webp"
             alt="hero"
-            className="w-full h-full object-cover object-[64%_center] lg:object-contain lg:scale-105"
+            fill
+            priority
+            fetchPriority="high"
+            quality={80}
+            sizes="100vw"
+            className="w-full h-full object-cover object-[64%_center]"
           />
 
           {/* Main cinematic smooth overlay */}
@@ -139,9 +122,9 @@ export default function MainPage() {
 
             {/* Paragraph */}
             <p className="text-white/90 mt-8 text-lg md:text-xl leading-relaxed max-w-xl">
-              Thousands of luxury home enthusiasts just like you{" "}
+              Thousands of people are already exploring homes{" "}
               <br className="hidden md:block" />
-              visit our website.
+              with us — join them.
             </p>
 
             <div className="mt-6 w-full flex justify-left">
@@ -178,10 +161,16 @@ export default function MainPage() {
                         href={item.link || "/KBR_prime"}
                         className="flex items-center gap-3 px-4 py-3 hover:bg-gray-200 cursor-pointer hover:rounded-2xl"
                       >
-                        <img
-                          src={item.image}
-                          className="w-12 h-12 rounded-md object-cover"
-                        />
+                        <div className="relative w-12 h-12 shrink-0 overflow-hidden rounded-md">
+                          <Image
+                            src={item.image || item.img || "/house.jpeg"}
+                            alt={item.title}
+                            fill
+                            unoptimized
+                            sizes="48px"
+                            className="object-cover"
+                          />
+                        </div>
                         <div className="text-left">
                           <p className="text-sm font-semibold">{item.title}</p>
                           <p className="text-sm text-gray-700">
@@ -203,14 +192,27 @@ export default function MainPage() {
       </section>
 
       <section
-        className="w-full   bg-[url('/bg.jpg')] 
-  bg-cover bg-center bg-no-repeat py-12 px-4 md:px-10"
+        id="projects"
+        className="w-full bg-[url('/bg.jpg')] bg-cover bg-center bg-no-repeat py-16 px-4 md:px-10"
       >
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-800">
-            Properties in Banglore 🏡
+        <div className="text-center max-w-3xl mx-auto">
+          {/* TOP SMALL TAG */}
+          <p className="text-[#c9a14a] tracking-[3px] text-xs md:text-sm text font-bold font-lg mb-3">
+            DISCOVER PREMIUM LIVING
+          </p>
+
+          <h2 className="text-3xl md:text-5xl font-serif font-semibold text-gray-900 leading-tight flex items-center justify-center gap-3">
+            Properties in Bangalore
+            <Building2 className="w-7 h-7 text-[#ad8c43]" />
           </h2>
-          <p className="text-gray-500 mt-2 text-sm md:text-base">
+          {/* GOLD DIVIDER */}
+          <div className="flex items-center justify-center gap-3">
+            <span className="w-10 h-[1px] bg-[#c9a14a]"></span>
+            <span className="text-[#c9a14a] text-lg">✦</span>
+            <span className="w-10 h-[1px] bg-[#c9a14a]"></span>
+          </div>
+          {/* SUBTEXT */}
+          <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-6">
             Thousands of luxury home enthusiasts just like you visit our
             website.
           </p>
@@ -218,12 +220,7 @@ export default function MainPage() {
 
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              ...filteredListings,
-              ...listings.filter(
-                (item) => !filteredListings.some((f) => f.id === item.id),
-              ),
-            ].map((item) => {
+            {orderedListings.map((item) => {
               const isMatched = filteredListings.some((f) => f.id === item.id);
 
               return (
@@ -235,10 +232,14 @@ export default function MainPage() {
                         : "shadow-sm hover:shadow-md"
                     }`}
                   >
-                    <div className="relative">
-                      <img
-                        src={item.img || item.image}
-                        className="w-full h-56 object-cover"
+                    <div className="relative h-56">
+                      <Image
+                        src={item.img || item.image || "/house.jpeg"}
+                        alt={item.title}
+                        fill
+                        unoptimized
+                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                        className="object-cover"
                       />
 
                       <div className="absolute top-3 left-3 flex gap-2">
@@ -313,7 +314,7 @@ export default function MainPage() {
         </div>
       </section>
 
-      <section className="w-full bg-[#f5f5f5] py-12 px-4 md:px-12">
+      {/* <section className="w-full bg-[#f5f5f5] py-12 px-4 md:px-12">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
           <div>
             <p className="text-sm tracking-widest text-yellow-600 font-semibold mb-3">
@@ -365,8 +366,54 @@ export default function MainPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+      <section className="w-full bg-[#f5f5f5] py-16 px-4 md:px-12">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          {/* LEFT CONTENT */}
+          <div>
+            <p className="text-xs tracking-[3px] text-[#c9a14a] font-semibold mb-3">
+              ABOUT VINRA GROUP
+            </p>
 
+            <h2 className="text-3xl md:text-5xl font-serif font-semibold text-gray-900 leading-tight">
+              Crafting Turnkey Real Estate Excellence
+            </h2>
+
+            <p className="mt-6 text-gray-600 text-sm md:text-base leading-relaxed">
+              With over 15+ years of experience, Vinra Group has grown into one
+              of Bangalore’s most trusted real estate brands. From construction
+              to interiors, we deliver complete property solutions tailored for
+              modern living.
+            </p>
+
+            <p className="mt-4 text-gray-600 text-sm md:text-base leading-relaxed">
+              Our focus on quality, innovation, and customer satisfaction has
+              made us a preferred choice for homebuyers and investors alike.
+            </p>
+          </div>
+
+          {/* RIGHT STATS */}
+          <div className="grid grid-cols-2 gap-6">
+            {[
+              { value: "15+", label: "Years Experience" },
+              { value: "3,000+", label: "Projects Completed" },
+              { value: "1M+", label: "SqFt Built" },
+              { value: "100+", label: "Ongoing Projects" },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-white/60 backdrop-blur-md border border-white/40 rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition"
+              >
+                <h3 className="text-3xl md:text-4xl font-bold text-[#c9a14a]">
+                  {item.value}
+                </h3>
+                <p className="text-sm text-gray-600 mt-2">{item.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* 
       <section className="w-full bg-[#e8ded8] py-10 px-4 md:px-12">
         <div className="max-w-7xl mx-auto space-y-6 text-gray-700 text-sm md:text-base leading-relaxed">
           <p>
@@ -395,7 +442,84 @@ export default function MainPage() {
             project.
           </p>
         </div>
+      </section> */}
+      <section className="w-full bg-[#e8ded8] py-14 px-4 md:px-12">
+        <div className="max-w-5xl mx-auto text-center space-y-6 text-gray-700">
+          <p className="text-sm md:text-base leading-relaxed">
+            Vinra Group offers end-to-end real estate solutions, from property
+            investment to construction and interior design. We don’t just build
+            structures — we create spaces that inspire and last.
+          </p>
+
+          <p className="text-sm md:text-base leading-relaxed">
+            With a passion for quality and innovation, we continue to redefine
+            modern living through thoughtfully designed residential and
+            commercial projects.
+          </p>
+
+          <p className="text-sm md:text-base leading-relaxed">
+            Our expert team ensures seamless execution and world-class standards
+            in every project we deliver.
+          </p>
+        </div>
       </section>
+      <footer className="w-full bg-[#1a1a1a] text-white py-12 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-10">
+          {/* BRAND */}
+          <div>
+            <h2 className="text-xl font-semibold text-[#c9a14a] mb-3">
+              Vinra Group
+            </h2>
+            <p className="text-sm text-gray-400">
+              Building trust through quality real estate and modern living
+              solutions across Bangalore.
+            </p>
+          </div>
+
+          {/* QUICK LINKS */}
+          <div>
+            <h3 className="text-sm font-semibold mb-3">Quick Links</h3>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li>
+                <a href="#">Home</a>
+              </li>
+              <li>
+                <a href="#about">About</a>
+              </li>
+              <li>
+                <a href="#projects">Projects</a>
+              </li>
+              <li>
+                <a href="#contact">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          {/* SERVICES */}
+          <div>
+            <h3 className="text-sm font-semibold mb-3">Services</h3>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li>Property Investment</li>
+              <li>Construction</li>
+              <li>Interior Design</li>
+              <li>Property Management</li>
+            </ul>
+          </div>
+
+          {/* CONTACT */}
+          <div>
+            <h3 className="text-sm font-semibold mb-3">Contact</h3>
+            <p className="text-sm text-gray-400">Bangalore, India</p>
+            <p className="text-sm text-gray-400 mt-1">+91 7026003069</p>
+            <p className="text-sm text-gray-400 mt-1">info@vinragroup.com</p>
+          </div>
+        </div>
+
+        {/* BOTTOM */}
+        <div className="border-t border-gray-700 mt-10 pt-4 text-center text-sm text-gray-500">
+          © {new Date().getFullYear()} Vinra Group. All rights reserved.
+        </div>
+      </footer>
       <EnquiryForm open={open} setOpen={setOpen} />
     </>
   );

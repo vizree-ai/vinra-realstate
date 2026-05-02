@@ -100,7 +100,7 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
         <div className="hidden lg:block absolute -left-6 top-0 h-full w-[1px] bg-[#5b3d2e]/40"></div>
 
         <h2 className="text-2xl md:text-4xl font-semibold text-[#1E3D34] leading-tight md:leading-snug">
-          Interested? Let's talk!
+          Interested? Let&apos;s talk!
         </h2>
         <div className="w-26 md:w-20 h-[3px] bg-[#b78a31] rounded-full mt-2"></div>
         <form
