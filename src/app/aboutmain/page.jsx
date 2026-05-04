@@ -67,7 +67,7 @@ function AboutMain() {
             <div className="relative pb-20 md:pb-24">
               <div className="relative h-[320px] overflow-hidden rounded-2xl shadow-[0_24px_55px_rgba(30,61,52,0.22)] md:h-[430px]">
                 <Image
-                  src="/about-e.png"
+                  src="/raw.png"
                   alt="Vinra Group real estate construction"
                   fill
                   sizes="(min-width: 1024px) 45vw, 100vw"
