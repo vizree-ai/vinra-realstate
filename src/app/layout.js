@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/CommonNavbar";
 // import Navbar from "@/components/Navbar";
 
 const geistSans = Geist({
@@ -17,13 +18,13 @@ export const metadata = {
     process.env.NEXT_PUBLIC_SITE_URL || "https://www.vinragroup.com",
   ),
   title: {
-    default: "Vinra Group | Properties in Bangalore",
-    template: "%s | Vinra Group",
+    default: "Vinra Estate | Properties in Bangalore",
+    template: "%s | Vinra Estate",
   },
   description:
-    "Explore affordable homes, apartments, plots, and real estate projects in Bangalore with Vinra Group.",
+    "Explore affordable homes, apartments, plots, and real estate projects in Bangalore with Vinra Estate.",
   keywords: [
-    "Vinra Group",
+    "Vinra Estate",
     "properties in Bangalore",
     "homes in Bangalore",
     "Bangalore real estate",
@@ -31,16 +32,16 @@ export const metadata = {
     "Hoskote apartments",
   ],
   openGraph: {
-    title: "Vinra Group | Properties in Bangalore",
+    title: "Vinra Estate | Properties in Bangalore",
     description:
-      "Explore affordable homes, apartments, plots, and real estate projects in Bangalore with Vinra Group.",
-    siteName: "Vinra Group",
+      "Explore affordable homes, apartments, plots, and real estate projects in Bangalore with Vinra Estate.",
+    siteName: "Vinra Estate",
     images: [
       {
         url: "/hd (1).webp",
         width: 1200,
         height: 630,
-        alt: "Vinra Group properties in Bangalore",
+        alt: "Vinra Estate properties in Bangalore",
       },
     ],
     locale: "en_IN",
@@ -48,9 +49,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vinra Group | Properties in Bangalore",
+    title: "Vinra Estate | Properties in Bangalore",
     description:
-      "Explore affordable homes, apartments, plots, and real estate projects in Bangalore with Vinra Group.",
+      "Explore affordable homes, apartments, plots, and real estate projects in Bangalore with Vinra Estate.",
     images: ["/hd (1).webp"],
   },
   robots: {
@@ -70,10 +71,12 @@ export default function RootLayout({ children }) {
           fetchPriority="high"
         />
       </head>
-      {/* <Navbar /> */}
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased no-scrollbar`}
       >
+        <Navbar variant="home" />
+
         {children}
       </body>
     </html>

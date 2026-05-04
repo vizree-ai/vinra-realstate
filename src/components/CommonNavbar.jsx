@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa";
 import EnquiryForm from "./EnquiryForm";
+import Link from "next/link";
 
 export default function Navbar({ variant = "home" }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -77,19 +78,18 @@ export default function Navbar({ variant = "home" }) {
           {/* ================= DESKTOP MENU ================= */}
           {isHome ? (
             <>
-              <div className="hidden md:flex items-center gap-10 text-[17px] font-medium text-white group">
+              <div className="hidden md:flex items-center gap-10 text-[17px] font-medium text-[#D8A33B] group">
                 {/* HOME */}
                 <a
-                  href="#"
-                  className="relative pb-2 text-[#D8A33B] transition group-hover:text-white"
+                  href="/"
+                  className="relative pb-2 text-[#D8A33B] transition group-hover:text-[#D8A33B]"
                 >
                   Home
                   <span className="absolute left-0 -bottom-1 w-full h-[3px] bg-[#D8A33B] rounded-full transition-all duration-300 group-hover:w-0"></span>
                 </a>
 
-                {/* ABOUT */}
                 <a
-                  href="#about"
+                  href="/aboutmain"
                   className="relative pb-2 hover:text-[#D8A33B] transition group/item"
                 >
                   About Us
@@ -98,7 +98,7 @@ export default function Navbar({ variant = "home" }) {
 
                 {/* PROJECTS */}
                 <a
-                  href="#projects"
+                  href="/projects"
                   className="relative pb-2 hover:text-[#D8A33B] transition group/item"
                 >
                   Projects
@@ -107,19 +107,10 @@ export default function Navbar({ variant = "home" }) {
 
                 {/* EMI */}
                 <a
-                  href="#emi"
+                  href="/emicalculator"
                   className="relative pb-2 hover:text-[#D8A33B] transition group/item"
                 >
                   EMI Calculator
-                  <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-[#D8A33B] rounded-full transition-all duration-300 group-hover/item:w-full"></span>
-                </a>
-
-                {/* BLOGS */}
-                <a
-                  href="#blogs"
-                  className="relative pb-2 hover:text-[#D8A33B] transition group/item"
-                >
-                  Blogs
                   <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-[#D8A33B] rounded-full transition-all duration-300 group-hover/item:w-full"></span>
                 </a>
               </div>
@@ -180,18 +171,17 @@ export default function Navbar({ variant = "home" }) {
             <div className="flex flex-col gap-8 text-[#1E3D34] text-2xl font-semibold">
               {isHome ? (
                 <>
-                  <a onClick={() => setIsOpen(false)}>Home</a>
-                  <a href="#about" onClick={() => setIsOpen(false)}>
+                  <a href="/" onClick={() => setIsOpen(false)}>
+                    Home
+                  </a>
+                  <a href="/aboutmain" onClick={() => setIsOpen(false)}>
                     About Us
                   </a>
-                  <a href="#projects" onClick={() => setIsOpen(false)}>
+                  <a href="/projects" onClick={() => setIsOpen(false)}>
                     Projects
                   </a>
-                  <a href="#emi" onClick={() => setIsOpen(false)}>
+                  <a href="/emicalculator" onClick={() => setIsOpen(false)}>
                     EMI Calculator
-                  </a>
-                  <a href="#blogs" onClick={() => setIsOpen(false)}>
-                    Blogs
                   </a>
                 </>
               ) : (

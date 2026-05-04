@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/lib/supabase";
-import Navbar from "./CommonNavbar";
+
 import EnquiryForm from "./EnquiryForm";
 import MobileStickyContact from "./MobileStickyContact";
 
@@ -72,11 +72,8 @@ export default function MainPage() {
         {/* Top smooth overlay */}
         <div className="absolute top-0 left-0 w-full h-36 md:h-44 bg-gradient-to-b from-yellow/85 via-yellow/45 to-transparent z-20" />
 
-        <Navbar variant="home" />
-
         {/* Background */}
         <div className="absolute inset-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/hd (1).webp"
             alt="hero"
@@ -328,139 +325,6 @@ export default function MainPage() {
               );
             })}
           </div>
-        </div>
-      </section>
-
-      <section
-        id="about"
-        className="relative w-full scroll-mt-10 overflow-hidden bg-[#f6f1e8] px-4 py-16 md:px-12 md:py-20"
-      >
-        <div className="absolute inset-0 opacity-60 [background-image:linear-gradient(90deg,rgba(30,61,52,0.08)_1px,transparent_1px),linear-gradient(180deg,rgba(30,61,52,0.06)_1px,transparent_1px)] [background-size:44px_44px]" />
-        <div className="absolute -right-24 top-10 h-72 w-72 rounded-full border border-[#c9a14a]/35" />
-        <div className="absolute -left-20 bottom-12 h-52 w-52 rounded-full border border-[#1E3D34]/20" />
-
-        <div className="relative mx-auto max-w-7xl">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-            <div>
-              <p className="mb-3 text-xs font-bold tracking-[3px] text-[#9f773c]">
-                ABOUT VINRA GROUP
-              </p>
-
-              <h2 className="max-w-3xl font-serif text-3xl font-semibold leading-tight text-gray-950 md:text-5xl">
-                Crafting Turnkey Real Estate Excellence
-              </h2>
-
-              <div className="my-5 flex items-center gap-3">
-                <span className="h-[2px] w-14 bg-[#c9a14a]" />
-                <span className="h-2 w-2 rounded-full bg-[#1E3D34]" />
-                <span className="h-[2px] w-8 bg-[#c9a14a]" />
-              </div>
-
-              <div className="max-w-2xl space-y-4 text-sm leading-relaxed text-gray-700 md:text-base">
-                <p>
-                  With over 15+ years of experience, Vinra Group has grown into
-                  one of Bangalore&apos;s most trusted real estate brands. From
-                  construction to interiors, we deliver complete property
-                  solutions tailored for modern living.
-                </p>
-                <p>
-                  Our focus on quality, innovation, and customer satisfaction
-                  has made us a preferred choice for homebuyers and investors
-                  alike.
-                </p>
-              </div>
-
-              <button
-                onClick={() =>
-                  document.getElementById("projects")?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  })
-                }
-                className="mt-7 rounded-full bg-[#1E3D34] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(30,61,52,0.22)] transition hover:bg-[#163027] hover:shadow-[0_18px_36px_rgba(30,61,52,0.28)]"
-              >
-                Explore Our Projects
-              </button>
-            </div>
-
-            <div className="relative pb-28 md:pb-24">
-              <div className="relative h-[320px] overflow-hidden rounded-2xl shadow-[0_24px_55px_rgba(30,61,52,0.22)] md:h-[430px]">
-                <Image
-                  src="/house.jpeg"
-                  alt="Vinra Group real estate construction"
-                  fill
-                  sizes="(min-width: 1024px) 45vw, 100vw"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1E3D34]/55 via-transparent to-transparent" />
-                <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/25 bg-white/15 p-4 text-white backdrop-blur-md">
-                  <p className="text-sm font-semibold">
-                    Building trust through real estate excellence.
-                  </p>
-                  <p className="mt-1 text-xs text-white/80">
-                    Quality construction, premium living spaces, and complete
-                    property solutions.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="relative mt-10 md:-mt-20 z-10 px-2 md:px-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  { value: "15+", label: "Years Experience", Icon: Building2 },
-                  { value: "3,000+", label: "Projects Completed", Icon: Home },
-                  { value: "1M+", label: "SqFt Built", Icon: Ruler },
-                  { value: "100+", label: "Ongoing Projects", Icon: Handshake },
-                ].map(({ value, label, Icon }) => (
-                  <div
-                    key={label}
-                    className="group rounded-2xl border border-white/30 bg-white/60 backdrop-blur-xl p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition duration-300 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
-                  >
-                    <Icon className="mb-3 h-6 w-6 text-[#c4934a] group-hover:scale-110 transition" />
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#1E3D34]">
-                      {value}
-                    </h3>
-                    <p className="mt-1 text-xs font-semibold text-[#9f773c] tracking-wide">
-                      {label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-10 grid gap-5 md:mt-16 md:grid-cols-3">
-          {[
-            {
-              title: "Complete Solutions",
-              text: "Vinra Group offers end-to-end real estate solutions, from property investment to construction and interior design.",
-              Icon: Building2,
-            },
-            {
-              title: "Spaces That Last",
-              text: "We do not just build structures. We create spaces that inspire, perform, and stay valuable for years.",
-              Icon: Home,
-            },
-            {
-              title: "Seamless Execution",
-              text: "Our expert team ensures smooth delivery and world-class standards in every project we take forward.",
-              Icon: Handshake,
-            },
-          ].map(({ title, text, Icon }) => (
-            <div
-              key={title}
-              className="rounded-2xl border border-[#e4d6bc] bg-white/80 p-6 shadow-[0_14px_34px_rgba(30,61,52,0.08)] backdrop-blur-md transition hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(30,61,52,0.12)]"
-            >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#1E3D34] text-white">
-                <Icon className="h-5 w-5" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-950">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-gray-700">
-                {text}
-              </p>
-            </div>
-          ))}
         </div>
       </section>
 
