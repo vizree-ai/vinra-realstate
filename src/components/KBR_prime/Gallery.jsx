@@ -158,7 +158,7 @@ export default function Gallery() {
         <div className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl">
           {/* BLURRED IMAGE */}
           <Image
-            src="/home.webp" // your image
+            src="/floor plan.jpg" // your image
             alt="Masterplan"
             width={1200}
             height={600}
@@ -191,7 +191,7 @@ export default function Gallery() {
         <div className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl">
           {/* BLURRED IMAGE */}
           <Image
-            src="/home.webp" // your image
+            src="/floor plan.jpg" // your image
             alt="Masterplan"
             width={1200}
             height={600}
