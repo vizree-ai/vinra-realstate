@@ -53,13 +53,13 @@ export default function Hero() {
               ].map((item, i) => (
                 <div
                   key={i}
-                  className="border-1 border-[#1E3D34] flex items-center gap-3 md:gap-4 rounded-xl text-white px-4 py-2.5 md:px-5 md:py-3.5"
+                  className="border-1 border-[#1E3D34] flex items-center gap-3 md:gap-4 rounded-xl  px-4 py-3.5 md:px-5"
                 >
                   <div className="w-6 h-6 md:w-6 md:h-6 flex-shrink-0 flex items-center justify-center bg-[#1E3D34] text-[#c09b64] font-extrabold rounded text-medium md:text-base">
                     ✓
                   </div>
 
-                  <p className="text-sm md:text-base text-[#1E3D34] font-bold leading-tight md:leading-normal">
+                  <p className="text-medium md:text-base text-[#1E3D34] font-bold leading-tight md:leading-normal">
                     {item}
                   </p>
                 </div>
@@ -92,22 +92,25 @@ export default function Hero() {
             <span className="text-[#b88a2a] font-bold">Vinra KBR Prime</span>
           </h2>
 
-          <p className="mt-6 text-[#5b3d2e]/80 leading-relaxed text-sm md:text-base max-w-2xl mx-auto">
-            VINRA KBR PRIME brings thoughtfully designed homes crafted for
-            families who seek comfort, convenience, and future value. Spacious
-            layouts, quality construction, premium amenities, and peaceful
-            surroundings make it the perfect address for modern living. Lorem
-            ipsum, dolor sit amet consectetur adipisicing elit. Porro delectus
-            nobis aliquid ratione quos sed, ipsam eaque voluptatem laborum,
-            assumenda suscipit ad! Cupiditate, dolorum assumenda reiciendis cum
-            vero sit quas quidem, corrupti quibusdam quam pariatur fugiat
-            obcaecati. Corporis iusto dolorum sequi culpa. Eligendi sapiente
-            veritatis nulla ex quasi delectus illo amet ipsa sunt quis aperiam
-            facere ducimus repellendus modi, corrupti hic fugiat molestiae ab
-            aliquam saepe accusamus ipsum omnis? Quibusdam tempore rerum, esse
-            maxime minima magni eum ipsum iste animi qui? Amet provident
-            quisquam minima quis adipisci vero ipsa, autem esse alias in quam
-            excepturi dicta quos earum accusamus inventore.
+          <p className="mt-6 text-[#5b3d2e]/80 leading-relaxed text-medium md:text-base max-w-2xl mx-auto">
+            VINRA KBR PRIME is a premium residential project designed for modern
+            families who value comfort, connectivity, and long-term investment
+            potential.
+            <br /> Strategically located in a fast-growing area, it offers
+            excellent access to key IT hubs, schools, hospitals, and daily
+            conveniences—making everyday living seamless.
+            <br /> The project features thoughtfully planned 2 & 3 BHK homes
+            with spacious layouts, abundant natural light, and smart
+            ventilation. Built with high-quality materials and attention to
+            detail, every home reflects durability, elegance, and functionality.
+            <br />
+            Residents can enjoy a range of lifestyle amenities including
+            landscaped open spaces, children’s play areas, security systems, and
+            dedicated parking—creating a safe and vibrant community environment.
+            <br />
+            Whether you’re looking for your dream home or a high-return
+            investment, VINRA KBR PRIME offers the perfect balance of luxury,
+            practicality, and future growth.
           </p>
         </div>
 
@@ -147,7 +150,7 @@ export default function Hero() {
         </svg>
       </section>
 
-      <section className="w-full bg-[#5b3d2e] py-12">
+      <section className="w-full bg-[#1E3D34] py-12">
         <div className="flex flex-col-reverse lg:grid lg:grid-cols-[55%_45%] items-center gap-8 lg:gap-0">
           <motion.div
             initial={{ opacity: 0, x: -60 }}

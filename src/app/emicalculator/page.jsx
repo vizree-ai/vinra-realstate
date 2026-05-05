@@ -1,10 +1,12 @@
 "use client";
+import EnquiryForm from "@/components/EnquiryForm";
 import { useState, useMemo } from "react";
 
 export default function EmiCalculatorPremium() {
   const [loan, setLoan] = useState(2500000);
   const [years, setYears] = useState(10);
   const [rate, setRate] = useState(7);
+  const [open, setOpen] = useState(false);
 
   const monthlyRate = rate / 12 / 100;
   const months = years * 12;
@@ -131,7 +133,10 @@ export default function EmiCalculatorPremium() {
               </div>
             </div>
 
-            <button className="mt-8 w-full bg-gradient-to-r from-[#1E3D34] via-[#7b5b2d] to-[#c4934a] text-white font-semibold py-3 rounded-xl hover:bg-[#b8903f] transition">
+            <button
+              onClick={() => setOpen(true)}
+              className="cursor-pointer mt-8 w-full bg-gradient-to-r from-[#1E3D34] via-[#7b5b2d] to-[#c4934a] text-white font-semibold py-3 rounded-xl hover:bg-[#b8903f] transition"
+            >
               Talk To our Loan Expert
             </button>
           </div>
@@ -351,6 +356,7 @@ export default function EmiCalculatorPremium() {
           </div>
         </div>
       </section>
+      <EnquiryForm open={open} setOpen={setOpen} />
     </>
   );
 }

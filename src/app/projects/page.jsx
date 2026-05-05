@@ -12,6 +12,7 @@ import {
   Handshake,
 } from "lucide-react";
 import Image from "next/image";
+import EnquiryForm from "@/components/EnquiryForm";
 
 export default function projects() {
   const [listings, setListings] = useState([]);
@@ -185,6 +186,7 @@ export default function projects() {
           </div>
         </div>
       </section>
+      <EnquiryForm open={open} setOpen={setOpen} />
     </div>
   );
 }

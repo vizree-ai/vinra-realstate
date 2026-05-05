@@ -119,7 +119,7 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
               placeholder="Name*"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full pl-12 pr-5 py-3 rounded-xl md:rounded-2xl 
+              className="w-full pl-12 pr-5 py-3.5 md:py-3.5 rounded-xl md:rounded-2xl 
                  border border-[#1E3D34]
                     text-[#1E3D34] placeholder-[#1E3D34]/70 
                     outline-none 
@@ -135,19 +135,19 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
               size={20}
               strokeWidth={1.5}
               className="absolute left-4 top-1/2 -translate-y-1/2 
-      text-[#b78a31] z-10 pointer-events-none"
+                 text-[#b78a31] z-10 pointer-events-none"
             />
             <input
               type="tel"
               placeholder="Phone no*"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full pl-12 pr-5 py-3 rounded-xl md:rounded-2xl 
-      border border-[#1E3D34] 
-      text-[#1E3D34] placeholder-[#1E3D34]/70 
-      outline-none 
-      focus:border-[#C8A96A] focus:ring-2 focus:ring-[#C8A96A]/30 
-      transition-all"
+              className="w-full pl-12 pr-5 py-3.5 md:py-3.5 rounded-xl md:rounded-2xl 
+              border border-[#1E3D34] 
+              text-[#1E3D34] placeholder-[#1E3D34]/70 
+              outline-none 
+              focus:border-[#C8A96A] focus:ring-2 focus:ring-[#C8A96A]/30 
+              transition-all"
               required
             />
           </div>
@@ -158,18 +158,18 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
               size={20}
               strokeWidth={1.5}
               className="absolute left-4 top-1/2 -translate-y-1/2 
-      text-[#b78a31] z-10 pointer-events-none"
+          text-[#b78a31] z-10 pointer-events-none"
             />
 
             <select
               value={bhk}
               onChange={(e) => setBhk(e.target.value)}
-              className="block w-full pl-12 pr-10 px-4 py-2.5 md:px-5 md:py-3.5 rounded-xl 
-    border border-[#1E3D34]
-      text-[#1E3D34]/70 
-      outline-none 
-      focus:border-[#C8A96A] focus:ring-2 focus:ring-[#C8A96A]/30 
-      appearance-none cursor-pointer transition-all"
+              className="block w-full pl-12 pr-10 py-3.5 md:py-3.5 rounded-xl 
+                border border-[#1E3D34]
+                  text-[#1E3D34]/70 
+                  outline-none 
+                  focus:border-[#C8A96A] focus:ring-2 focus:ring-[#C8A96A]/30 
+                  appearance-none cursor-pointer transition-all"
               required
             >
               <option value="" disabled hidden>
@@ -187,7 +187,13 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
           {/* BUTTON */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-[#b07a1d] to-[#c69636] text-white py-3 md:py-4 rounded-xl font-semibold tracking-wide shadow-md hover:shadow-lg active:scale-95 md:hover:scale-[1.02] 
+            className="w-full 
+                   bg-gradient-to-r from-[#b07a1d] to-[#c69636] 
+                   text-white py-3 md:py-4 
+                   rounded-xl font-semibold tracking-wide 
+                   shadow-md 
+                   hover:shadow-lg 
+                   active:scale-95 md:hover:scale-[1.02] 
                    transition-all 
                    relative overflow-hidden"
           >

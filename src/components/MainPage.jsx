@@ -93,22 +93,12 @@ export default function MainPage() {
                      md:via-[60%] 
                      to-transparent"
           />
-
-          {/* Soft vignette */}
-          {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_38%,rgba(255,200,120,0.16),transparent_34%),radial-gradient(circle_at_18%_45%,rgba(0,0,0,0.55),transparent_48%)]" /> */}
-
-          {/* Bottom depth */}
           <div className="absolute inset-0 bg-gradient-to-t from-yellow/55 via-transparent to-transparent" />
         </div>
 
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl px-4 md:px-0 pt-16 md:pt-10 lg:pt-28">
           <div className="max-w-3xl text-left [filter:drop-shadow(0_0_8px_rgba(0,0,0,0.9))_drop-shadow(0_0_18px_rgba(0,0,0,0.75))_drop-shadow(0_0_30px_rgba(0,0,0,0.6))]">
-            {/* Top text */}
-            {/* <p className="text-[#D8A33B] text-lg md:text-2xl font-medium tracking-wide ">
-              Find. Choose. Own.
-            </p> */}
-
             <span className=" text-[26px] sm:text-[40px] md:text-[25px] font-semibold relative whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-b from-[#fff6cf] via-[#e0b347] to-[#9a6815] ">
               Find. Choose. Own.
             </span>
@@ -123,12 +113,6 @@ export default function MainPage() {
                   Homes in Bangalore
                 </span>
               </span>
-
-              {/* Homes */}
-              {/* <span className="mt-2 block text-[42px] sm:text-[60px] md:text-[62px] font-serif font-semibold relative whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-b from-[#fff6cf] via-[#e0b347] to-[#9a6815] ">
-                Homes in <br className="block md:hidden" />
-                Bangalore
-              </span> */}
             </h1>
 
             {/* Gold line */}
