@@ -6,11 +6,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import EnquiryForm from "../EnquiryForm";
 
 const images = [
-  "/1.jpeg",
-  "/house.jpeg",
-  "/home.jpg",
-  "/house.jpeg",
-  "/1.jpeg",
+  "/1.webp",
+  "/house.webp",
+  "/home.webp",
+  "/house.webp",
+  "/1.webp",
 ];
 
 export default function Gallery() {
@@ -158,7 +158,7 @@ export default function Gallery() {
         <div className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl">
           {/* BLURRED IMAGE */}
           <Image
-            src="/masterplan.jpg" // your image
+            src="/home.webp" // your image
             alt="Masterplan"
             width={1200}
             height={600}
@@ -191,7 +191,7 @@ export default function Gallery() {
         <div className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl">
           {/* BLURRED IMAGE */}
           <Image
-            src="/masterplan.jpg" // your image
+            src="/home.webp" // your image
             alt="Masterplan"
             width={1200}
             height={600}

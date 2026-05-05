@@ -23,7 +23,7 @@ export default function EmiCalculatorPremium() {
 
   return (
     <>
-      <section className="w-full bg-[#F7F3EC] py-20 px-10 md:px-12 text-[#c9a14a]">
+      <section className="w-full bg-[url('/bg.webp')] bg-cover bg-center bg-no-repeat py-20 px-10 md:px-12 text-[#1E3D34]">
         <div
           className="absolute inset-0 opacity-60 pointer-events-none 
            [background-image:linear-gradient(90deg,rgba(30,61,52,0.08)_1px,transparent_1px),
@@ -32,23 +32,25 @@ export default function EmiCalculatorPremium() {
         />{" "}
         {/* Heading */}
         <div className="mt-10 text-center ">
-          <h2 className="text-3xl md:text-5xl font-serif text-[#c9a14a]">
+          {/* <h2 className="text-3xl md:text-5xl font-serif text-[#1E3D34]"> */}
+
+          <h2 className="text-3xl md:text-5xl font-serif font-semibold text-[#1E3D34] leading-tight flex items-center justify-center gap-3">
             Plan Your Dream Home
           </h2>
 
-          <p className="mt-3 max-w-xl mx-auto text-sm md:text-base text-[#c9a14a]">
+          <p className="mt-3 max-w-xl mx-auto text-sm md:text-base text-[#1E3D34]">
             Calculate your monthly EMI instantly and make smarter property
             decisions.
           </p>
         </div>
         <div className="mt-15 max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           {/* LEFT SIDE */}
-          <div className="space-y-8">
+          <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.4)]">
             {/* Loan */}
-            <div>
-              <div className="flex justify-between mb-2">
-                <p className="text-[#c9a14a">Loan Amount</p>
-                <span className="bg-white/10 px-4 py-1 rounded-full text-[#c9a14a] font-semibold">
+            <div className="mb-4">
+              <div className="flex justify-between">
+                <p className="text-[#1E3D34] text-lg mb-3">Loan Amount</p>
+                <span className="bg-white/10 px-4 py-1 rounded-full text-[#1E3D34] font-semibold">
                   ₹ {format(loan)}
                 </span>
               </div>
@@ -60,15 +62,15 @@ export default function EmiCalculatorPremium() {
                 step={50000}
                 value={loan}
                 onChange={(e) => setLoan(Number(e.target.value))}
-                className="w-full accent-[#c9a14a]"
+                className="w-full accent-[#1E3D34]"
               />
             </div>
 
             {/* Tenure */}
-            <div>
-              <div className="flex justify-between mb-2">
-                <p className="text-[#c9a14a]">Tenure (Years)</p>
-                <span className="bg-white/10 px-4 py-1 rounded-full text-[#c9a14a] font-semibold">
+            <div className="mb-4">
+              <div className="flex justify-between ">
+                <p className="text-[#1E3D34]  text-lg mb-3">Tenure (Years)</p>
+                <span className="bg-white/10 px-4 py-1 rounded-full text-[#1E3D34] font-semibold">
                   {years}
                 </span>
               </div>
@@ -79,15 +81,15 @@ export default function EmiCalculatorPremium() {
                 max={30}
                 value={years}
                 onChange={(e) => setYears(Number(e.target.value))}
-                className="w-full accent-[#c9a14a]"
+                className="w-full accent-[#1E3D34]"
               />
             </div>
 
             {/* Rate */}
-            <div>
-              <div className="flex justify-between mb-2">
-                <p className="text-[#c9a14a]">Interest Rate</p>
-                <span className="bg-white/10 px-4 py-1 rounded-full text-[#c9a14a] font-semibold">
+            <div className="mb-4">
+              <div className="flex justify-between">
+                <p className="text-[#1E3D34]  text-lg mb-3">Interest Rate</p>
+                <span className="bg-white/10 px-4 py-1 rounded-full text-[#1E3D34] font-semibold">
                   {rate}%
                 </span>
               </div>
@@ -99,33 +101,33 @@ export default function EmiCalculatorPremium() {
                 step="0.1"
                 value={rate}
                 onChange={(e) => setRate(Number(e.target.value))}
-                className="w-full accent-[#c9a14a]"
+                className="w-full accent-[#1E3D34]"
               />
             </div>
           </div>
 
           {/* RIGHT SIDE */}
           <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.4)]">
-            <p className="text-[#c9a14a] text-sm">Monthly EMI</p>
+            <p className="text-[#1E3D34] text-sm">Monthly EMI</p>
 
-            <h2 className="text-4xl md:text-5xl font-bold text-[#c9a14a] mt-2">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#1E3D34] mt-2">
               ₹ {format(emi)}
             </h2>
 
             <div className="mt-8 space-y-3 text-sm md:text-base">
               <div className="flex justify-between">
-                <span className="text-[#c9a14a]">Principal</span>
+                <span className="text-[#1E3D34]">Principal</span>
                 <span>₹ {format(loan)}</span>
               </div>
 
               <div className="flex justify-between">
-                <span className="text-[#c9a14a]">Interest</span>
+                <span className="text-[#1E3D34]">Interest</span>
                 <span>₹ {format(interest)}</span>
               </div>
 
               <div className="flex justify-between font-semibold border-t border-white/10 pt-3">
                 <span>Total Amount</span>
-                <span className="text-[#c9a14a]">₹ {format(total)}</span>
+                <span className="text-[#1E3D34]">₹ {format(total)}</span>
               </div>
             </div>
 
@@ -136,7 +138,7 @@ export default function EmiCalculatorPremium() {
         </div>
       </section>
 
-      <section className="w-full bg-[#F7F3EC] px-10 md:px-12 pb-10">
+      <section className="w-full bg-[#F7F3EC] pt-20 px-10 md:px-12 pb-10">
         <div className="max-w-5xl mx-auto space-y-10 text-gray-800">
           <h1 className="text-2xl md:text-4xl font-serif text-[#1E3D34]">
             Home Loan EMI Calculator – FAQs | Vinra Estate

@@ -66,7 +66,7 @@ export default function projects() {
     <div>
       <section
         id="projects"
-        className="w-full bg-[url('/bg.jpg')] bg-cover bg-center bg-no-repeat py-36 px-4 md:px-10"
+        className="w-full bg-[url('/bg.webp')] bg-cover bg-center bg-no-repeat py-36 px-4 md:px-10"
       >
         <div className="text-center max-w-3xl mx-auto">
           {/* TOP SMALL TAG */}
@@ -74,9 +74,8 @@ export default function projects() {
             DISCOVER PREMIUM LIVING
           </p>
 
-          <h2 className="text-3xl md:text-5xl font-serif font-semibold text-gray-900 leading-tight flex items-center justify-center gap-3">
+          <h2 className="text-3xl md:text-5xl font-serif font-semibold text-[#1E3D34] leading-tight flex items-center justify-center gap-3">
             Properties in Bangalore
-            <Building2 className="w-7 h-7 text-[#ad8c43]" />
           </h2>
           {/* GOLD DIVIDER */}
           <div className="flex items-center justify-center gap-3">
@@ -107,7 +106,7 @@ export default function projects() {
                   >
                     <div className="relative h-56">
                       <Image
-                        src={item.img || item.image || "/house.jpeg"}
+                        src={item.img || item.image || "/house.webp"}
                         alt={item.title}
                         fill
                         unoptimized

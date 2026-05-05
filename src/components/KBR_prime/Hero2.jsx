@@ -156,7 +156,7 @@ export default function Hero() {
             className="relative w-[95%] lg:w-[88%] h-[300px] lg:h-[520px] overflow-hidden 
              rounded-r-[200px] lg:rounded-r-[300px]"
           >
-            <Image src="/1.jpeg" alt="Project" fill className="object-cover" />
+            <Image src="/1.webp" alt="Project" fill className="object-cover" />
           </motion.div>
 
           <motion.div

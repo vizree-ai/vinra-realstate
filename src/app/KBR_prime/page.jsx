@@ -26,7 +26,7 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-      <CommonNavbar variant="project" />
+      {/* <CommonNavbar variant="project" /> */}
       <KBR_prime />
     </>
   );

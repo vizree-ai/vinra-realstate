@@ -80,7 +80,7 @@ export default function MainPage() {
             fetchPriority="high"
             loading="eager"
             decoding="sync"
-            className="w-full h-full object-cover object-[64%_center]"
+            className="w-full h-full object-cover object-[44%_center]"
           />
 
           {/* Main cinematic smooth overlay */}
@@ -177,7 +177,7 @@ export default function MainPage() {
                       >
                         <div className="relative w-12 h-12 shrink-0 overflow-hidden rounded-md">
                           <Image
-                            src={item.image || item.img || "/house.jpeg"}
+                            src={item.image || item.img || "/house.webp"}
                             alt={item.title}
                             fill
                             unoptimized
@@ -207,7 +207,7 @@ export default function MainPage() {
 
       <section
         id="projects"
-        className="w-full bg-[url('/bg.jpg')] bg-cover bg-center bg-no-repeat py-16 px-4 md:px-10"
+        className="w-full bg-[url('/bg.webp')] bg-cover bg-center bg-no-repeat py-16 px-4 md:px-10"
       >
         <div className="text-center max-w-3xl mx-auto">
           {/* TOP SMALL TAG */}
@@ -217,7 +217,6 @@ export default function MainPage() {
 
           <h2 className="text-3xl md:text-5xl font-serif font-semibold text-gray-900 leading-tight flex items-center justify-center gap-3">
             Properties in Bangalore
-            <Building2 className="w-7 h-7 text-[#ad8c43]" />
           </h2>
           {/* GOLD DIVIDER */}
           <div className="flex items-center justify-center gap-3">
@@ -248,7 +247,7 @@ export default function MainPage() {
                   >
                     <div className="relative h-56">
                       <Image
-                        src={item.img || item.image || "/house.jpeg"}
+                        src={item.img || item.image || "/house.webp"}
                         alt={item.title}
                         fill
                         unoptimized

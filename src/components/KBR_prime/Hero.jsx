@@ -187,31 +187,20 @@ export default function Hero() {
       </div>
 
       {/* FLOATING BUTTONS */}
-      <a
-        href="https://wa.me/917026003069"
-        className="fixed bottom-4 right-4 z-50 w-12 h-12 rounded-full bg-[#25D366] flex items-center justify-center shadow-lg"
-      >
-        <FaWhatsapp className="text-white text-3xl" />
-      </a>
 
-      <div className="fixed top-145 left-0 -translate-y-1/2 z-50 flex flex-col gap-2">
+      <div className="fixed top-125 left-0 -translate-y-1/2 z-50 flex flex-col gap-2">
         <a
           href="tel:+917026003069"
-          className="w-10 h-14 bg-[#1E3D34] text-white rounded-r-2xl flex items-center justify-center"
+          className="w-9 h-14 bg-[#1E3D34] text-white rounded-r-2xl flex items-center justify-center"
         >
           <FaPhoneAlt />
         </a>
-        <button
-          onClick={() => setOpen(true)}
-          className="cursor-pointer text-sm font-semibold tracking-wide w-10 bg-[#1E3D34] text-white rounded-l-2xl"
-          style={{
-            height: "140px",
-            writingMode: "vertical-rl",
-            transform: "rotate(180deg)",
-          }}
+        <a
+          href="https://wa.me/917026003069"
+          className="fixed -bottom-16 left-0 z-50 w-9 h-14 rounded-r-2xl bg-[#25D366] flex items-center justify-center shadow-lg"
         >
-          Send Enquiry
-        </button>
+          <FaWhatsapp className="text-white text-3xl" />
+        </a>
       </div>
 
       <EnquiryForm open={open} setOpen={setOpen} />

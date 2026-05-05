@@ -1,37 +1,44 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa";
 import EnquiryForm from "./EnquiryForm";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Navbar({ variant = "home" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [isMobileMenuNavbarHidden, setIsMobileMenuNavbarHidden] =
     useState(false);
+
   const lastMobileMenuScrollY = useRef(0);
+  const router = useRouter();
 
   const isHome = variant === "home";
 
-  const handleExploreProjects = () => {
-    setIsOpen(false);
-    setIsMobileMenuNavbarHidden(false);
-    document.getElementById("projects")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
+  // ================= FIX: INSTANT NAVIGATION =================
+  const handleNavigation = useCallback(
+    (href) => {
+      setIsOpen(false); // close first
+      setIsMobileMenuNavbarHidden(false);
 
-  const handleMobileMenuToggle = () => {
+      requestAnimationFrame(() => {
+        router.push(href);
+      });
+    },
+    [router],
+  );
+
+  const handleMobileMenuToggle = useCallback(() => {
     setIsMobileMenuNavbarHidden(false);
     lastMobileMenuScrollY.current = 0;
-    setIsOpen((current) => !current);
-  };
+    setIsOpen((prev) => !prev);
+  }, []);
 
-  const handleMobileMenuScroll = (event) => {
+  const handleMobileMenuScroll = useCallback((event) => {
     const currentScrollY = event.currentTarget.scrollTop;
 
     if (currentScrollY <= 10) {
@@ -43,33 +50,33 @@ export default function Navbar({ variant = "home" }) {
     }
 
     lastMobileMenuScrollY.current = currentScrollY;
-  };
+  }, []);
+
+  const navbarPositionClass = isHome
+    ? "absolute top-0 left-0 px-4 md:px-10 pt-4"
+    : "relative lg:absolute lg:top-0 lg:left-0 px-3 lg:px-7 bg-[#F7F3EC] lg:bg-transparent";
+
+  const navbarTransformClass =
+    isOpen && isMobileMenuNavbarHidden ? "-translate-y-full" : "translate-y-0";
 
   return (
     <>
       {/* ================= NAVBAR ================= */}
       <div
-        className={`top-0 left-0 w-full z-[100] transition-transform duration-300 ease-out ${
-          isOpen && isMobileMenuNavbarHidden
-            ? "-translate-y-full"
-            : "translate-y-0"
-        } ${
-          isHome
-            ? "absolute top-0 left-0 px-4 md:px-10 pt-4"
-            : "relative lg:absolute lg:top-0 lg:left-0 px-3 lg:px-7 bg-[#F7F3EC] lg:bg-transparent"
-        }`}
+        className={`top-0 left-0 w-full z-[100] transition-transform duration-300 ease-out ${navbarTransformClass} ${navbarPositionClass}`}
       >
         <div
           className={`flex items-center justify-between ${
             isHome ? "h-[78px]" : "lg:grid lg:grid-cols-[1fr_auto_1fr]"
           }`}
         >
-          {/* ================= LOGO ================= */}
+          {/* LOGO */}
           <Image
-            src="/logo.png"
+            src="/logo.webp"
             alt="Logo"
             width={110}
             height={60}
+            priority
             className={`object-contain ${
               isHome ? " w-[90px] md:w-[110px]" : "w-[85px] lg:w-[100px]"
             }`}
@@ -78,42 +85,21 @@ export default function Navbar({ variant = "home" }) {
           {/* ================= DESKTOP MENU ================= */}
           {isHome ? (
             <>
-              <div className="hidden md:flex items-center gap-10 text-[17px] font-medium text-[#D8A33B] group">
-                {/* HOME */}
-                <a
-                  href="/"
-                  className="relative pb-2 text-[#D8A33B] transition group-hover:text-[#D8A33B]"
-                >
+              <div className="hidden md:flex items-center gap-10 text-[17px] font-medium text-[#D8A33B]">
+                <Link href="/" prefetch>
                   Home
-                  <span className="absolute left-0 -bottom-1 w-full h-[3px] bg-[#D8A33B] rounded-full transition-all duration-300 group-hover:w-0"></span>
-                </a>
-
-                <a
-                  href="/aboutmain"
-                  className="relative pb-2 hover:text-[#D8A33B] transition group/item"
-                >
+                </Link>
+                <Link href="/aboutmain" prefetch>
                   About Us
-                  <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-[#D8A33B] rounded-full transition-all duration-300 group-hover/item:w-full"></span>
-                </a>
-
-                {/* PROJECTS */}
-                <a
-                  href="/projects"
-                  className="relative pb-2 hover:text-[#D8A33B] transition group/item"
-                >
+                </Link>
+                <Link href="/projects" prefetch>
                   Projects
-                  <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-[#D8A33B] rounded-full transition-all duration-300 group-hover/item:w-full"></span>
-                </a>
-
-                {/* EMI */}
-                <a
-                  href="/emicalculator"
-                  className="relative pb-2 hover:text-[#D8A33B] transition group/item"
-                >
+                </Link>
+                <Link href="/emicalculator" prefetch>
                   EMI Calculator
-                  <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-[#D8A33B] rounded-full transition-all duration-300 group-hover/item:w-full"></span>
-                </a>
+                </Link>
               </div>
+
               <div className="hidden md:block">
                 <a
                   href="https://wa.me/916366699888?text=Hi%2C%20I%27m%20looking%20for%20a%20flat."
@@ -141,14 +127,13 @@ export default function Navbar({ variant = "home" }) {
                 <a href="#contact">Contact</a>
               </div>
 
-              {/* RIGHT NUMBER */}
               <div className="hidden lg:flex bg-[#F8EDD8] text-black px-4 py-1.5 rounded-full text-sm font-medium">
                 7026003069
               </div>
             </div>
           )}
 
-          {/* ================= MOBILE BUTTON ================= */}
+          {/* MOBILE BUTTON */}
           <button
             onClick={handleMobileMenuToggle}
             className="md:hidden cursor-pointer lg:hidden z-[101] flex items-center bg-[#9f773c] rounded-full px-4 py-1 text-white text-3xl"
@@ -158,55 +143,59 @@ export default function Navbar({ variant = "home" }) {
         </div>
       </div>
 
-      {/* ================= MOBILE MENU (COMMON) ================= */}
-      <AnimatePresence>
+      {/* ================= MOBILE MENU ================= */}
+      <AnimatePresence mode="wait">
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }} // smoother, no slide flicker
+            transition={{ duration: 0.2 }}
             onScroll={handleMobileMenuScroll}
-            className="fixed inset-0 z-[90] bg-[#deb06c] backdrop-blur-xl overflow-y-auto px-6 py-24"
+            className="fixed inset-0 z-[90] bg-[#F7F3EC]/95 backdrop-blur-xl"
           >
-            <div className="flex flex-col gap-8 text-[#1E3D34] text-2xl font-semibold">
-              {isHome ? (
-                <>
-                  <a href="/" onClick={() => setIsOpen(false)}>
-                    Home
-                  </a>
-                  <a href="/aboutmain" onClick={() => setIsOpen(false)}>
-                    About Us
-                  </a>
-                  <a href="/projects" onClick={() => setIsOpen(false)}>
-                    Projects
-                  </a>
-                  <a href="/emicalculator" onClick={() => setIsOpen(false)}>
-                    EMI Calculator
-                  </a>
-                </>
-              ) : (
-                <>
-                  <a onClick={() => setIsOpen(false)}>Home</a>
-                  <a href="#amenities" onClick={() => setIsOpen(false)}>
-                    Amenities
-                  </a>
-                  <a href="#gallery" onClick={() => setIsOpen(false)}>
-                    Gallery
-                  </a>
-                  <a href="#location" onClick={() => setIsOpen(false)}>
-                    Location
-                  </a>
-                  <a href="#contact" onClick={() => setIsOpen(false)}>
-                    Contact
-                  </a>
-                </>
-              )}
+            <div className="flex items-center justify-center h-full w-full px-6">
+              <div className="flex flex-col items-center gap-8 text-[#1E3D34] text-2xl md:text-3xl font-semibold">
+                {/* MOBILE LINKS FIXED */}
+                {isHome ? (
+                  <>
+                    <button onClick={() => handleNavigation("/")}>Home</button>
+                    <button onClick={() => handleNavigation("/aboutmain")}>
+                      About Us
+                    </button>
+                    <button onClick={() => handleNavigation("/projects")}>
+                      Projects
+                    </button>
+                    <button onClick={() => handleNavigation("/emicalculator")}>
+                      EMI Calculator
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <a href="#amenities" onClick={() => setIsOpen(false)}>
+                      Home
+                    </a>
+                    <a href="#amenities" onClick={() => setIsOpen(false)}>
+                      Amenities
+                    </a>
+                    <a href="#gallery" onClick={() => setIsOpen(false)}>
+                      Gallery
+                    </a>
+                    <a href="#location" onClick={() => setIsOpen(false)}>
+                      Location
+                    </a>
+                    <a href="#contact" onClick={() => setIsOpen(false)}>
+                      Contact
+                    </a>
+                  </>
+                )}
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ================= ENQUIRY FORM ================= */}
+      {/* ENQUIRY FORM */}
       {!isHome && <EnquiryForm open={open} setOpen={setOpen} variant="popup" />}
     </>
   );
