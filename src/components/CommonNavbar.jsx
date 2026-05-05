@@ -71,16 +71,18 @@ export default function Navbar({ variant = "home" }) {
           }`}
         >
           {/* LOGO */}
-          <Image
-            src="/logo.webp"
-            alt="Logo"
-            width={110}
-            height={60}
-            priority
-            className={`object-contain ${
-              isHome ? " w-[90px] md:w-[110px]" : "w-[85px] lg:w-[100px]"
-            }`}
-          />
+          <Link href="/">
+            <Image
+              src="/logo.webp"
+              alt="Logo"
+              width={110}
+              height={60}
+              priority
+              className={`object-contain ${
+                isHome ? " w-[90px] md:w-[110px]" : "w-[85px] lg:w-[100px]"
+              }`}
+            />
+          </Link>
 
           {/* ================= DESKTOP MENU ================= */}
           {isHome ? (
@@ -124,12 +126,14 @@ export default function Navbar({ variant = "home" }) {
                 <a href="#amenities">Amenities</a>
                 <a href="#gallery">Gallery</a>
                 <a href="#location">Location</a>
-                <a href="#contact">Contact</a>
               </div>
 
-              <div className="hidden lg:flex bg-[#F8EDD8] text-black px-4 py-1.5 rounded-full text-sm font-medium">
+              <a
+                href="tel:+917026003069"
+                className="hidden lg:flex bg-[#F8EDD8] text-black px-4 py-1.5 rounded-full text-sm font-medium"
+              >
                 7026003069
-              </div>
+              </a>
             </div>
           )}
 

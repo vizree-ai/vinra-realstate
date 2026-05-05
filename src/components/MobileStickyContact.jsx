@@ -4,7 +4,7 @@ import { MessageCircle } from "lucide-react";
 
 export default function MobileStickyContact({ setOpen }) {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[80] px-4 pb-4 pt-3 md:hidden pointer-events-none">
+    <div className="fixed inset-x-0 bottom-2 z-[80] px-4 pb-4 pt-3 md:hidden pointer-events-none">
       <button
         type="button"
         onClick={() => setOpen(true)}

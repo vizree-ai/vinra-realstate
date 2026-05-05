@@ -80,7 +80,7 @@ export default function MainPage() {
             fetchPriority="high"
             loading="eager"
             decoding="sync"
-            className="w-full h-full object-cover object-[44%_center]"
+            className="w-full h-full object-cover object-[54%_center]"
           />
 
           {/* Main cinematic smooth overlay */}
@@ -327,63 +327,6 @@ export default function MainPage() {
         </div>
       </section>
 
-      <footer className="w-full bg-[#1a1a1a] text-white py-12 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-10">
-          {/* BRAND */}
-          <div>
-            <h2 className="text-xl font-semibold text-[#c9a14a] mb-3">
-              Vinra Group
-            </h2>
-            <p className="text-sm text-gray-400">
-              Building trust through quality real estate and modern living
-              solutions across Bangalore.
-            </p>
-          </div>
-
-          {/* QUICK LINKS */}
-          <div>
-            <h3 className="text-sm font-semibold mb-3">Quick Links</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#about">About</a>
-              </li>
-              <li>
-                <a href="#projects">Projects</a>
-              </li>
-              <li>
-                <a href="#contact">Contact</a>
-              </li>
-            </ul>
-          </div>
-
-          {/* SERVICES */}
-          <div>
-            <h3 className="text-sm font-semibold mb-3">Services</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>Property Investment</li>
-              <li>Construction</li>
-              <li>Interior Design</li>
-              <li>Property Management</li>
-            </ul>
-          </div>
-
-          {/* CONTACT */}
-          <div>
-            <h3 className="text-sm font-semibold mb-3">Contact</h3>
-            <p className="text-sm text-gray-400">Bangalore, India</p>
-            <p className="text-sm text-gray-400 mt-1">+91 7026003069</p>
-            <p className="text-sm text-gray-400 mt-1">info@vinragroup.com</p>
-          </div>
-        </div>
-
-        {/* BOTTOM */}
-        <div className="border-t border-gray-700 mt-10 pt-4 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} Vinra Group. All rights reserved.
-        </div>
-      </footer>
       <MobileStickyContact setOpen={setOpen} />
       <EnquiryForm open={open} setOpen={setOpen} />
     </>

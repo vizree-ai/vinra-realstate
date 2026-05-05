@@ -216,12 +216,9 @@ export default function Gallery() {
       <section className="w-full">
         <EnquiryForm variant="visit" />
 
-        {/* BOTTOM DISCLAIMER */}
-        {/* Reduced py-14 to py-8 for a much shorter footer on mobile */}
         <div className="bg-[#5b3d2e] text-white text-center py-8 md:py-14 px-6">
-          {/* RERA: Reduced font and margin */}
           <h3 className="text-base md:text-xl font-medium mb-4 md:mb-6">
-            RERA NO : PRM/KA/RERA/1251/308/PR/170625/007842
+            RERA NO : PRM/KA/RERA/1251/309/AG/180430/000888
           </h3>
 
           {/* DISCLAIMER TITLE */}

@@ -94,9 +94,12 @@ export default function Hero() {
 
           <div className="absolute bottom-6 right-6 z-10">
             <button className="bg-[#9f773c] text-white px-6 py-2 rounded-xl shadow-md hover:scale-105 transition">
-              <span className="cursor-pointer text-lg font-semibold tracking-widest">
+              <a
+                href="tel:+917026003069"
+                className="cursor-pointer text-lg font-semibold tracking-widest"
+              >
                 7026003069
-              </span>
+              </a>
             </button>
           </div>
         </div>

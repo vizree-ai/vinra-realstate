@@ -164,7 +164,7 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
             <select
               value={bhk}
               onChange={(e) => setBhk(e.target.value)}
-              className="block w-full pl-12 pr-10 py-3 rounded-xl 
+              className="block w-full pl-12 pr-10 px-4 py-2.5 md:px-5 md:py-3.5 rounded-xl 
     border border-[#1E3D34]
       text-[#1E3D34]/70 
       outline-none 
@@ -187,15 +187,9 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
           {/* BUTTON */}
           <button
             type="submit"
-            className="w-full 
-bg-gradient-to-r from-[#b07a1d] to-[#c69636] 
-text-white py-3 md:py-4 
-rounded-xl font-semibold tracking-wide 
-shadow-md 
-hover:shadow-lg 
-active:scale-95 md:hover:scale-[1.02] 
-transition-all 
-relative overflow-hidden"
+            className="w-full bg-gradient-to-r from-[#b07a1d] to-[#c69636] text-white py-3 md:py-4 rounded-xl font-semibold tracking-wide shadow-md hover:shadow-lg active:scale-95 md:hover:scale-[1.02] 
+                   transition-all 
+                   relative overflow-hidden"
           >
             ENQUIRE
           </button>
