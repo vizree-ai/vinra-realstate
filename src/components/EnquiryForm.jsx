@@ -53,7 +53,7 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
 
             <input
               type="tel"
-              placeholder="Phone no*"
+              placeholder="Whatsapp No.*"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="w-full lg:w-1/3 px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base text-black"
@@ -246,7 +246,7 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
 
           <input
             type="tel"
-            placeholder="Phone Number*"
+            placeholder="Whatsapp No.*"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             className="w-full px-4 py-3 rounded-2xl border border-[#d6b89f] text-black bg-[#faf7f4] placeholder-gray-500 outline-none focus:ring-1 focus:ring-[#5b3d2e]"

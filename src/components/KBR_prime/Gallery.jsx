@@ -248,7 +248,7 @@ export default function Gallery() {
               </p>
 
               <h3 className="text-white text-3xl md:text-5xl font-bold mb-4">
-                Ground + 1
+                2 bhk floor plan
               </h3>
 
               <p className="text-white/85 text-sm md:text-base max-w-md mb-7 leading-relaxed">
@@ -284,7 +284,7 @@ export default function Gallery() {
               </p>
 
               <h3 className="text-white text-3xl md:text-5xl font-bold mb-4">
-                Ground + 2
+                3 bhk floor plan
               </h3>
 
               <p className="text-white/85 text-sm md:text-base max-w-md mb-7 leading-relaxed">
