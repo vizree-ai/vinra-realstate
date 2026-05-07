@@ -1,32 +1,39 @@
 import KBR_prime from "@/components/KBR_prime";
-import CommonNavbar from "@/components/CommonNavbar";
 
 export const metadata = {
-  title: "Vinra KBR Prime Apartments in Hoskote",
+  title: "Vinra KBR Prime | Luxury Apartments in Bangalore",
   description:
-    "Own 2 and 3 BHK apartments at Vinra KBR Prime in Hoskote, Bangalore with premium amenities and connectivity.",
-  alternates: {
-    canonical: "/KBR_prime",
-  },
+    "Explore Vinra KBR Prime premium apartments with modern amenities, great connectivity, and luxury living in Bangalore.",
+
+  keywords: [
+    "Vinra KBR Prime",
+    "Vinra apartments",
+    "Vinra KBR Prime Bangalore",
+    "Luxury apartments Bangalore",
+    "2 BHK apartments Bangalore",
+    "3 BHK apartments Bangalore",
+  ],
+
   openGraph: {
-    title: "Vinra KBR Prime Apartments in Hoskote",
-    description:
-      "Explore Vinra KBR Prime 2 and 3 BHK apartments in Hoskote, Bangalore.",
+    title: "Vinra KBR Prime",
+    description: "Luxury apartments with premium amenities in Bangalore.",
+    url: "https://vinraestates.com/KBR_prime",
+    siteName: "Vinra KBR Prime",
     images: [
       {
-        url: "/Vinra KBR Prime.webp",
+        url: "/kbr1.webp",
         width: 1200,
         height: 630,
-        alt: "Vinra KBR Prime apartments in Hoskote",
       },
     ],
+    locale: "en_IN",
+    type: "website",
   },
 };
 
 export default function Page() {
   return (
     <>
-      {/* <CommonNavbar variant="project" /> */}
       <KBR_prime />
     </>
   );

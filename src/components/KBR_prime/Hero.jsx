@@ -46,47 +46,10 @@ function HeroImage({ className = "" }) {
 }
 
 export default function Hero() {
-  const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
-
-  const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "Amenities", href: "#amenities" },
-    { name: "Gallery", href: "#gallery" },
-    { name: "Location", href: "#location" },
-    { name: "Contact", href: "#contact" },
-  ];
 
   return (
     <section className="w-full flex justify-center items-center relative overflow-hidden">
-      {/* MOBILE MENU */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-[90] lg:hidden bg-[#6b4a34]/95 backdrop-blur-xl flex flex-col items-center justify-center"
-          >
-            <div className="flex flex-col gap-8 text-white text-2xl font-semibold">
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  {link.name}
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* MAIN GRID */}
       <div className="w-full max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-[60%_40%] min-h-screen lg:h-[730px] overflow-hidden">
         {/* RIGHT IMAGE DESKTOP */}
         <div className="hidden lg:block relative h-full">
@@ -106,7 +69,7 @@ export default function Hero() {
 
         {/* LEFT PANEL */}
         <div className="bg-[#F7F3EC] text-[#5b3d2e] p-4 lg:p-8 lg:pt-28 flex flex-col justify-start relative">
-          <div className="text-center lg:text-left">
+          <div className="mt-4 text-center lg:text-left">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}

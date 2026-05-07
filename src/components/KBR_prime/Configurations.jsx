@@ -52,7 +52,7 @@ export default function Configurations() {
     >
       <div className="fixed md:fixed inset-0 -z-10 w-full h-full">
         <Image
-          src="/house.webp"
+          src="/hand.jpeg"
           alt="Background"
           fill
           sizes="100vw"

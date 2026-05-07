@@ -6,15 +6,16 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import EnquiryForm from "../EnquiryForm";
 
 const images = [
-  "/1.webp",
+  "/kbr1.webp",
+  "/kbr2.webp",
+  "/kbr3.webp",
+  "/kbr4.webp",
   "/house.webp",
-  "/home.webp",
-  "/house.webp",
-  "/1.webp",
 ];
 
 export default function Gallery() {
   const [index, setIndex] = useState(0);
+  const [open, setOpen] = useState(false);
 
   const nextSlide = () => {
     setIndex((prev) => (prev + 1) % images.length);
@@ -110,7 +111,10 @@ export default function Gallery() {
 
           {/* DOWNLOAD */}
 
-          <button className="text-[#5b3d2e] mt-12 bg-amber-100 border-3 border-dashed border-[#5b3d2e] px-6 py-3 rounded-full hover:bg-[#5b3d2e] hover:text-white transition">
+          <button
+            onClick={() => setOpen(true)}
+            className="text-[#5b3d2e] mt-12 bg-amber-100 border-3 border-dashed border-[#5b3d2e] px-6 py-3 rounded-full hover:bg-[#5b3d2e] hover:text-white transition"
+          >
             📄 Download Broucher
           </button>
         </div>
@@ -120,7 +124,7 @@ export default function Gallery() {
           {/* MAP */}
           <div className="border-10 border border-white w-full h-[450px] rounded overflow-hidden shadow-lg">
             <iframe
-              src="https://www.google.com/maps?q=Sarjapur%20Road%20Bangalore&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.4942786703705!2d77.82032769999999!3d13.067830299999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae0f001629b9a3%3A0x4ae927a47d558812!2sVinra%20KBR%20Prime!5e0!3m2!1sen!2sin!4v1778146622983!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -133,86 +137,173 @@ export default function Gallery() {
             <h2 className="text-3xl font-semibold mb-6">Proximities</h2>
 
             <ul className="space-y-2 text-lg">
-              <li>1. Infosys Headquarters – 5 Mins</li>
-              <li>2. Azim Premji University – 4 Mins</li>
-              <li>3. Forum Mall – 5-10 Mins</li>
-              <li>4. Manipal Hospital – 15-20 Mins</li>
-              <li>5. Oakridge International School – 10-12 Mins</li>
-              <li>6. DMart – 2 Mins</li>
-              <li>7. Decathlon – 15-20 Mins</li>
-              <li>8. Oxygen Mall – 10-15 Mins</li>
-              <li>9. Sarjapur Social – 15-20 Mins</li>
-              <li>10. RGA Tech Park – 15-20 Mins</li>
-              <li>11. Wipro – 20-25 Mins</li>
+              <li>1. Whitefield – 20-25 Mins</li>
+              <li>2. ITPL Tech Park – 25-30 Mins</li>
+              <li>3. Old Madras Road – 5 Mins</li>
+              <li>4. Hoskote Town – 5 Mins</li>
+              <li>5. MVJ Medical College – 5 Mins</li>
+              <li>6. Nexus Shantiniketan Mall – 25 Mins</li>
+              <li>7. KR Puram Railway Station – 25-30 Mins</li>
+              <li>8. Upcoming Metro Connectivity – Nearby</li>
+              <li>9. International Schools – 10-15 Mins</li>
+              <li>10. Hospitals & Daily Essentials – Nearby</li>
+              <li>11. Bangalore International Airport – 40-45 Mins</li>
             </ul>
           </div>
         </div>
       </section>
-      <div className="bg-[#f5f3ef] py-16 px-6 text-center">
-        {/* TITLE */}
-        <h2 className="text-3xl md:text-4xl font-semibold text-[#5b3d2e] mb-10">
-          Floorplan
-        </h2>
+      <div className="bg-gradient-to-b from-[#f8f5f0] to-[#efe7dd] py-20 px-6 overflow-hidden">
+        {/* TOP CONTENT */}
+        <div className="text-center max-w-4xl mx-auto mb-16">
+          <p className="text-[#c09b64] uppercase tracking-[5px] text-xs md:text-sm font-semibold mb-4">
+            Crafted for Modern Families
+          </p>
 
-        {/* IMAGE CONTAINER */}
-        <div className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl">
-          {/* BLURRED IMAGE */}
+          <h2 className="text-4xl md:text-6xl font-bold text-[#5b3d2e] leading-tight mb-6">
+            Floor Plans <span className="text-[#c09b64]">&</span> Master Plan
+          </h2>
+
+          <p className="text-[#6b625d] text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+            Every home at{" "}
+            <span className="font-semibold text-[#5b3d2e]">
+              Vinra KBR Prime
+            </span>{" "}
+            is thoughtfully designed to deliver the perfect balance of comfort,
+            functionality, and elegance. Spacious layouts, smart space planning,
+            natural ventilation, and premium architectural detailing ensure a
+            refined living experience for modern families.
+          </p>
+
+          {/* TRUST TAGS */}
+          <div className="flex flex-wrap justify-center gap-3 mt-8">
+            {[
+              "Premium Planning",
+              "Vastu Inspired Layouts",
+              "Trusted Construction",
+              "Spacious Interiors",
+            ].map((tag, i) => (
+              <span
+                key={i}
+                className="bg-white border border-[#d9c7ae] text-[#5b3d2e] px-4 py-2 rounded-full text-sm shadow-sm"
+              >
+                ✦ {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* MASTER PLAN PREVIEW */}
+        <div className="relative max-w-5xl mx-auto rounded-[32px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.15)] mb-20 group">
+          <h1 className="text-3xl text-center md:text-4xl font-bold text-[#5b3d2e] mb-2">
+            Master Plan
+          </h1>
           <Image
-            src="/floor plan.jpg" // your image
+            src="/master-plan.jpg"
             alt="Masterplan"
-            width={1200}
-            height={600}
-            className="w-full h-auto object-cover blur-md scale-105"
+            width={1400}
+            height={700}
+            className="w-full h-[320px] md:h-[520px] object-cover group-hover:scale-105 transition duration-700"
           />
 
-          {/* DARK OVERLAY (optional but makes button pop) */}
-          <div className="absolute inset-0 bg-black/30"></div>
+          {/* OVERLAY */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-          {/* CENTER BUTTON */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <button
-              className="bg-[#5b3d2e] text-white px-6 py-3 rounded-lg 
-                             shadow-lg
-                             hover:scale-105 transition-all duration-300"
-            >
-              View Floor Plans
-            </button>
+          {/* CONTENT */}
+          <div className="absolute inset-0 flex flex-col justify-end items-start text-left p-6 md:p-12">
+            <p className="uppercase tracking-[4px] text-[#d4b483] text-xs md:text-sm font-medium mb-3">
+              Community Master Layout
+            </p>
+
+            <h2 className="text-white text-3xl md:text-5xl font-bold mb-4">
+              Thoughtfully Planned
+              <br />
+              Premium Community
+            </h2>
+
+            <p className="text-white/80 text-sm md:text-lg max-w-2xl leading-relaxed">
+              Wide internal roads, landscaped open spaces, modern amenities,
+              dedicated recreational zones, and carefully planned residences
+              come together to create an elevated lifestyle experience.
+            </p>
+          </div>
+        </div>
+
+        {/* FLOOR PLAN CARDS */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+          {/* G+1 CARD */}
+          <div className="group relative rounded-[30px] overflow-hidden shadow-[0_15px_50px_rgba(0,0,0,0.12)]">
+            <Image
+              src="/floor-plan.webp"
+              alt="Floor Plan Ground Plus 1"
+              width={1200}
+              height={700}
+              className="w-full h-[340px] md:h-[460px] object-cover blur-[5px] group-hover:blur-0 scale-105 group-hover:scale-110 transition-all duration-700"
+            />
+
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+              <p className="text-[#d4b483] uppercase tracking-[4px] text-xs md:text-sm mb-3">
+                Elegant Residences
+              </p>
+
+              <h3 className="text-white text-3xl md:text-5xl font-bold mb-4">
+                Ground + 1
+              </h3>
+
+              <p className="text-white/85 text-sm md:text-base max-w-md mb-7 leading-relaxed">
+                Spaciously crafted floor plans offering seamless layouts,
+                natural lighting, privacy, and modern functionality for
+                contemporary family living.
+              </p>
+
+              <button
+                onClick={() => setOpen(true)}
+                className="bg-[#5b3d2e] hover:bg-[#3f2a1f] text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
+              >
+                View Floor Plans
+              </button>
+            </div>
+          </div>
+
+          {/* G+2 CARD */}
+          <div className="group relative rounded-[30px] overflow-hidden shadow-[0_15px_50px_rgba(0,0,0,0.12)]">
+            <Image
+              src="/floor2.jpg"
+              alt="Floor Plan Ground Plus 2"
+              width={1200}
+              height={700}
+              className="w-full h-[340px] md:h-[460px] object-cover blur-[5px] group-hover:blur-0 scale-105 group-hover:scale-110 transition-all duration-700"
+            />
+
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+              <p className="text-[#d4b483] uppercase tracking-[4px] text-xs md:text-sm mb-3">
+                Premium Smart Layouts
+              </p>
+
+              <h3 className="text-white text-3xl md:text-5xl font-bold mb-4">
+                Ground + 2
+              </h3>
+
+              <p className="text-white/85 text-sm md:text-base max-w-md mb-7 leading-relaxed">
+                Experience intelligently planned residences with optimized
+                spaces, elegant interiors, enhanced comfort, and premium
+                lifestyle features.
+              </p>
+
+              <button
+                onClick={() => setOpen(true)}
+                className="bg-[#5b3d2e] hover:bg-[#3f2a1f] text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
+              >
+                View Floor Plans
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <div className="w-full my-1"></div>
-      <div className="bg-[#f5f3ef] py-16 px-6 text-center">
-        {/* TITLE */}
-        <h2 className="text-3xl md:text-4xl font-semibold text-[#5b3d2e] mb-10">
-          Masterplan
-        </h2>
 
-        {/* IMAGE CONTAINER */}
-        <div className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl">
-          {/* BLURRED IMAGE */}
-          <Image
-            src="/floor plan.jpg" // your image
-            alt="Masterplan"
-            width={1200}
-            height={600}
-            className="w-full h-auto object-cover blur-md scale-105"
-          />
-
-          {/* DARK OVERLAY (optional but makes button pop) */}
-          <div className="absolute inset-0 bg-black/30"></div>
-
-          {/* CENTER BUTTON */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <button
-              className="bg-[#5b3d2e] text-white px-6 py-3 rounded-lg 
-                             shadow-lg
-                             hover:scale-105 transition-all duration-300"
-            >
-              View Floor Plans
-            </button>
-          </div>
-        </div>
-      </div>
       <section className="w-full">
         <EnquiryForm variant="visit" />
 
@@ -228,18 +319,22 @@ export default function Gallery() {
 
           {/* TEXT: Reduced from text-sm to text-xs on very small screens to save space */}
           <p className="max-w-4xl mx-auto text-xs md:text-base leading-relaxed text-white/80">
-            The content is for information purposes only and does not constitute
-            an offer to avail of any service. Prices mentioned are subject to
-            change without notice and properties mentioned are subject to
-            availability. Images are for representation purposes only. This is
-            the official website of{" "}
-            <span className="font-semibold">Inspira Winds of Life</span>. We may
-            share data with RERA registered brokers/companies for further
-            processing. We may also send updates to the mobile number/email id
-            registered with us. All Rights Reserved.
+            Disclaimer: The information provided on this website is for general
+            informational purposes only and should not be considered as an
+            offer, invitation, or commitment for any service or property.
+            Prices, specifications, availability, and other project details are
+            subject to change without prior notice. All images, visuals, and
+            renderings used are for illustrative and representation purposes
+            only. This is the official website of Vinra KBR Prime. By submitting
+            your details, you authorize us and our RERA registered
+            associates/partners to contact you via call, SMS, WhatsApp, or email
+            regarding project updates and related information. We are committed
+            to maintaining transparency and providing accurate information to
+            our customers. All Rights Reserved.
           </p>
         </div>
-      </section>{" "}
+      </section>
+      <EnquiryForm open={open} setOpen={setOpen} />
     </>
   );
 }
