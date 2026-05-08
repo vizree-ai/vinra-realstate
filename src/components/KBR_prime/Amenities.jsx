@@ -1,5 +1,6 @@
 "use client";
-
+import { useState } from "react";
+import EnquiryForm from "../EnquiryForm";
 import { motion } from "framer-motion";
 import {
   Dumbbell,
@@ -47,6 +48,7 @@ const amenities = [
 ];
 
 export default function Amenities() {
+  const [open, setOpen] = useState(false);
   return (
     <section className="bg-[#f4f4f4] py-10">
       <div className="max-w-7xl mx-auto px-6 text-center">
@@ -95,6 +97,21 @@ export default function Amenities() {
           })}
         </div>
       </div>
+    <div className="flex justify-center mt-12 py-5">
+  <button
+    onClick={() => setOpen(true)}
+    className="text-[#5b3d2e] flex items-center gap-2 bg-amber-100 border-2 border-dashed border-[#5b3d2e] px-6 py-3 rounded-full hover:bg-[#5b3d2e] hover:text-white transition"
+  >
+    📄 Download Brochure
+  </button>
+</div>
+      <EnquiryForm
+        heading="Get the brochure on your whatsapp"
+        description="Fill your details to receive the complete brochure, pricing & availability on your WhatsApp."
+        buttonText="Get Brochure"
+        open={open}
+        setOpen={setOpen}
+      />
     </section>
   );
 }

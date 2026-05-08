@@ -50,7 +50,7 @@ export default function Hero() {
 
   return (
     <section className="w-full flex justify-center items-center relative overflow-hidden">
-      <div className="w-full max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-[60%_40%] min-h-screen lg:h-[730px] overflow-hidden">
+      <div className="w-full max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-[60%_40%] h-auto lg:h-[730px] overflow-hidden">
         {/* RIGHT IMAGE DESKTOP */}
         <div className="hidden lg:block relative h-full">
           <HeroImage className="h-full w-full" />

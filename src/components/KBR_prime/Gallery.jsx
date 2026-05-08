@@ -193,38 +193,64 @@ export default function Gallery() {
         </div>
 
         {/* MASTER PLAN PREVIEW */}
-        <div className="relative max-w-5xl mx-auto rounded-[32px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.15)] mb-20 group">
-          <h1 className="text-3xl text-center md:text-4xl font-bold text-[#5b3d2e] mb-2">
-            Master Plan
-          </h1>
-          <Image
-            src="/master-plan.jpg"
-            alt="Masterplan"
-            width={1400}
-            height={700}
-            className="w-full h-[320px] md:h-[520px] object-cover group-hover:scale-105 transition duration-700"
-          />
+        <div className="relative max-w-6xl mx-auto rounded-[36px] overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.18)] mb-24 group border border-white/10">
+          {/* TOP TITLE */}
+          <div className="flex items-center justify-between mb-5 px-2">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#5b3d2e] leading-tight">
+                Master Plan
+              </h2>
+            </div>
 
-          {/* OVERLAY */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div className="hidden md:flex items-center gap-2 bg-white px-5 py-2 rounded-full shadow-md">
+              <span className="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+              <p className="text-sm font-medium text-[#5b3d2e]">
+                Smartly Designed Layout
+              </p>
+            </div>
+          </div>
 
-          {/* CONTENT */}
-          <div className="absolute inset-0 flex flex-col justify-end items-start text-left p-6 md:p-12">
-            <p className="uppercase tracking-[4px] text-[#d4b483] text-xs md:text-sm font-medium mb-3">
-              Community Master Layout
-            </p>
+          {/* IMAGE */}
+          <div className="relative rounded-[32px] overflow-hidden">
+            <Image
+              src="/master-plan.jpg"
+              alt="Masterplan"
+              width={1400}
+              height={700}
+              className="w-full h-[350px] md:h-[620px] object-cover scale-100 group-hover:scale-105 transition duration-700"
+            />
 
-            <h2 className="text-white text-3xl md:text-5xl font-bold mb-4">
-              Thoughtfully Planned
-              <br />
-              Premium Community
-            </h2>
+            {/* PREMIUM OVERLAY */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10"></div>
 
-            <p className="text-white/80 text-sm md:text-lg max-w-2xl leading-relaxed">
-              Wide internal roads, landscaped open spaces, modern amenities,
-              dedicated recreational zones, and carefully planned residences
-              come together to create an elevated lifestyle experience.
-            </p>
+            {/* GOLD GLOW */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,180,131,0.25),transparent_35%)]"></div>
+
+            {/* CONTENT */}
+            <div className="absolute inset-0 flex flex-col justify-end items-start p-6 md:p-14">
+              {/* TAG */}
+              <div className="mb-5 flex items-center gap-3">
+                <div className="h-[1px] w-10 bg-[#d4b483]"></div>
+              </div>
+
+              {/* TITLE */}
+              <h2 className="text-white text-3xl md:text-6xl font-bold leading-tight mb-5 max-w-3xl">
+                Thoughtfully Crafted
+                <br />
+                Premium Community Living
+              </h2>
+
+              {/* DESCRIPTION */}
+              <p className="text-white/90 text-sm md:text-lg leading-relaxed max-w-2xl">
+                Wide internal roads, lush landscaped gardens, premium amenities,
+                recreational zones, and intelligently planned residences come
+                together to create an elevated lifestyle experience for modern
+                families.
+              </p>
+              <p className="uppercase tracking-[4px] text-[#d4b483] mt-6 text-xs md:text-sm font-medium">
+                Community Master Layout
+              </p>
+            </div>
           </div>
         </div>
 
@@ -248,7 +274,7 @@ export default function Gallery() {
               </p>
 
               <h3 className="text-white text-3xl md:text-5xl font-bold mb-4">
-                2 bhk floor plan
+                2 BHK floor plan
               </h3>
 
               <p className="text-white/85 text-sm md:text-base max-w-md mb-7 leading-relaxed">
@@ -259,9 +285,9 @@ export default function Gallery() {
 
               <button
                 onClick={() => setOpen(true)}
-                className="bg-[#5b3d2e] hover:bg-[#3f2a1f] text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
+                className="bg-[#b88a44] hover:bg-[#3f2a1f] text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
               >
-                View Floor Plans
+                Download Floor Plans
               </button>
             </div>
           </div>
@@ -284,7 +310,7 @@ export default function Gallery() {
               </p>
 
               <h3 className="text-white text-3xl md:text-5xl font-bold mb-4">
-                3 bhk floor plan
+                3 BHK floor plan
               </h3>
 
               <p className="text-white/85 text-sm md:text-base max-w-md mb-7 leading-relaxed">
@@ -295,9 +321,9 @@ export default function Gallery() {
 
               <button
                 onClick={() => setOpen(true)}
-                className="bg-[#5b3d2e] hover:bg-[#3f2a1f] text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
+                className="bg-[#b88a44] hover:bg-[#3f2a1f] text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
               >
-                View Floor Plans
+                Download Floor Plans
               </button>
             </div>
           </div>
@@ -334,7 +360,13 @@ export default function Gallery() {
           </p>
         </div>
       </section>
-      <EnquiryForm open={open} setOpen={setOpen} />
+      <EnquiryForm
+        heading="Get floor plans on your whatsapp"
+        description="Fill your details to receive complete floor plans, pricing & availability on your WhatsApp."
+        buttonText="Get Floor Plan"
+        open={open}
+        setOpen={setOpen}
+      />
     </>
   );
 }

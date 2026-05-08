@@ -2,19 +2,37 @@
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { User, Phone, Building } from "lucide-react";
+import { User, Phone, Building, CalendarDays } from "lucide-react";
 
-export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
+export default function EnquiryForm({
+  open,
+  setOpen,
+  variant = "popup",
+  heading,
+  description,
+  buttonText,
+}) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [bhk, setBhk] = useState("");
+  const [visitDate, setVisitDate] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { error } = await supabase
-      .from("enquiries")
-      .insert([{ name, phone, bhk }]);
+    if (loading) return;
+
+    setLoading(true);
+
+    const { error } = await supabase.from("enquiries").insert([
+      {
+        name,
+        phone,
+        bhk,
+        date: visitDate,
+      },
+    ]);
 
     if (error) {
       alert("Error submitting ❌");
@@ -25,9 +43,12 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
       setName("");
       setPhone("");
       setBhk("");
+      setVisitDate("");
 
       if (setOpen) setOpen(false);
     }
+
+    setLoading(false);
   };
 
   // popup closed
@@ -36,57 +57,82 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
   if (variant === "visit") {
     return (
       <div className="bg-[#9c8c7f] py-8 md:py-10 text-center px-5">
-        <h2 className="text-2xl md:text-4xl text-white mb-6 md:mb-10 font-medium px-4">
+        <h2 className="text-2xl md:text-4xl text-white font-medium px-4">
           Request For Site Visit
         </h2>
+        <p className="text-white text-base md:text-lg py-6 px-4">
+          Visit the project site, explore floor plans, amenities & premium
+          lifestyle spaces.
+        </p>
 
         <form onSubmit={handleSubmit}>
           <div className="max-w-5xl mx-auto px-6 flex flex-col lg:flex-row gap-3 md:gap-6 justify-center items-center">
+            {/* NAME */}
             <input
               type="text"
               placeholder="Name*"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full lg:w-1/3 px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base text-black"
+              className="flex-1 w-full px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base text-black"
               required
             />
 
+            {/* PHONE */}
             <input
               type="tel"
               placeholder="Whatsapp No.*"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="w-full lg:w-1/3 px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base text-black"
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, "");
+                setPhone(value);
+              }}
+              pattern="[6-9]{1}[0-9]{9}"
+              maxLength={10}
+              minLength={10}
+              title="Enter a valid 10-digit mobile number."
+              className="flex-1 w-full px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base text-black"
               required
             />
 
-            <div className="w-full lg:w-1/3 relative">
-              <select
-                value={bhk}
-                onChange={(e) => setBhk(e.target.value)}
-                className={`w-full px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base appearance-none ${
-                  bhk ? "text-black" : "text-gray-500"
-                }`}
+            {/* DATE */}
+            <div className="relative flex-1 w-full">
+              <input
+                type="date"
+                value={visitDate}
+                onChange={(e) => setVisitDate(e.target.value)}
+                className="w-full px-6 pr-12 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base text-black appearance-none"
                 required
-              >
-                <option value="" disabled hidden>
-                  Select BHK*
-                </option>
-                <option value="2 BHK">2 BHK</option>
-                <option value="3 BHK">3 BHK</option>
-              </select>
+              />
 
-              <span className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-[#5b3d2e]">
-                ▼
-              </span>
+              <CalendarDays
+                size={20}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-[#5b3d2e] pointer-events-none"
+              />
+
+              <style jsx>{`
+                input[type="date"]::-webkit-calendar-picker-indicator {
+                  opacity: 0;
+                  position: absolute;
+                  right: 0;
+                  width: 100%;
+                  height: 100%;
+                  cursor: pointer;
+                }
+              `}</style>
             </div>
           </div>
 
+          {/* BUTTON */}
           <button
             type="submit"
-            className="mt-6 md:mt-8 bg-[#5b3d2e] text-white px-8 md:px-10 py-2.5 md:py-3 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition text-sm md:text-base font-semibold"
+            disabled={loading}
+            className={`mt-6 md:mt-8 px-8 md:px-10 py-2.5 md:py-3 rounded-lg shadow-md transition text-sm md:text-base font-semibold text-white ${
+              loading
+                ? "bg-gray-400 cursor-progress"
+                : "bg-[#5b3d2e] hover:shadow-xl hover:scale-105 cursor-pointer"
+            }`}
           >
-            ENQUIRE
+            {loading ? "Submitting..." : "Schedule Visit"}
           </button>
         </form>
       </div>
@@ -226,12 +272,11 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
         </p>
 
         <h2 className="text-center text-2xl font-bold text-[#5b3d2e] mt-2">
-          Connect with property expert
+          {heading}
         </h2>
 
         <p className="text-center text-[#7a5a45] mt-2 mb-6 text-sm">
-          Fill your details to receive latest price sheet, <br /> floor plans &
-          special discounts.
+          {description}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -276,7 +321,7 @@ export default function EnquiryForm({ open, setOpen, variant = "popup" }) {
             type="submit"
             className="w-full py-3 rounded-2xl text-white font-semibold bg-gradient-to-r from-[#5b3d2e] to-[#7a5239] hover:opacity-95 transition shadow-md"
           >
-            Get Free Callback
+            {buttonText || "ENQUIRE NOW"}
           </button>
         </form>
       </div>

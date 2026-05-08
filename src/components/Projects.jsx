@@ -67,7 +67,7 @@ export default function projects() {
     <div>
       <section
         id="projects"
-        className="w-full bg-[url('/bg.webp')] bg-cover bg-center bg-no-repeat py-36 px-4 md:px-10"
+        className="w-full bg-[url('/bg.webp')] bg-cover bg-center bg-no-repeat py-20 px-4 md:px-10"
       >
         <div className="text-center max-w-3xl mx-auto">
           {/* TOP SMALL TAG */}
