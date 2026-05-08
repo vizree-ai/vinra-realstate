@@ -193,63 +193,68 @@ export default function Gallery() {
         </div>
 
         {/* MASTER PLAN PREVIEW */}
-        <div className="relative max-w-6xl mx-auto rounded-[36px] overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.18)] mb-24 group border border-white/10">
+        <div className="relative max-w-6xl mx-auto rounded-b-[36px] overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.18)] mb-24 group border border-white/10">
           {/* TOP TITLE */}
-          <div className="flex items-center justify-between mb-5 px-2">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5 px-2">
+            {/* LEFT */}
             <div>
-              <h2 className="text-3xl md:text-5xl font-bold text-[#5b3d2e] leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-[#5b3d2e] leading-tight">
                 Master Plan
               </h2>
             </div>
 
-            <div className="hidden md:flex items-center gap-2 bg-white px-5 py-2 rounded-full shadow-md">
-              <span className="w-2.5 h-2.5 rounded-full bg-green-500"></span>
-              <p className="text-sm font-medium text-[#5b3d2e]">
+            {/* RIGHT BADGE */}
+            <div className="flex items-center gap-2 bg-white px-4 md:px-5 py-2 rounded-full shadow-md w-fit">
+              <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-green-500"></span>
+
+              <p className="text-xs sm:text-sm font-medium text-[#5b3d2e] whitespace-nowrap">
                 Smartly Designed Layout
               </p>
             </div>
           </div>
 
           {/* IMAGE */}
-          <div className="relative rounded-[32px] overflow-hidden">
+          <div className="relative rounded-[24px] md:rounded-[32px] overflow-hidden group">
+            {/* IMAGE */}
             <Image
               src="/master-plan.jpg"
               alt="Masterplan"
               width={1400}
               height={700}
-              className="w-full h-[350px] md:h-[620px] object-cover scale-100 group-hover:scale-105 transition duration-700"
+              className="w-full h-[260px] sm:h-[340px] md:h-[600px] object-cover md:object-contain scale-100 group-hover:scale-105 transition duration-700"
             />
 
-            {/* PREMIUM OVERLAY */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10"></div>
+            {/* OVERLAY */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10"></div>
 
             {/* GOLD GLOW */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,180,131,0.25),transparent_35%)]"></div>
 
             {/* CONTENT */}
-            <div className="absolute inset-0 flex flex-col justify-end items-start p-6 md:p-14">
-              {/* TAG */}
-              <div className="mb-5 flex items-center gap-3">
-                <div className="h-[1px] w-10 bg-[#d4b483]"></div>
-              </div>
-
+            <div className="absolute inset-0 flex flex-col justify-end items-start p-4 sm:p-6 md:p-14">
               {/* TITLE */}
-              <h2 className="text-white text-3xl md:text-6xl font-bold leading-tight mb-5 max-w-3xl">
+              <h2 className="text-white text-xl sm:text-3xl md:text-5xl font-bold leading-tight mb-3 md:mb-5 max-w-3xl">
                 Thoughtfully Crafted
                 <br />
                 Premium Community Living
               </h2>
 
               {/* DESCRIPTION */}
-              <p className="text-white/90 text-sm md:text-lg leading-relaxed max-w-2xl">
+              <p className="text-white/90 text-xs sm:text-sm md:text-lg leading-relaxed max-w-2xl">
                 Wide internal roads, lush landscaped gardens, premium amenities,
                 recreational zones, and intelligently planned residences come
                 together to create an elevated lifestyle experience for modern
                 families.
               </p>
-              <p className="uppercase tracking-[4px] text-[#d4b483] mt-6 text-xs md:text-sm font-medium">
-                Community Master Layout
-              </p>
+
+              {/* LABEL */}
+              <div className="mt-4 md:mt-6">
+                <p className="uppercase tracking-[3px] md:tracking-[4px] text-[#d4b483] text-[10px] sm:text-xs md:text-sm font-medium">
+                  Community Master Layout
+                </p>
+
+                <div className="h-[2px] mt-2 w-14 md:w-20 bg-[#d4b483]"></div>
+              </div>
             </div>
           </div>
         </div>
