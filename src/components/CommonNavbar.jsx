@@ -122,10 +122,11 @@ export default function Navbar({ variant = "home" }) {
               </div>
 
               <div className="hidden lg:flex items-center gap-6 text-white text-sm font-medium px-4">
-                <a href="#">Home</a>
+                <a href="#hero">Home</a>
                 <a href="#amenities">Amenities</a>
                 <a href="#gallery">Gallery</a>
                 <a href="#location">Location</a>
+                <a href="#contact">Contact</a>
               </div>
 
               <a
@@ -176,7 +177,7 @@ export default function Navbar({ variant = "home" }) {
                   </>
                 ) : (
                   <>
-                    <a href="#amenities" onClick={() => setIsOpen(false)}>
+                    <a href="#hero" onClick={() => setIsOpen(false)}>
                       Home
                     </a>
                     <a href="#amenities" onClick={() => setIsOpen(false)}>

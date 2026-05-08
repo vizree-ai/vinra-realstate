@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import {
   BedDouble,
@@ -14,12 +13,7 @@ import {
   Home,
 } from "lucide-react";
 
-import {
-  motion,
-  useScroll,
-  useTransform,
-  AnimatePresence,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import EnquiryForm from "../EnquiryForm";
 
 export default function Hero() {

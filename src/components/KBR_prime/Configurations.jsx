@@ -1,9 +1,10 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import EnquiryForm from "../EnquiryForm";
+const EnquiryForm = dynamic(() => import("../EnquiryForm"), { ssr: false });
 
 const ConfigCard = ({ item, scrollYProgress }) => {
   const [open, setOpen] = useState(false);
@@ -35,13 +36,15 @@ const ConfigCard = ({ item, scrollYProgress }) => {
         </div>
       </motion.div>
 
-      <EnquiryForm
-        open={open}
-        setOpen={setOpen}
-        heading={`Unlock ${item.title} Price`}
-        description={`Fill your details to receive pricing, floor plans & offers for ${item.title}.`}
-        buttonText="Request Pricing"
-      />
+      {open && (
+        <EnquiryForm
+          open={open}
+          setOpen={setOpen}
+          heading={`Unlock ${item.title} Price`}
+          description={`Fill your details to receive pricing, floor plans & offers for ${item.title}.`}
+          buttonText="Request Pricing"
+        />
+      )}
     </>
   );
 };

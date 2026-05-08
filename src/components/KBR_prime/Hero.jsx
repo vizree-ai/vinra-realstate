@@ -1,8 +1,9 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ShieldCheck,
   Building2,
@@ -13,7 +14,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
-import EnquiryForm from "../EnquiryForm";
+const EnquiryForm = dynamic(() => import("../EnquiryForm"), { ssr: false });
 import MobileStickyContact from "../MobileStickyContact";
 
 function HeroImage({ className = "" }) {
@@ -49,7 +50,7 @@ export default function Hero() {
   const [open, setOpen] = useState(false);
 
   return (
-    <section className="w-full flex justify-center items-center relative overflow-hidden">
+    <section id="hero" className="w-full flex justify-center items-center relative overflow-hidden scroll-mt-28">
       <div className="w-full max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-[60%_40%] h-auto lg:h-[730px] overflow-hidden">
         {/* RIGHT IMAGE DESKTOP */}
         <div className="hidden lg:block relative h-full">
@@ -169,8 +170,9 @@ export default function Hero() {
         </a>
       </div>
 
-      <EnquiryForm open={open} setOpen={setOpen} />
+      {open && <EnquiryForm open={open} setOpen={setOpen} />}
       <MobileStickyContact setOpen={setOpen} />
+
     </section>
   );
 }

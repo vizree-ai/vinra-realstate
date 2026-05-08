@@ -1,9 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import EnquiryForm from "../EnquiryForm";
+const EnquiryForm = dynamic(() => import("../EnquiryForm"), { ssr: false });
 
 const images = [
   "/kbr1.webp",
@@ -27,7 +28,7 @@ export default function Gallery() {
 
   return (
     <>
-      <section className="bg-[#f4f4f4] py-16">
+      <section id="gallery" className="bg-[#f4f4f4] py-16 scroll-mt-28">
         <div className="max-w-7xl mx-auto px-6 text-center">
           {/* TITLE */}
           <h2 className="text-3xl font-semibold text-[#5b3d2e] mb-10">
@@ -39,15 +40,15 @@ export default function Gallery() {
             {/* LEFT ARROW */}
             <button
               onClick={prevSlide}
-              className="absolute left-0 z-10 bg-white/80 hover:bg-white p-2 rounded-full shadow-md"
+              className="absolute left-2 md:left-0 z-10 bg-white/80 hover:bg-white p-1 md:p-2 rounded-full shadow-md"
             >
-              <ChevronLeft className="text-[#5b3d2e]" />
+              <ChevronLeft className="text-[#5b3d2e] w-4 h-4 md:w-6 md:h-6" />
             </button>
 
             {/* IMAGES */}
-            <div className="flex gap-6 overflow-hidden">
+            <div className="flex gap-2 md:gap-6 overflow-hidden">
               {/* LEFT SIDE SMALL */}
-              <div className="w-[120px] h-[300px] relative hidden md:block">
+              <div className="w-[80px] md:w-[120px] h-[200px] md:h-[300px] relative hidden md:block">
                 <Image
                   src={images[(index - 1 + images.length) % images.length]}
                   alt=""
@@ -57,7 +58,7 @@ export default function Gallery() {
               </div>
 
               {/* MAIN IMAGE (SLIDE VERSION) */}
-              <div className="w-[500px] h-[300px] relative overflow-hidden">
+              <div className="w-[300px] md:w-[500px] h-[200px] md:h-[300px] relative overflow-hidden">
                 <motion.div
                   animate={{ x: `-${index * 100}%` }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -77,7 +78,7 @@ export default function Gallery() {
               </div>
 
               {/* RIGHT SIDE IMAGE */}
-              <div className="w-[400px] h-[300px] relative hidden md:block">
+              <div className="w-[80px] md:w-[120px] h-[200px] md:h-[300px] relative hidden md:block">
                 <Image
                   src={images[(index + 1) % images.length]}
                   alt=""
@@ -90,9 +91,9 @@ export default function Gallery() {
             {/* RIGHT ARROW */}
             <button
               onClick={nextSlide}
-              className="absolute right-0 z-10 bg-white/80 hover:bg-white p-2 rounded-full shadow-md"
+              className="absolute right-2 md:right-0 z-10 bg-white/80 hover:bg-white p-1 md:p-2 rounded-full shadow-md"
             >
-              <ChevronRight className="text-[#5b3d2e]" />
+              <ChevronRight className="text-[#5b3d2e] w-4 h-4 md:w-6 md:h-6" />
             </button>
           </div>
 
@@ -118,8 +119,8 @@ export default function Gallery() {
             📄 Download Broucher
           </button>
         </div>
-      </section>
-      <section className="bg-[#5b3d2e] py-20 text-white">
+      </section> 
+      <section id="location" className="bg-[#5b3d2e] py-20 text-white scroll-mt-16">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           {/* MAP */}
           <div className="border-10 border border-white w-full h-[450px] rounded overflow-hidden shadow-lg">
@@ -365,13 +366,16 @@ export default function Gallery() {
           </p>
         </div>
       </section>
-      <EnquiryForm
-        heading="Get floor plans on your whatsapp"
-        description="Fill your details to receive complete floor plans, pricing & availability on your WhatsApp."
-        buttonText="Get Floor Plan"
-        open={open}
-        setOpen={setOpen}
-      />
+      {open && (
+        <EnquiryForm
+          heading="Get floor plans on your whatsapp"
+          description="Fill your details to receive complete floor plans, pricing & availability on your WhatsApp."
+          buttonText="Get Floor Plan"
+          open={open}
+          setOpen={setOpen}
+        />
+      )}
+
     </>
   );
 }

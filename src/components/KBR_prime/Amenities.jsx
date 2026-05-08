@@ -50,7 +50,7 @@ const amenities = [
 export default function Amenities() {
   const [open, setOpen] = useState(false);
   return (
-    <section className="bg-[#f4f4f4] py-10">
+    <section id="amenities" className="bg-[#f4f4f4] py-10 scroll-mt-28">
       <div className="max-w-7xl mx-auto px-6 text-center">
         {/* TITLE */}
         <motion.h2

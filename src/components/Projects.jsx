@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useEffect, useMemo, useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { getProperties } from "@/lib/supabase";
 import Link from "next/link";
 import {
   MapPin,
@@ -31,15 +31,11 @@ export default function projects() {
 
   useEffect(() => {
     const fetchListings = async () => {
-      const { data, error } = await supabase
-        .from("properties")
-        .select("*")
-        .order("display_order", { ascending: false });
-
-      if (error) {
+      try {
+        const data = await getProperties();
+        setListings(data || []);
+      } catch (error) {
         console.error(error);
-      } else {
-        setListings(data);
       }
     };
 
