@@ -1,12 +1,15 @@
 "use client";
 
 import { useRef, useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa";
-import EnquiryForm from "./EnquiryForm";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+
+const EnquiryForm = dynamic(() => import("./EnquiryForm"), {
+  ssr: false,
+});
 
 export default function Navbar({ variant = "home" }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -149,56 +152,50 @@ export default function Navbar({ variant = "home" }) {
       </div>
 
       {/* ================= MOBILE MENU ================= */}
-      <AnimatePresence mode="wait">
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }} // smoother, no slide flicker
-            transition={{ duration: 0.2 }}
-            onScroll={handleMobileMenuScroll}
-            className="fixed inset-0 z-[90] bg-[#F7F3EC]/95 backdrop-blur-xl"
-          >
-            <div className="flex items-center justify-center h-full w-full px-6">
-              <div className="flex flex-col items-center gap-8 text-[#1E3D34] text-2xl md:text-3xl font-semibold">
-                {/* MOBILE LINKS FIXED */}
-                {isHome ? (
-                  <>
-                    <button onClick={() => handleNavigation("/")}>Home</button>
-                    <button onClick={() => handleNavigation("/aboutmain")}>
-                      About Us
-                    </button>
-                    <button onClick={() => handleNavigation("/projects")}>
-                      Projects
-                    </button>
-                    <button onClick={() => handleNavigation("/emicalculator")}>
-                      EMI Calculator
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <a href="#hero" onClick={() => setIsOpen(false)}>
-                      Home
-                    </a>
-                    <a href="#amenities" onClick={() => setIsOpen(false)}>
-                      Amenities
-                    </a>
-                    <a href="#gallery" onClick={() => setIsOpen(false)}>
-                      Gallery
-                    </a>
-                    <a href="#location" onClick={() => setIsOpen(false)}>
-                      Location
-                    </a>
-                    <a href="#contact" onClick={() => setIsOpen(false)}>
-                      Contact
-                    </a>
-                  </>
-                )}
-              </div>
+      {isOpen && (
+        <div
+          onScroll={handleMobileMenuScroll}
+          className="fixed inset-0 z-[90] bg-[#F7F3EC]/95 backdrop-blur-xl animate-fadeIn"
+        >
+          <div className="flex items-center justify-center h-full w-full px-6">
+            <div className="flex flex-col items-center gap-8 text-[#1E3D34] text-2xl md:text-3xl font-semibold">
+              {/* MOBILE LINKS FIXED */}
+              {isHome ? (
+                <>
+                  <button onClick={() => handleNavigation("/")}>Home</button>
+                  <button onClick={() => handleNavigation("/aboutmain")}>
+                    About Us
+                  </button>
+                  <button onClick={() => handleNavigation("/projects")}>
+                    Projects
+                  </button>
+                  <button onClick={() => handleNavigation("/emicalculator")}>
+                    EMI Calculator
+                  </button>
+                </>
+              ) : (
+                <>
+                  <a href="#hero" onClick={() => setIsOpen(false)}>
+                    Home
+                  </a>
+                  <a href="#amenities" onClick={() => setIsOpen(false)}>
+                    Amenities
+                  </a>
+                  <a href="#gallery" onClick={() => setIsOpen(false)}>
+                    Gallery
+                  </a>
+                  <a href="#location" onClick={() => setIsOpen(false)}>
+                    Location
+                  </a>
+                  <a href="#contact" onClick={() => setIsOpen(false)}>
+                    Contact
+                  </a>
+                </>
+              )}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      )}
 
       {/* ENQUIRY FORM */}
       {!isHome && <EnquiryForm open={open} setOpen={setOpen} variant="popup" />}

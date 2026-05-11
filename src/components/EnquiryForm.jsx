@@ -272,11 +272,11 @@ export default function EnquiryForm({
         </p>
 
         <h2 className="text-center text-2xl font-bold text-[#5b3d2e] mt-2">
-          {heading}
+           {heading || "Discover Your Dream Home"}
         </h2>
 
         <p className="text-center text-[#7a5a45] mt-2 mb-6 text-sm">
-          {description}
+           {description || "Connect with our property expert for pricing, availability & special launch benefits."}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">

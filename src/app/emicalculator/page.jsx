@@ -16,7 +16,7 @@ export default function EmiCalculatorPremium() {
       (loan * monthlyRate * Math.pow(1 + monthlyRate, months)) /
       (Math.pow(1 + monthlyRate, months) - 1);
     return Math.round(val || 0);
-  }, [loan, rate, years]);
+  }, [loan, monthlyRate, months]);
 
   const total = emi * months;
   const interest = total - loan;

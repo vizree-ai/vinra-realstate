@@ -1,14 +1,8 @@
 "use client";
 import React from "react";
-import {
-  MapPin,
-  BedDouble,
-  Ruler,
-  Building2,
-  Home,
-  Handshake,
-} from "lucide-react";
+import { Ruler, Building2, Home, Handshake } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 function AboutMain() {
   return (
     <>
@@ -51,17 +45,12 @@ function AboutMain() {
                 </p>
               </div>
 
-              <button
-                onClick={() =>
-                  document.getElementById("projects")?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  })
-                }
-                className="mt-7 rounded-full bg-[#1E3D34] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(30,61,52,0.22)] transition hover:bg-[#163027] hover:shadow-[0_18px_36px_rgba(30,61,52,0.28)]"
+              <Link
+                href="/projects"
+                className="mt-6 inline-block rounded-full bg-[#1E3D34] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(30,61,52,0.22)] transition hover:bg-[#163027] hover:shadow-[0_18px_36px_rgba(30,61,52,0.28)]"
               >
                 Explore Our Projects
-              </button>
+              </Link>
             </div>
 
             <div className="relative pb-20 md:pb-24">

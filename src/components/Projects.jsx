@@ -14,7 +14,7 @@ import {
 import Image from "next/image";
 import EnquiryForm from "@/components/EnquiryForm";
 
-export default function projects() {
+export default function Projects() {
   const [listings, setListings] = useState([]);
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
