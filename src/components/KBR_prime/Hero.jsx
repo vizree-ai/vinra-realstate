@@ -50,8 +50,8 @@ export default function Hero() {
   const [open, setOpen] = useState(false);
 
   return (
-    <section id="hero" className="w-full flex justify-center items-center relative overflow-hidden scroll-mt-28">
-      <div className="w-full max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-[60%_40%] h-auto lg:h-[730px] overflow-hidden">
+    <section id="hero" className="w-full flex justify-center items-stretch relative overflow-hidden scroll-mt-28">
+      <div className="w-full max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-[60%_40%] h-auto lg:min-h-[730px] overflow-hidden">
         {/* RIGHT IMAGE DESKTOP */}
         <div className="hidden lg:block relative h-full">
           <HeroImage className="h-full w-full" />
@@ -123,30 +123,30 @@ export default function Hero() {
           {/* FEATURES */}
           <div className="mt-5 sm:mt-6 md:mt-7 lg:mt-8 border border-[#C89A45] rounded-3xl overflow-hidden">
             <div className="bg-[#1E3D34] shadow-md text-[#F7F3EC] grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center rounded-3xl font-bold overflow-hidden">
-              <div className="text-center py-3 px-1 sm:px-2 flex flex-col items-center gap-1">
-                <IndianRupee className="w-6 h-6 p-1 lg:w-6 lg:h-6 bg-[#c4934A] rounded-full" />
-                <p className="text-sm lg:text-2xl">55 Lakhs</p>
-                <p className="text-[10px] lg:text-lg opacity-70">
+              <div className="text-center py-2.5 px-1 sm:px-2 xl:py-3 flex flex-col items-center gap-1">
+                <IndianRupee className="w-6 h-6 p-1 lg:w-5 lg:h-5 xl:w-6 xl:h-6 bg-[#c4934A] rounded-full" />
+                <p className="text-sm lg:text-lg xl:text-2xl">55 Lakhs</p>
+                <p className="text-[10px] lg:text-sm xl:text-lg opacity-70">
                   Starting Price
                 </p>
               </div>
 
               <div className="h-10 w-[1px] bg-[#5b3d2e]/20"></div>
 
-              <div className="text-center py-3 px-1 sm:px-2 flex flex-col items-center gap-1">
-                <Home className="w-6 h-6 p-1 lg:w-6 lg:h-6 bg-[#c4934A] rounded-full" />
-                <p className="text-sm lg:text-2xl">2 & 3 BHK</p>
-                <p className="text-[10px] lg:text-lg opacity-70">
+              <div className="text-center py-2.5 px-1 sm:px-2 xl:py-3 flex flex-col items-center gap-1">
+                <Home className="w-6 h-6 p-1 lg:w-5 lg:h-5 xl:w-6 xl:h-6 bg-[#c4934A] rounded-full" />
+                <p className="text-sm lg:text-lg xl:text-2xl">2 & 3 BHK</p>
+                <p className="text-[10px] lg:text-sm xl:text-lg opacity-70">
                   Premium Homes
                 </p>
               </div>
 
               <div className="h-10 w-[1px] bg-[#5b3d2e]/20"></div>
 
-              <div className="text-center py-3 px-1 sm:px-2 flex flex-col items-center gap-1">
-                <MapPin className="w-6 h-6 p-1 lg:w-6 lg:h-6 bg-[#c4934A] rounded-full" />
-                <p className="text-sm lg:text-2xl">Hoskote</p>
-                <p className="text-[10px] lg:text-lg opacity-70">Bangalore</p>
+              <div className="text-center py-2.5 px-1 sm:px-2 xl:py-3 flex flex-col items-center gap-1">
+                <MapPin className="w-6 h-6 p-1 lg:w-5 lg:h-5 xl:w-6 xl:h-6 bg-[#c4934A] rounded-full" />
+                <p className="text-sm lg:text-lg xl:text-2xl">Hoskote</p>
+                <p className="text-[10px] lg:text-sm xl:text-lg opacity-70">Bangalore</p>
               </div>
             </div>
           </div>
