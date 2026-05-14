@@ -50,7 +50,10 @@ export default function Hero() {
   const [open, setOpen] = useState(false);
 
   return (
-    <section id="hero" className="w-full flex justify-center items-stretch relative overflow-hidden scroll-mt-28">
+    <section
+      id="hero"
+      className="w-full flex justify-center items-stretch relative overflow-hidden scroll-mt-28"
+    >
       <div className="w-full max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-[60%_40%] h-auto lg:min-h-[730px] overflow-hidden">
         {/* RIGHT IMAGE DESKTOP */}
         <div className="hidden lg:block relative h-full">
@@ -62,10 +65,10 @@ export default function Hero() {
               className="bg-[#9f773c] text-white px-6 py-2 rounded-xl shadow-md hover:scale-105 transition"
             >
               <a
-                href="tel:+917026003069"
+                href="tel:+916366699888"
                 className="cursor-pointer text-lg font-semibold tracking-widest"
               >
-                7026003069
+                6366699888
               </a>
             </button>
           </div>
@@ -149,7 +152,9 @@ export default function Hero() {
               <div className="text-center py-2.5 px-1 sm:px-2 xl:py-3 flex flex-col items-center gap-1">
                 <MapPin className="w-6 h-6 p-1 lg:w-5 lg:h-5 xl:w-6 xl:h-6 bg-[#c4934A] rounded-full" />
                 <p className="text-sm lg:text-lg xl:text-2xl">Hoskote</p>
-                <p className="text-[10px] lg:text-sm xl:text-lg opacity-70">Bangalore</p>
+                <p className="text-[10px] lg:text-sm xl:text-lg opacity-70">
+                  Bangalore
+                </p>
               </div>
             </div>
           </div>
@@ -160,13 +165,13 @@ export default function Hero() {
 
       <div className="fixed top-125 left-0 -translate-y-1/2 z-50 flex flex-col gap-2">
         <a
-          href="tel:+917026003069"
+          href="tel:+916366699888"
           className="w-9 h-14 bg-[#1E3D34] text-white rounded-r-2xl flex items-center justify-center"
         >
           <FaPhoneAlt />
         </a>
         <a
-          href="https://wa.me/917026003069"
+          href="https://wa.me/916366699888"
           className="fixed -bottom-16 left-0 z-50 w-9 h-14 rounded-r-2xl bg-[#25D366] flex items-center justify-center shadow-lg"
         >
           <FaWhatsapp className="text-white text-3xl" />
@@ -175,7 +180,6 @@ export default function Hero() {
 
       {open && <EnquiryForm open={open} setOpen={setOpen} />}
       <MobileStickyContact setOpen={setOpen} />
-
     </section>
   );
 }
