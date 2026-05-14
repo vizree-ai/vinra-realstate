@@ -39,6 +39,7 @@ export default function Gallery() {
           <div className="relative flex items-center justify-center gap-6">
             {/* LEFT ARROW */}
             <button
+              suppressHydrationWarning
               onClick={prevSlide}
               className="absolute left-2 md:left-0 z-10 bg-white/80 hover:bg-white p-1 md:p-2 rounded-full shadow-md"
             >
@@ -90,6 +91,7 @@ export default function Gallery() {
 
             {/* RIGHT ARROW */}
             <button
+              suppressHydrationWarning
               onClick={nextSlide}
               className="absolute right-2 md:right-0 z-10 bg-white/80 hover:bg-white p-1 md:p-2 rounded-full shadow-md"
             >
@@ -113,6 +115,7 @@ export default function Gallery() {
           {/* DOWNLOAD */}
 
           <button
+            suppressHydrationWarning
             onClick={() => setOpen(true)}
             className="text-[#5b3d2e] mt-12 bg-amber-100 border-3 border-dashed border-[#5b3d2e] px-6 py-3 rounded-full hover:bg-[#5b3d2e] hover:text-white transition"
           >
@@ -290,6 +293,7 @@ export default function Gallery() {
               </p>
 
               <button
+                suppressHydrationWarning
                 onClick={() => setOpen(true)}
                 className="bg-[#b88a44] hover:bg-[#3f2a1f] text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
               >
@@ -326,6 +330,7 @@ export default function Gallery() {
               </p>
 
               <button
+                suppressHydrationWarning
                 onClick={() => setOpen(true)}
                 className="bg-[#b88a44] hover:bg-[#3f2a1f] text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
               >

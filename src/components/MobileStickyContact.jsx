@@ -6,6 +6,7 @@ export default function MobileStickyContact({ setOpen }) {
   return (
     <div className="fixed inset-x-0 bottom-2 z-[80] px-4 pb-4 pt-3 md:hidden pointer-events-none">
       <button
+        suppressHydrationWarning
         type="button"
         onClick={() => setOpen(true)}
         className="pointer-events-auto mx-auto flex min-h-14 w-full max-w-md items-center justify-center gap-3 rounded-4xl border border-white/25 bg-gradient-to-r from-[#1E3D34] via-[#7b5b2d] to-[#c4934a] px-5 py-3 text-white shadow-[0_14px_34px_rgba(30,61,52,0.38)] backdrop-blur-md active:scale-[0.98] transition"

@@ -13,6 +13,7 @@ export default function FloatingEnquiry({ setOpen }) {
       </a>
 
       <button
+        suppressHydrationWarning
         onClick={() => setOpen(true)}
         className="cursor-pointer text-sm font-semibold tracking-wide w-10 bg-[#1E3D34] text-white rounded-r-2xl"
         style={{

@@ -69,6 +69,7 @@ export default function EnquiryForm({
           <div className="max-w-5xl mx-auto px-6 flex flex-col lg:flex-row gap-3 md:gap-6 justify-center items-center">
             {/* NAME */}
             <input
+              suppressHydrationWarning
               type="text"
               placeholder="Name*"
               value={name}
@@ -79,6 +80,7 @@ export default function EnquiryForm({
 
             {/* PHONE */}
             <input
+              suppressHydrationWarning
               type="tel"
               placeholder="Whatsapp No.*"
               value={phone}
@@ -97,6 +99,7 @@ export default function EnquiryForm({
             {/* DATE */}
             <div className="relative flex-1 w-full">
               <input
+                suppressHydrationWarning
                 type="date"
                 value={visitDate}
                 onChange={(e) => setVisitDate(e.target.value)}
@@ -124,6 +127,7 @@ export default function EnquiryForm({
 
           {/* BUTTON */}
           <button
+            suppressHydrationWarning
             type="submit"
             disabled={loading}
             className={`mt-6 md:mt-8 px-8 md:px-10 py-2.5 md:py-3 rounded-lg shadow-md transition text-sm md:text-base font-semibold text-white ${
@@ -161,6 +165,7 @@ export default function EnquiryForm({
               className="absolute left-4 top-1/2 -translate-y-1/2  text-[#b78a31] z-10 pointer-events-none"
             />
             <input
+              suppressHydrationWarning
               type="text"
               placeholder="Name*"
               value={name}
@@ -184,6 +189,7 @@ export default function EnquiryForm({
                  text-[#b78a31] z-10 pointer-events-none"
             />
             <input
+              suppressHydrationWarning
               type="tel"
               placeholder="Phone no*"
               value={phone}
@@ -208,6 +214,7 @@ export default function EnquiryForm({
             />
 
             <select
+              suppressHydrationWarning
               value={bhk}
               onChange={(e) => setBhk(e.target.value)}
               className="block w-full pl-12 pr-10 py-3.5 md:py-3.5 rounded-xl 
@@ -232,6 +239,7 @@ export default function EnquiryForm({
 
           {/* BUTTON */}
           <button
+            suppressHydrationWarning
             type="submit"
             className="w-full 
                    bg-gradient-to-r from-[#b07a1d] to-[#c69636] 
@@ -261,6 +269,7 @@ export default function EnquiryForm({
         className="bg-white w-full max-w-md rounded-3xl shadow-xl relative p-7 border border-[#e7d8c8]"
       >
         <button
+          suppressHydrationWarning
           onClick={() => setOpen(false)}
           className="absolute top-4 right-4 bg-[#5b3d2e] text-white w-9 h-9 rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition"
         >
@@ -281,6 +290,7 @@ export default function EnquiryForm({
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
+            suppressHydrationWarning
             type="text"
             placeholder="Full Name*"
             value={name}
@@ -290,6 +300,7 @@ export default function EnquiryForm({
           />
 
           <input
+            suppressHydrationWarning
             type="tel"
             placeholder="Whatsapp No.*"
             value={phone}
@@ -300,6 +311,7 @@ export default function EnquiryForm({
 
           <div className="relative">
             <select
+              suppressHydrationWarning
               value={bhk}
               onChange={(e) => setBhk(e.target.value)}
               className="block w-full px-4 py-3 rounded-xl border border-[#d6b89f] bg-[#faf7f4] text-gray-500 outline-none focus:ring-1 focus:ring-[#5b3d2e] appearance-none cursor-pointer"
@@ -318,6 +330,7 @@ export default function EnquiryForm({
           </div>
 
           <button
+            suppressHydrationWarning
             type="submit"
             className="w-full py-3 rounded-2xl text-white font-semibold bg-gradient-to-r from-[#5b3d2e] to-[#7a5239] hover:opacity-95 transition shadow-md"
           >

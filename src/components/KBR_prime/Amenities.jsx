@@ -99,6 +99,7 @@ export default function Amenities() {
       </div>
     <div className="flex justify-center mt-12 py-5">
   <button
+    suppressHydrationWarning
     onClick={() => setOpen(true)}
     className="text-[#5b3d2e] flex items-center gap-2 bg-amber-100 border-2 border-dashed border-[#5b3d2e] px-6 py-3 rounded-full hover:bg-[#5b3d2e] hover:text-white transition"
   >

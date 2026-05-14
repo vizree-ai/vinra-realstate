@@ -28,6 +28,7 @@ const ConfigCard = ({ item, scrollYProgress }) => {
 
         <div className="px-14 bg-[#5b3d2e] p-4 md:p-6 flex justify-center">
           <button
+            suppressHydrationWarning
             onClick={() => setOpen(true)}
             className="w-full md:w-auto border border-white text-white px-6 py-2.5 md:py-3 rounded-full text-sm md:text-base font-medium hover:bg-white hover:text-[#5b3d2e] transition-all duration-300"
           >

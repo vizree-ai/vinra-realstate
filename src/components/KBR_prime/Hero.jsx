@@ -57,7 +57,10 @@ export default function Hero() {
           <HeroImage className="h-full w-full" />
 
           <div className="absolute bottom-6 right-6 z-10">
-            <button className="bg-[#9f773c] text-white px-6 py-2 rounded-xl shadow-md hover:scale-105 transition">
+            <button
+              suppressHydrationWarning
+              className="bg-[#9f773c] text-white px-6 py-2 rounded-xl shadow-md hover:scale-105 transition"
+            >
               <a
                 href="tel:+917026003069"
                 className="cursor-pointer text-lg font-semibold tracking-widest"

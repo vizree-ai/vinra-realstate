@@ -111,7 +111,10 @@ export default function Navbar({ variant = "home" }) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <button className="flex items-center gap-2 border-2 border-[#D8A33B] font-bold text-[#f0b53d] px-5 py-2.5 rounded-xl bg-white/30 backdrop-blur-md hover:bg-white/20 transition-all duration-300">
+                  <button
+                    suppressHydrationWarning
+                    className="flex items-center gap-2 border-2 border-[#D8A33B] font-bold text-[#f0b53d] px-5 py-2.5 rounded-xl bg-white/30 backdrop-blur-md hover:bg-white/20 transition-all duration-300"
+                  >
                     <FaWhatsapp size={20} />
                     Connect with us
                   </button>
@@ -133,16 +136,17 @@ export default function Navbar({ variant = "home" }) {
               </div>
 
               <a
-                href="tel:+917026003069"
+                href="tel:+916366699888"
                 className="hidden lg:flex bg-[#F8EDD8] text-black px-4 py-1.5 rounded-full text-sm font-medium"
               >
-                7026003069
+                6366699888
               </a>
             </div>
           )}
 
           {/* MOBILE BUTTON */}
           <button
+            suppressHydrationWarning
             onClick={handleMobileMenuToggle}
             className="md:hidden cursor-pointer lg:hidden z-[101] flex items-center bg-[#9f773c] rounded-full px-4 py-1 text-white text-3xl"
           >
@@ -162,14 +166,28 @@ export default function Navbar({ variant = "home" }) {
               {/* MOBILE LINKS FIXED */}
               {isHome ? (
                 <>
-                  <button onClick={() => handleNavigation("/")}>Home</button>
-                  <button onClick={() => handleNavigation("/aboutmain")}>
+                  <button
+                    suppressHydrationWarning
+                    onClick={() => handleNavigation("/")}
+                  >
+                    Home
+                  </button>
+                  <button
+                    suppressHydrationWarning
+                    onClick={() => handleNavigation("/aboutmain")}
+                  >
                     About Us
                   </button>
-                  <button onClick={() => handleNavigation("/projects")}>
+                  <button
+                    suppressHydrationWarning
+                    onClick={() => handleNavigation("/projects")}
+                  >
                     Projects
                   </button>
-                  <button onClick={() => handleNavigation("/emicalculator")}>
+                  <button
+                    suppressHydrationWarning
+                    onClick={() => handleNavigation("/emicalculator")}
+                  >
                     EMI Calculator
                   </button>
                 </>
