@@ -26,14 +26,14 @@ import {
 
 const amenities = [
   { icon: Waves, title: "Swimming Pool" },
-  { icon: Building2, title: "Club House" },
+  // { icon: Building2, title: "Club House" },
   { icon: Tent, title: "Indoor Games" },
   { icon: Cctv, title: "24/7 Security" },
-  { icon: Dumbbell, title: "Gymnasium" },
-  { icon: Volleyball, title: "Basketball Court" },
-  { icon: Gamepad2, title: "Pickleball Court" },
+  // { icon: Dumbbell, title: "Gymnasium" },
+  // { icon: Volleyball, title: "Basketball Court" },
+  // { icon: Gamepad2, title: "Pickleball Court" },
   { icon: Baby, title: "Children’s Play Area" },
-  { icon: PartyPopper, title: "Party Hall" },
+  // { icon: PartyPopper, title: "Party Hall" },
   { icon: ArrowUpDown, title: "High-Speed Elevators" },
   { icon: Trees, title: "Lawn Area" },
   { icon: Flame, title: "Barbecue Area" },
@@ -97,15 +97,15 @@ export default function Amenities() {
           })}
         </div>
       </div>
-    <div className="flex justify-center mt-12 py-5">
-  <button
-    suppressHydrationWarning
-    onClick={() => setOpen(true)}
-    className="text-[#5b3d2e] flex items-center gap-2 bg-amber-100 border-2 border-dashed border-[#5b3d2e] px-6 py-3 rounded-full hover:bg-[#5b3d2e] hover:text-white transition"
-  >
-    📄 Download Brochure
-  </button>
-</div>
+      <div className="flex justify-center mt-12 py-5">
+        <button
+          suppressHydrationWarning
+          onClick={() => setOpen(true)}
+          className="text-[#5b3d2e] flex items-center gap-2 bg-amber-100 border-2 border-dashed border-[#5b3d2e] px-6 py-3 rounded-full hover:bg-[#5b3d2e] hover:text-white transition"
+        >
+          📄 Download Brochure
+        </button>
+      </div>
       <EnquiryForm
         heading="Get the brochure on your whatsapp"
         description="Fill your details to receive the complete brochure, pricing & availability on your WhatsApp."

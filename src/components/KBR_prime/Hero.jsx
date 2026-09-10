@@ -131,7 +131,7 @@ export default function Hero() {
             <div className="bg-[#1E3D34] shadow-md text-[#F7F3EC] grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center rounded-3xl font-bold overflow-hidden">
               <div className="text-center py-2.5 px-1 sm:px-2 xl:py-3 flex flex-col items-center gap-1">
                 <IndianRupee className="w-6 h-6 p-1 lg:w-5 lg:h-5 xl:w-6 xl:h-6 bg-[#c4934A] rounded-full" />
-                <p className="text-sm lg:text-lg xl:text-2xl">55 Lakhs</p>
+                <p className="text-sm lg:text-lg xl:text-2xl">59 Lakhs</p>
                 <p className="text-[10px] lg:text-sm xl:text-lg opacity-70">
                   Starting Price
                 </p>
