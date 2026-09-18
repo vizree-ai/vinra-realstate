@@ -55,9 +55,8 @@ export default function Navbar({ variant = "home" }) {
     lastMobileMenuScrollY.current = currentScrollY;
   }, []);
 
-  const navbarPositionClass = isHome
-    ? "absolute top-0 left-0 px-4 md:px-10 pt-4"
-    : "relative lg:absolute lg:top-0 lg:left-0 px-3 lg:px-7 bg-[#F7F3EC] lg:bg-transparent";
+  const navbarPositionClass =
+    "absolute top-0 left-0 w-full px-4 md:px-10 pt-4 bg-transparent";
 
   const navbarTransformClass =
     isOpen && isMobileMenuNavbarHidden ? "-translate-y-full" : "translate-y-0";
@@ -148,7 +147,7 @@ export default function Navbar({ variant = "home" }) {
           <button
             suppressHydrationWarning
             onClick={handleMobileMenuToggle}
-            className="md:hidden cursor-pointer lg:hidden z-[101] flex items-center bg-[#9f773c] rounded-full px-4 py-1 text-white text-3xl"
+            className="md:hidden cursor-pointer lg:hidden z-[101] flex items-center justify-center bg-[#0c241c]/90 border border-[#d5ad65]/50 rounded-full px-3.5 py-1.5 text-[#d5ad65] text-xl backdrop-blur-md shadow-lg active:scale-95 transition"
           >
             {isOpen ? "✕" : "☰"}
           </button>

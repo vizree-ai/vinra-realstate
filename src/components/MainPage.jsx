@@ -6,7 +6,7 @@ import LazyProjects from "./LazyProjects";
 export default function MainPage() {
   return (
     <>
-      <section className="relative flex h-[85vh] w-full items-center justify-center overflow-visible md:h-[99vh]">
+      <section className="relative flex h-screen w-full items-center justify-center overflow-visible">
         <div className="absolute left-0 top-0 z-20 h-36 w-full bg-gradient-to-b from-yellow/85 via-yellow/45 to-transparent md:h-44" />
 
         <div className="absolute inset-0">

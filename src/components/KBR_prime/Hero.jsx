@@ -13,9 +13,9 @@ import {
   Home,
   MapPin,
 } from "lucide-react";
-import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 const EnquiryForm = dynamic(() => import("../EnquiryForm"), { ssr: false });
 import MobileStickyContact from "../MobileStickyContact";
+import FloatingContactButtons from "../FloatingContactButtons";
 
 function HeroImage({ className = "" }) {
   return (
@@ -52,9 +52,9 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="w-full flex justify-center items-stretch relative overflow-hidden scroll-mt-28"
+      className="w-full min-h-screen flex justify-center items-stretch relative overflow-hidden scroll-mt-28"
     >
-      <div className="w-full max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-[60%_40%] h-auto lg:min-h-[730px] overflow-hidden">
+      <div className="w-full max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-[60%_40%] h-auto lg:min-h-screen overflow-hidden">
         {/* RIGHT IMAGE DESKTOP */}
         <div className="hidden lg:block relative h-full">
           <HeroImage className="h-full w-full" />
@@ -161,22 +161,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* FLOATING BUTTONS */}
-
-      <div className="fixed top-125 left-0 -translate-y-1/2 z-50 flex flex-col gap-2">
-        <a
-          href="tel:+916366699888"
-          className="w-9 h-14 bg-[#1E3D34] text-white rounded-r-2xl flex items-center justify-center"
-        >
-          <FaPhoneAlt />
-        </a>
-        <a
-          href="https://wa.me/916366699888"
-          className="fixed -bottom-16 left-0 z-50 w-9 h-14 rounded-r-2xl bg-[#25D366] flex items-center justify-center shadow-lg"
-        >
-          <FaWhatsapp className="text-white text-3xl" />
-        </a>
-      </div>
+      <FloatingContactButtons />
 
       {open && <EnquiryForm open={open} setOpen={setOpen} />}
       <MobileStickyContact setOpen={setOpen} />

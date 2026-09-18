@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import EnquiryForm from "@/components/EnquiryForm";
+import { getProjectLink } from "@/lib/projectRoutes";
 
 export default function Projects() {
   const [listings, setListings] = useState([]);
@@ -93,7 +94,7 @@ export default function Projects() {
               const isMatched = filteredListings.some((f) => f.id === item.id);
 
               return (
-                <Link key={item.id} href={item.link || "#"}>
+                <Link key={item.id} href={getProjectLink(item)}>
                   <div
                     className={`bg-white rounded-2xl overflow-hidden transition cursor-pointer ${
                       search && isMatched

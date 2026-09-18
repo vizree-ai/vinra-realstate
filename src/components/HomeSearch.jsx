@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Search } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { getProjectLink } from "@/lib/projectRoutes";
 
 export default function HomeSearch() {
   const [listings, setListings] = useState([]);
@@ -78,7 +79,7 @@ export default function HomeSearch() {
               filteredListings.map((item) => (
                 <Link
                   key={item.id}
-                  href={item.link || "/KBR_prime"}
+                  href={getProjectLink(item)}
                   className="flex cursor-pointer items-center gap-3 px-4 py-3 hover:rounded-2xl hover:bg-gray-200"
                 >
                   <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-md">

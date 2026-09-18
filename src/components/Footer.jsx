@@ -1,4 +1,28 @@
 import Image from "next/image";
+import { Instagram, Facebook, Youtube, Linkedin } from "lucide-react";
+
+const socialLinks = [
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/vinragroupofficial/",
+    icon: Instagram,
+  },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/Vinragroupofficial",
+    icon: Facebook,
+  },
+  {
+    name: "Youtube",
+    href: "https://www.youtube.com/channel/UCtYIR-Fm-DBCeKLeEw-SWdA",
+    icon: Youtube,
+  },
+  {
+    name: "Linkedin",
+    href: "https://www.linkedin.com/company/vinragroup",
+    icon: Linkedin,
+  },
+];
 
 export default function Footer() {
   return (
@@ -18,7 +42,7 @@ export default function Footer() {
               />
             </div>
 
-            <h2 className="mt-2 text-yellow-500">A Unit of Vinra Group</h2>
+            <h2 className="mt-2 text-yellow-500 font-medium">A Unit of Vinra Group</h2>
 
             <p className="text-sm mt-4 text-justify text-gray-300 leading-relaxed">
               Vinra Estates is a leading real estate company in Bangalore,
@@ -67,7 +91,8 @@ export default function Footer() {
           <div>
             <h3 className="text-yellow-500 font-semibold mb-4">Contact</h3>
             <div className="space-y-3 text-sm text-gray-300">
-              <p>📞 888-4898-765</p>
+              <p>📞
+                636-6699-888</p>
               <p>✉️ info@vinragroup.com</p>
 
               <p className="leading-relaxed">
@@ -77,16 +102,24 @@ export default function Footer() {
                 Bengaluru, Karnataka 560042
               </p>
             </div>
-            {/* SOCIAL */}
-            <div className="flex gap-3 mt-4 flex-wrap">
-              {["🌐", "🐦", "▶️", "💬", "📸"].map((icon, i) => (
-                <div
-                  key={i}
-                  className="w-9 h-9 flex items-center justify-center bg-gray-800 rounded-full hover:bg-yellow-500 hover:text-black transition cursor-pointer"
-                >
-                  {icon}
-                </div>
-              ))}
+
+            {/* SOCIAL LINKS */}
+            <div className="flex gap-3 mt-5 flex-wrap items-center">
+              {socialLinks.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={item.name}
+                    className="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full text-gray-300 hover:bg-yellow-500 hover:text-black transition duration-300 border border-gray-700 hover:border-yellow-500"
+                  >
+                    <Icon className="w-5 h-5" />
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>

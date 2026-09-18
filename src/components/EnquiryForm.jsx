@@ -38,7 +38,7 @@ export default function EnquiryForm({
       alert("Error submitting ❌");
       console.log(error);
     } else {
-      alert("Submitted Successfully ✅");
+      alert("Submitted Successfully ✅ Our sales executive will connect with you shortly!");
 
       setName("");
       setPhone("");
@@ -162,7 +162,7 @@ export default function EnquiryForm({
             <User
               size={20}
               strokeWidth={1.5}
-              className="absolute left-4 top-1/2 -translate-y-1/2  text-[#b78a31] z-10 pointer-events-none"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-[#b78a31] z-10 pointer-events-none"
             />
             <input
               suppressHydrationWarning
@@ -226,10 +226,11 @@ export default function EnquiryForm({
               required
             >
               <option value="" disabled hidden>
-                Select BHK*
+                Select Plot Dimensions*
               </option>
-              <option value="2 BHK">2 BHK</option>
-              <option value="3 BHK">3 BHK</option>
+              <option value="30x40 Plot">30 x 40 Villa Plot (1,200 Sq Ft)</option>
+              <option value="30x50 Plot">30 x 50 Villa Plot (1,500 Sq Ft)</option>
+              <option value="Custom Plot">Custom / Odd Size Plot</option>
             </select>
 
             <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#1E3D34]">
@@ -249,9 +250,9 @@ export default function EnquiryForm({
                    hover:shadow-lg 
                    active:scale-95 md:hover:scale-[1.02] 
                    transition-all 
-                   relative overflow-hidden"
+                   relative overflow-hidden cursor-pointer"
           >
-            ENQUIRE
+            ENQUIRE NOW
           </button>
         </form>
       </div>
@@ -277,15 +278,15 @@ export default function EnquiryForm({
         </button>
 
         <p className="text-center text-sm font-semibold tracking-[3px] text-[#a06a44] uppercase">
-          Vinra KBR Prime
+          Vinra Real Estate
         </p>
 
         <h2 className="text-center text-2xl font-bold text-[#5b3d2e] mt-2">
-           {heading || "Discover Your Dream Home"}
+          {heading || "Discover Your Dream Property"}
         </h2>
 
         <p className="text-center text-[#7a5a45] mt-2 mb-6 text-sm">
-           {description || "Connect with our property expert for pricing, availability & special launch benefits."}
+          {description || "Connect with our sales expert for brochure, pricing & site visit assistance."}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -318,10 +319,11 @@ export default function EnquiryForm({
               required
             >
               <option value="" disabled hidden>
-                Select BHK*
+                Select Plot Dimensions*
               </option>
-              <option value="2 BHK">2 BHK</option>
-              <option value="3 BHK">3 BHK</option>
+              <option value="30x40 Plot">30 x 40 Villa Plot (1,200 Sq Ft)</option>
+              <option value="30x50 Plot">30 x 50 Villa Plot (1,500 Sq Ft)</option>
+              <option value="Custom Plot">Custom / Odd Size Plot</option>
             </select>
 
             <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#5b3d2e]">
@@ -332,10 +334,14 @@ export default function EnquiryForm({
           <button
             suppressHydrationWarning
             type="submit"
-            className="w-full py-3 rounded-2xl text-white font-semibold bg-gradient-to-r from-[#5b3d2e] to-[#7a5239] hover:opacity-95 transition shadow-md"
+            className="w-full py-3.5 rounded-2xl text-white font-semibold bg-gradient-to-r from-[#5b3d2e] to-[#7a5239] hover:opacity-95 transition shadow-md cursor-pointer"
           >
             {buttonText || "ENQUIRE NOW"}
           </button>
+          
+          <p className="mt-3 text-center text-xs leading-relaxed text-[#7a5a45]">
+            🔒 Your details are secure. Our sales executive will connect with you shortly to share the official brochure, plot layout & pricing.
+          </p>
         </form>
       </div>
     </div>
