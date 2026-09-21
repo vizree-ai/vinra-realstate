@@ -97,17 +97,31 @@ function VipEnquiryCard() {
 
     setFormState((prev) => ({ ...prev, loading: true }));
 
-    const { error } = await supabase.from("enquiries").insert([
+    let { error } = await supabase.from("bmr_enquiries").insert([
       {
         name: formState.name,
         phone: formState.phone,
         bhk: formState.bhk || "Plot Enquiry",
+        dimensions: formState.bhk || "Plot Enquiry",
         date: formState.visitDate || null,
+        want_to_visit: formState.visitDate || null,
       },
     ]);
 
+    if (error && (error.code === "PGRST204" || (error.message && error.message.toLowerCase().includes("column")))) {
+      const { error: err2 } = await supabase.from("bmr_enquiries").insert([
+        {
+          name: formState.name || "Anonymous",
+          phone: formState.phone || "",
+          dimensions: formState.bhk || "Plot Enquiry",
+          want_to_visit: formState.visitDate || null,
+        },
+      ]);
+      error = err2;
+    }
+
     if (error) {
-      alert("Something went wrong. Please try again ❌");
+      alert(`Error submitting ❌: ${error.message || "Please check Supabase settings"}`);
       console.error(error);
       setFormState((prev) => ({ ...prev, loading: false }));
     } else {
@@ -563,7 +577,7 @@ export default function Overview() {
 
             {/* Right Side: Interactive Enquiry Form */}
             <div className="lg:col-span-6 border-t border-gray-100 pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-              <EnquiryForm variant="section" />
+              <EnquiryForm variant="section" tableName="bmr_enquiries" />
             </div>
 
           </div>

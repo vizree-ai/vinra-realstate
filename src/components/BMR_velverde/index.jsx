@@ -19,7 +19,7 @@ export default function BMRVelverde() {
       <Overview />
       <Amenities />
       <Gallery />
-      <EnquiryForm />
+      <EnquiryForm tableName="bmr_enquiries" />
     </>
   );
 }

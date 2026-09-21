@@ -175,7 +175,7 @@ export default function Hero() {
 
       <FloatingContactButtons />
 
-      {open && <EnquiryForm open={open} setOpen={setOpen} />}
+      {open && <EnquiryForm open={open} setOpen={setOpen} tableName="bmr_enquiries" />}
       {brochureOpen && (
         <EnquiryForm
           heading="Request Official Project Brochure"
@@ -183,6 +183,7 @@ export default function Hero() {
           buttonText="Request Brochure"
           open={brochureOpen}
           setOpen={setBrochureOpen}
+          tableName="bmr_enquiries"
         />
       )}
       <MobileStickyContact setOpen={setOpen} />

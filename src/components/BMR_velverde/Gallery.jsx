@@ -254,7 +254,7 @@ export default function Gallery() {
 
       {/* BOTTOM CONVERSION & FOOTER DISCLAIMER */}
       <section className="w-full bg-[#071812]">
-        <EnquiryForm variant="visit" />
+        <EnquiryForm variant="visit" tableName="bmr_enquiries" />
 
         <div className="border-t border-white/10 bg-[#071812] px-6 py-10 text-center text-white md:py-14">
           <p className="mb-2 text-xs font-bold uppercase tracking-widest text-[#d5ad65] md:text-sm">
@@ -323,6 +323,7 @@ export default function Gallery() {
           buttonText="Request Brochure"
           open={open}
           setOpen={setOpen}
+          tableName="bmr_enquiries"
         />
       )}
     </>

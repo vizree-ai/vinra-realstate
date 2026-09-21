@@ -11,6 +11,7 @@ export default function EnquiryForm({
   heading,
   description,
   buttonText,
+  tableName = "enquiries",
 }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -25,18 +26,43 @@ export default function EnquiryForm({
 
     setLoading(true);
 
-    const { error } = await supabase.from("enquiries").insert([
-      {
-        name,
-        phone,
-        bhk,
-        date: visitDate,
-      },
-    ]);
+    // Build dynamic payload with non-empty fields
+    const payload = {};
+    if (name) payload.name = name;
+    if (phone) payload.phone = phone;
+    if (bhk) {
+      payload.bhk = bhk;
+      payload.dimensions = bhk;
+    }
+    if (visitDate) {
+      payload.date = visitDate;
+      payload.want_to_visit = visitDate;
+    }
+
+    // Attempt 1: Standard insert
+    let { error } = await supabase.from(tableName).insert([payload]);
+
+    // Attempt 2: Fallback for schema mismatch (e.g. bmr_enquiries vs enquiries column differences)
+    if (error && (error.code === "PGRST204" || (error.message && error.message.toLowerCase().includes("column")))) {
+      const fallbackPayload = {};
+      if (name) fallbackPayload.name = name;
+      if (phone) fallbackPayload.phone = phone;
+      if (bhk) {
+        if (tableName === "bmr_enquiries") fallbackPayload.dimensions = bhk;
+        else fallbackPayload.bhk = bhk;
+      }
+      if (visitDate) {
+        if (tableName === "bmr_enquiries") fallbackPayload.want_to_visit = visitDate;
+        else fallbackPayload.date = visitDate;
+      }
+
+      const { error: err2 } = await supabase.from(tableName).insert([fallbackPayload]);
+      error = err2;
+    }
 
     if (error) {
-      alert("Error submitting ❌");
-      console.log(error);
+      alert(`Error submitting ❌: ${error.message || "Please check Supabase table configuration"}`);
+      console.error("Supabase submission error:", error);
     } else {
       alert("Submitted Successfully ✅ Our sales executive will connect with you shortly!");
 

@@ -91,6 +91,7 @@ export default function Amenities() {
         buttonText="Request Brochure"
         open={open}
         setOpen={setOpen}
+        tableName="bmr_enquiries"
       />
     </section>
   );
