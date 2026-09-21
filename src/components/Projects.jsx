@@ -60,6 +60,7 @@ export default function Projects() {
     ],
     [filteredListings, listings],
   );
+
   return (
     <div>
       <section
@@ -92,15 +93,15 @@ export default function Projects() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {orderedListings.map((item) => {
               const isMatched = filteredListings.some((f) => f.id === item.id);
+              const statusValue = item.status || item.statas || item.property_status;
 
               return (
                 <Link key={item.id} href={getProjectLink(item)}>
                   <div
-                    className={`bg-white rounded-2xl overflow-hidden transition cursor-pointer ${
-                      search && isMatched
+                    className={`bg-white rounded-2xl overflow-hidden transition cursor-pointer ${search && isMatched
                         ? "shadow-[0_0_20px_rgba(185,119,21,0.45)] border border-[#B97715]"
                         : "shadow-sm hover:shadow-md"
-                    }`}
+                      }`}
                   >
                     <div className="relative h-56">
                       <Image
@@ -117,6 +118,14 @@ export default function Projects() {
                           {item.category}
                         </span>
                       </div>
+
+                      {statusValue && (
+                        <div className="absolute top-3 right-3 flex gap-2">
+                          <span className="bg-[#B97715]/90 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-semibold capitalize">
+                            {statusValue}
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     <div className="p-5">

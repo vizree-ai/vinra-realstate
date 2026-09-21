@@ -10,27 +10,15 @@ let cachedProperties = null;
 let propertiesPromise = null;
 
 export async function getProperties() {
-  if (cachedProperties) {
-    return cachedProperties;
+  const { data, error } = await supabase
+    .from("properties")
+    .select("*")
+    .order("display_order", { ascending: false });
+
+  if (error) {
+    throw error;
   }
 
-  if (!propertiesPromise) {
-    propertiesPromise = supabase
-      .from("properties")
-      .select("*")
-      .order("display_order", { ascending: false })
-      .then(({ data, error }) => {
-        propertiesPromise = null;
-
-        if (error) {
-          throw error;
-        }
-
-        cachedProperties = data;
-        return data;
-      });
-  }
-
-  return propertiesPromise;
+  return data;
 }
 
