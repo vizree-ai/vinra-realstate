@@ -97,34 +97,19 @@ function VipEnquiryCard() {
 
     setFormState((prev) => ({ ...prev, loading: true }));
 
-    let { error } = await supabase.from("bmr_enquiries").insert([
-      {
-        name: formState.name,
-        phone: formState.phone,
-        bhk: formState.bhk || "Plot Enquiry",
-        dimensions: formState.bhk || "Plot Enquiry",
-        date: formState.visitDate || null,
-        want_to_visit: formState.visitDate || null,
-      },
-    ]);
-
-    if (error && (error.code === "PGRST204" || (error.message && error.message.toLowerCase().includes("column")))) {
-      const { error: err2 } = await supabase.from("bmr_enquiries").insert([
-        {
-          name: formState.name || "Anonymous",
-          phone: formState.phone || "",
-          dimensions: formState.bhk || "Plot Enquiry",
-          want_to_visit: formState.visitDate || null,
-        },
-      ]);
-      error = err2;
+    const payload = {
+      name: formState.name || "Anonymous",
+      phone: formState.phone || "",
+      dimensions: formState.bhk || "Plot Enquiry",
+    };
+    if (formState.visitDate) {
+      payload.want_to_visit = formState.visitDate;
     }
 
-    if (error) {
-      alert(`Error submitting ❌: ${error.message || "Please check Supabase settings"}`);
-      console.error(error);
-      setFormState((prev) => ({ ...prev, loading: false }));
-    } else {
+    try {
+      const { error } = await supabase.from("bmr_enquiries").insert([payload]);
+      if (error) throw error;
+
       setFormState({
         name: "",
         phone: "",
@@ -133,9 +118,14 @@ function VipEnquiryCard() {
         loading: false,
         submitted: true,
       });
+
       setTimeout(() => {
         setFormState((prev) => ({ ...prev, submitted: false }));
       }, 5000);
+    } catch (error) {
+      alert(`Error submitting ❌: ${error?.message || "Please try again"}`);
+      console.error(error);
+      setFormState((prev) => ({ ...prev, loading: false }));
     }
   };
 

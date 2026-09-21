@@ -21,60 +21,43 @@ export default function EnquiryForm({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (loading) return;
-
     setLoading(true);
 
-    // Build dynamic payload with non-empty fields
+    const isBmr = tableName === "bmr_enquiries";
     const payload = {};
     if (name) payload.name = name;
     if (phone) payload.phone = phone;
+
     if (bhk) {
-      payload.bhk = bhk;
-      payload.dimensions = bhk;
+      if (isBmr) payload.dimensions = bhk;
+      else payload.bhk = bhk;
     }
+
     if (visitDate) {
-      payload.date = visitDate;
-      payload.want_to_visit = visitDate;
+      if (isBmr) payload.want_to_visit = visitDate;
+      else payload.date = visitDate;
     }
 
-    // Attempt 1: Standard insert
-    let { error } = await supabase.from(tableName).insert([payload]);
+    try {
+      const { error } = await supabase.from(tableName).insert([payload]);
 
-    // Attempt 2: Fallback for schema mismatch (e.g. bmr_enquiries vs enquiries column differences)
-    if (error && (error.code === "PGRST204" || (error.message && error.message.toLowerCase().includes("column")))) {
-      const fallbackPayload = {};
-      if (name) fallbackPayload.name = name;
-      if (phone) fallbackPayload.phone = phone;
-      if (bhk) {
-        if (tableName === "bmr_enquiries") fallbackPayload.dimensions = bhk;
-        else fallbackPayload.bhk = bhk;
-      }
-      if (visitDate) {
-        if (tableName === "bmr_enquiries") fallbackPayload.want_to_visit = visitDate;
-        else fallbackPayload.date = visitDate;
+      if (error) {
+        throw error;
       }
 
-      const { error: err2 } = await supabase.from(tableName).insert([fallbackPayload]);
-      error = err2;
-    }
-
-    if (error) {
-      alert(`Error submitting ❌: ${error.message || "Please check Supabase table configuration"}`);
-      console.error("Supabase submission error:", error);
-    } else {
       alert("Submitted Successfully ✅ Our sales executive will connect with you shortly!");
-
       setName("");
       setPhone("");
       setBhk("");
       setVisitDate("");
-
       if (setOpen) setOpen(false);
+    } catch (error) {
+      alert(`Error submitting ❌: ${error?.message || "Please try again"}`);
+      console.error("Supabase submission error:", error);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   // popup closed

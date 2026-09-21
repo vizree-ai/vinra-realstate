@@ -6,19 +6,28 @@ const supabaseKey =
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
-let cachedProperties = null;
-let propertiesPromise = null;
+let memoryCache = null;
+let lastFetchTime = 0;
+const CACHE_TTL = 30000; // 30 seconds fast TTL
 
 export async function getProperties() {
+  const now = Date.now();
+  if (memoryCache && now - lastFetchTime < CACHE_TTL) {
+    return memoryCache;
+  }
+
   const { data, error } = await supabase
     .from("properties")
     .select("*")
     .order("display_order", { ascending: false });
 
   if (error) {
+    if (memoryCache) return memoryCache;
     throw error;
   }
 
+  memoryCache = data;
+  lastFetchTime = now;
   return data;
 }
 
