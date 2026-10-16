@@ -17,7 +17,7 @@ import {
 import MobileStickyContact from "../MobileStickyContact";
 import FloatingContactButtons from "../FloatingContactButtons";
 
-const EnquiryForm = dynamic(() => import("../EnquiryForm"), { ssr: false });
+import EnquiryForm from "../EnquiryForm";
 
 export default function Hero() {
   const [open, setOpen] = useState(false);

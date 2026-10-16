@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import {
   BedDouble,
@@ -11,23 +10,13 @@ import {
   Compass,
   TrendingUp,
   Home,
+  Phone,
 } from "lucide-react";
 
 import { motion } from "framer-motion";
 import EnquiryForm from "../EnquiryForm";
 
-export default function Hero() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => setIsOpen(!isOpen);
-
-  const navLinks = [
-    { name: "Work", href: "#" },
-    { name: "About", href: "#" },
-    { name: "Playground", href: "#" },
-    { name: "Resource", href: "#" },
-  ];
-
+export default function Hero2() {
   return (
     <>
       <section className="w-full bg-[#f3f1ed] pt-12 px-11">
@@ -59,18 +48,32 @@ export default function Hero() {
                 </div>
               ))}
             </div>
+
+            {/* DIRECT CALL PROMPT */}
+            <div className="mt-6 flex items-center gap-3 flex-wrap">
+              <span className="text-sm font-semibold text-[#1E3D34]">
+                Need project assistance?
+              </span>
+              <a
+                href="tel:+916366699888"
+                className="inline-flex items-center gap-1.5 bg-[#1E3D34] hover:bg-[#142923] text-white px-4 py-2 rounded-xl text-sm font-bold shadow hover:scale-105 active:scale-95 transition"
+              >
+                <Phone size={15} />
+                <span>Call 6366699888</span>
+              </a>
+            </div>
           </div>
 
           <EnquiryForm variant="section" />
         </div>
       </section>
+
       <section className="relative w-full bg-[#f3f1ed] pt-16 pb-32 px-6 overflow-hidden">
         {/* TOP ICON + LINES */}
         <div className="flex items-center justify-center gap-4 mb-6">
           <div className="h-[1px] w-16 bg-[#c8a96a]"></div>
 
           {/* ICON */}
-
           <Home size={26} className="text-[#c8a96a]" />
 
           <div className="h-[1px] w-16 bg-[#c8a96a]"></div>
@@ -189,6 +192,18 @@ export default function Hero() {
                 </li>
               ))}
             </ul>
+
+            {/* DIRECT CALL CTA */}
+            <div className="mt-8 pt-4 border-t border-white/20 flex flex-wrap items-center gap-4">
+              <a
+                href="tel:+916366699888"
+                className="inline-flex items-center gap-2 bg-[#c09b64] hover:bg-[#d4af37] text-[#1E3D34] px-6 py-2.5 rounded-full text-sm font-bold shadow-lg hover:scale-105 active:scale-95 transition"
+              >
+                <Phone size={16} />
+                <span>Call Sales Desk: 6366699888</span>
+              </a>
+              <span className="text-xs text-white/80">Instant site visit booking</span>
+            </div>
           </motion.div>
         </div>
       </section>

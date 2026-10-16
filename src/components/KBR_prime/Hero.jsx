@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -12,8 +11,9 @@ import {
   IndianRupee,
   Home,
   MapPin,
+  Phone,
 } from "lucide-react";
-const EnquiryForm = dynamic(() => import("../EnquiryForm"), { ssr: false });
+import EnquiryForm from "../EnquiryForm";
 import MobileStickyContact from "../MobileStickyContact";
 import FloatingContactButtons from "../FloatingContactButtons";
 
@@ -52,7 +52,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="w-full min-h-screen flex justify-center items-stretch relative overflow-hidden scroll-mt-28"
+      className="w-full flex justify-center items-stretch relative overflow-hidden scroll-mt-24"
     >
       <div className="w-full max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-[60%_40%] h-auto lg:min-h-screen overflow-hidden">
         {/* RIGHT IMAGE DESKTOP */}
@@ -60,23 +60,21 @@ export default function Hero() {
           <HeroImage className="h-full w-full" />
 
           <div className="absolute bottom-6 right-6 z-10">
-            <button
-              suppressHydrationWarning
-              className="bg-[#9f773c] text-white px-6 py-2 rounded-xl shadow-md hover:scale-105 transition"
+            <a
+              href="tel:+916366699888"
+              className="inline-flex items-center gap-2 bg-[#9f773c] hover:bg-[#85612c] text-white px-6 py-2.5 rounded-xl shadow-lg hover:scale-105 active:scale-95 transition font-semibold text-lg tracking-wider"
+              title="Click to Call 6366699888"
             >
-              <a
-                href="tel:+916366699888"
-                className="cursor-pointer text-lg font-semibold tracking-widest"
-              >
-                6366699888
-              </a>
-            </button>
+              <Phone className="w-5 h-5" />
+              <span>Call Now: 6366699888</span>
+            </a>
+
           </div>
         </div>
 
         {/* LEFT PANEL */}
-        <div className="bg-[#F7F3EC] text-[#5b3d2e] p-4 lg:p-8 lg:pt-28 flex flex-col justify-start relative">
-          <div className="mt-4 text-center lg:text-left">
+        <div className="bg-[#F7F3EC] text-[#5b3d2e] p-5 sm:p-7 lg:p-8 pt-24 sm:pt-28 lg:pt-28 xl:pt-32 pb-8 sm:pb-10 flex flex-col justify-start relative">
+          <div className="mt-2 text-center lg:text-left">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -97,6 +95,7 @@ export default function Hero() {
 
             {/* SAME IMAGE MOBILE */}
             <HeroImage className="block lg:hidden mt-5 w-full h-[34vh] sm:h-[38vh] md:h-[42vh] rounded-xl overflow-hidden shadow-2xl" />
+
             {/* BADGES */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -158,6 +157,8 @@ export default function Hero() {
               </div>
             </div>
           </div>
+
+
         </div>
       </div>
 

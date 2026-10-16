@@ -1,10 +1,10 @@
 "use client";
-import dynamic from "next/dynamic";
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-const EnquiryForm = dynamic(() => import("../EnquiryForm"), { ssr: false });
+import { ChevronLeft, ChevronRight, Phone } from "lucide-react";
+import EnquiryForm from "../EnquiryForm";
 
 const images = [
   "/kbr1.webp",
@@ -105,9 +105,8 @@ export default function Gallery() {
               <div
                 key={i}
                 onClick={() => setIndex(i)}
-                className={`h-2 w-2 rounded-full cursor-pointer transition ${
-                  i === index ? "bg-black w-3" : "bg-gray-400"
-                }`}
+                className={`h-2 w-2 rounded-full cursor-pointer transition ${i === index ? "bg-black w-3" : "bg-gray-400"
+                  }`}
               />
             ))}
           </div>
@@ -122,7 +121,7 @@ export default function Gallery() {
             📄 Download Broucher
           </button>
         </div>
-      </section> 
+      </section>
       <section id="location" className="bg-[#5b3d2e] py-20 text-white scroll-mt-16">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           {/* MAP */}
@@ -153,6 +152,18 @@ export default function Gallery() {
               <li>10. Hospitals & Daily Essentials – Nearby</li>
               <li>11. Bangalore International Airport – 40-45 Mins</li>
             </ul>
+
+            <div className="mt-8 pt-4 border-t border-white/20 flex flex-wrap items-center gap-3">
+              <span className="text-white/90 text-sm">Need site visit assistance?</span>
+              <a
+                href="tel:+916366699888"
+                className="inline-flex items-center gap-2 bg-[#d4af37] hover:bg-[#c29d2b] text-[#1E3D34] px-5 py-2 rounded-full font-bold text-sm shadow hover:scale-105 active:scale-95 transition"
+                title="Direct Call 6366699888"
+              >
+                <Phone size={15} />
+                <span>Call: 6366699888</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -341,13 +352,24 @@ export default function Gallery() {
         </div>
       </div>
 
-      <section className="w-full">
+      <section id="contact" className="w-full scroll-mt-24">
         <EnquiryForm variant="visit" />
 
         <div className="bg-[#5b3d2e] text-white text-center py-8 md:py-14 px-6">
           <h3 className="text-base md:text-xl font-medium mb-4 md:mb-6">
             RERA NO : PRM/KA/RERA/1251/309/AG/180430/000888
           </h3>
+
+          <div className="mb-6 flex justify-center items-center gap-2 text-sm text-white/90">
+            <span>Direct Sales Helpline:</span>
+            <a
+              href="tel:+916366699888"
+              className="font-bold underline text-[#d4af37] hover:text-white transition inline-flex items-center gap-1.5"
+            >
+              <Phone size={14} />
+              <span>+91 63666 99888</span>
+            </a>
+          </div>
 
           {/* DISCLAIMER TITLE */}
           <p className="font-semibold mb-2 md:mb-4 text-sm md:text-base">

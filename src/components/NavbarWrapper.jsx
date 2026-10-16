@@ -6,14 +6,13 @@ import Navbar from "@/components/CommonNavbar";
 export default function NavbarWrapper() {
   const pathname = usePathname();
 
-  const isProjectPage =
-    pathname.startsWith("/KBR_prime") || pathname.startsWith("/BMR_velverde");
+  if (pathname.startsWith("/KBR_prime")) {
+    return <Navbar variant="kbr" />;
+  }
 
-  // ❌ ONLY block home navbar on KBR page
-  if (isProjectPage) {
+  if (pathname.startsWith("/BMR_velverde")) {
     return <Navbar variant="project" />;
   }
 
-  // ✅ Show home navbar everywhere else
   return <Navbar variant="home" />;
 }

@@ -1,10 +1,9 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-const EnquiryForm = dynamic(() => import("../EnquiryForm"), { ssr: false });
+import EnquiryForm from "../EnquiryForm";
 
 const ConfigCard = ({ item, scrollYProgress }) => {
   const [open, setOpen] = useState(false);

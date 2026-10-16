@@ -5,7 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, MapPin, Download, Sparkles, Instagram, Facebook, Youtube, Linkedin } from "lucide-react";
 
-const EnquiryForm = dynamic(() => import("../EnquiryForm"), { ssr: false });
+import EnquiryForm from "../EnquiryForm";
 
 const images = [
   {
@@ -253,7 +253,7 @@ export default function Gallery() {
       </section>
 
       {/* BOTTOM CONVERSION & FOOTER DISCLAIMER */}
-      <section className="w-full bg-[#071812]">
+      <section id="contact" className="w-full bg-[#071812] scroll-mt-24">
         <EnquiryForm variant="visit" tableName="bmr_enquiries" />
 
         <div className="border-t border-white/10 bg-[#071812] px-6 py-10 text-center text-white md:py-14">

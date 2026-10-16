@@ -32,9 +32,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return (
-    <>
-      <KBR_prime />
-    </>
-  );
+  return <KBR_prime />;
 }
