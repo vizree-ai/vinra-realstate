@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Phone } from "lucide-react";
+import { ChevronLeft, ChevronRight, Phone, MapPin } from "lucide-react";
 import EnquiryForm from "../EnquiryForm";
 
 const images = [
@@ -13,6 +12,57 @@ const images = [
   "/kbr4.webp",
   "/house.webp",
 ];
+
+function LazyMap() {
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (!containerRef.current || shouldLoad) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [shouldLoad]);
+
+  return (
+    <div
+      ref={containerRef}
+      className="border-10 border border-white w-full h-[450px] rounded overflow-hidden shadow-lg bg-[#3a281e] relative flex items-center justify-center"
+    >
+      {shouldLoad ? (
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.4942786703705!2d77.82032769999999!3d13.067830299999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae0f001629b9a3%3A0x4ae927a47d558812!2sVinra%20KBR%20Prime!5e0!3m2!1sen!2sin!4v1778146622983!5m2!1sen!2sin"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          loading="lazy"
+          title="Vinra KBR Prime Location Map"
+        />
+      ) : (
+        <div className="flex flex-col items-center justify-center p-6 text-center text-stone-200">
+          <MapPin className="w-10 h-10 text-[#d4af37] mb-3 animate-bounce" />
+          <p className="font-semibold text-lg text-white">Vinra KBR Prime, Hoskote</p>
+          <p className="text-xs text-stone-300 mt-1 mb-4">Click below to open interactive location map</p>
+          <button
+            type="button"
+            onClick={() => setShouldLoad(true)}
+            className="px-5 py-2.5 bg-[#d4af37] text-[#1E3D34] rounded-full text-xs font-bold shadow hover:bg-white transition cursor-pointer"
+          >
+            Load Interactive Map
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Gallery() {
   const [index, setIndex] = useState(0);
@@ -41,7 +91,7 @@ export default function Gallery() {
             <button
               suppressHydrationWarning
               onClick={prevSlide}
-              className="absolute left-2 md:left-0 z-10 bg-white/80 hover:bg-white p-1 md:p-2 rounded-full shadow-md"
+              className="absolute left-2 md:left-0 z-10 bg-white/80 hover:bg-white p-1 md:p-2 rounded-full shadow-md cursor-pointer"
             >
               <ChevronLeft className="text-[#5b3d2e] w-4 h-4 md:w-6 md:h-6" />
             </button>
@@ -52,38 +102,49 @@ export default function Gallery() {
               <div className="w-[80px] md:w-[120px] h-[200px] md:h-[300px] relative hidden md:block">
                 <Image
                   src={images[(index - 1 + images.length) % images.length]}
-                  alt=""
+                  alt="Vinra KBR Prime Preview"
                   fill
+                  loading="lazy"
+                  quality={60}
+                  sizes="120px"
                   className="object-cover rounded-md opacity-70"
                 />
               </div>
 
               {/* MAIN IMAGE (SLIDE VERSION) */}
               <div className="w-[300px] md:w-[500px] h-[200px] md:h-[300px] relative overflow-hidden">
-                <motion.div
-                  animate={{ x: `-${index * 100}%` }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                  className="flex w-full h-full"
+                <div
+                  style={{
+                    transform: `translateX(-${index * 100}%)`,
+                    transition: "transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
+                  }}
+                  className="flex w-full h-full will-change-transform"
                 >
                   {images.map((img, i) => (
                     <div key={i} className="min-w-full h-full relative">
                       <Image
                         src={img}
-                        alt=""
+                        alt="Vinra KBR Prime Apartment View"
                         fill
+                        loading="lazy"
+                        quality={70}
+                        sizes="(max-width: 768px) 300px, 500px"
                         className="object-cover rounded-md"
                       />
                     </div>
                   ))}
-                </motion.div>
+                </div>
               </div>
 
               {/* RIGHT SIDE IMAGE */}
               <div className="w-[80px] md:w-[120px] h-[200px] md:h-[300px] relative hidden md:block">
                 <Image
                   src={images[(index + 1) % images.length]}
-                  alt=""
+                  alt="Vinra KBR Prime Preview"
                   fill
+                  loading="lazy"
+                  quality={60}
+                  sizes="120px"
                   className="object-cover rounded-md opacity-90"
                 />
               </div>
@@ -93,7 +154,7 @@ export default function Gallery() {
             <button
               suppressHydrationWarning
               onClick={nextSlide}
-              className="absolute right-2 md:right-0 z-10 bg-white/80 hover:bg-white p-1 md:p-2 rounded-full shadow-md"
+              className="absolute right-2 md:right-0 z-10 bg-white/80 hover:bg-white p-1 md:p-2 rounded-full shadow-md cursor-pointer"
             >
               <ChevronRight className="text-[#5b3d2e] w-4 h-4 md:w-6 md:h-6" />
             </button>
@@ -105,35 +166,27 @@ export default function Gallery() {
               <div
                 key={i}
                 onClick={() => setIndex(i)}
-                className={`h-2 w-2 rounded-full cursor-pointer transition ${i === index ? "bg-black w-3" : "bg-gray-400"
-                  }`}
+                className={`h-2 w-2 rounded-full cursor-pointer transition ${
+                  i === index ? "bg-black w-3" : "bg-gray-400"
+                }`}
               />
             ))}
           </div>
 
           {/* DOWNLOAD */}
-
           <button
             suppressHydrationWarning
             onClick={() => setOpen(true)}
-            className="text-[#5b3d2e] mt-12 bg-amber-100 border-3 border-dashed border-[#5b3d2e] px-6 py-3 rounded-full hover:bg-[#5b3d2e] hover:text-white transition"
+            className="text-[#5b3d2e] mt-12 bg-amber-100 border-3 border-dashed border-[#5b3d2e] px-6 py-3 rounded-full hover:bg-[#5b3d2e] hover:text-white transition cursor-pointer"
           >
-            📄 Download Broucher
+            📄 Download Brochure
           </button>
         </div>
       </section>
       <section id="location" className="bg-[#5b3d2e] py-20 text-white scroll-mt-16">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           {/* MAP */}
-          <div className="border-10 border border-white w-full h-[450px] rounded overflow-hidden shadow-lg">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.4942786703705!2d77.82032769999999!3d13.067830299999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae0f001629b9a3%3A0x4ae927a47d558812!2sVinra%20KBR%20Prime!5e0!3m2!1sen!2sin!4v1778146622983!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              loading="lazy"
-            ></iframe>
-          </div>
+          <LazyMap />
 
           {/* PROXIMITIES */}
           <div className="px-6">
@@ -233,9 +286,12 @@ export default function Gallery() {
             {/* IMAGE */}
             <Image
               src="/master-plan.jpg"
-              alt="Masterplan"
+              alt="Vinra KBR Prime Master Layout Plan"
               width={1400}
               height={700}
+              loading="lazy"
+              quality={75}
+              sizes="(max-width: 1024px) 100vw, 1200px"
               className="w-full h-[260px] sm:h-[340px] md:h-[600px] object-cover md:object-contain scale-100 group-hover:scale-105 transition duration-700"
             />
 
@@ -283,6 +339,9 @@ export default function Gallery() {
               alt="Floor Plan Ground Plus 1"
               width={1200}
               height={700}
+              loading="lazy"
+              quality={75}
+              sizes="(max-width: 1024px) 100vw, 600px"
               className="w-full h-[340px] md:h-[460px] object-cover blur-[5px] group-hover:blur-0 scale-105 group-hover:scale-110 transition-all duration-700"
             />
 
@@ -306,7 +365,7 @@ export default function Gallery() {
               <button
                 suppressHydrationWarning
                 onClick={() => setOpen(true)}
-                className="bg-[#b88a44] hover:bg-[#3f2a1f] text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
+                className="bg-[#b88a44] hover:bg-[#3f2a1f] text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer"
               >
                 Download Floor Plans
               </button>
@@ -320,6 +379,9 @@ export default function Gallery() {
               alt="Floor Plan Ground Plus 2"
               width={1200}
               height={700}
+              loading="lazy"
+              quality={75}
+              sizes="(max-width: 1024px) 100vw, 600px"
               className="w-full h-[340px] md:h-[460px] object-cover blur-[5px] group-hover:blur-0 scale-105 group-hover:scale-110 transition-all duration-700"
             />
 

@@ -1,4 +1,4 @@
-import KBR_prime from "@/components/KBR_prime";
+import KBR_prime from "@/components/KBR-prime";
 
 export const metadata = {
   title: "Vinra KBR Prime | Luxury Apartments in Bangalore",
@@ -17,7 +17,7 @@ export const metadata = {
   openGraph: {
     title: "Vinra KBR Prime",
     description: "Luxury apartments with premium amenities in Bangalore.",
-    url: "https://vinraestates.com/KBR_prime",
+    url: "https://vinraestates.com/kbr-prime",
     siteName: "Vinra KBR Prime",
     images: [
       {

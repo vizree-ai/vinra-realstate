@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
 import { User, Phone, Building, CalendarDays } from "lucide-react";
 
 export default function EnquiryForm({
@@ -11,7 +10,7 @@ export default function EnquiryForm({
   heading,
   description,
   buttonText,
-  tableName = "enquiries",
+  tableName = "kbr-enquiries",
 }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -25,6 +24,7 @@ export default function EnquiryForm({
     setLoading(true);
 
     const isBmr = tableName === "bmr_enquiries";
+    const isKbr = tableName === "kbr-enquiries" || tableName === "kbr_enquiries";
     const payload = {};
     if (name) payload.name = name;
     if (phone) payload.phone = phone;
@@ -35,11 +35,31 @@ export default function EnquiryForm({
     }
 
     if (visitDate) {
-      if (isBmr) payload.want_to_visit = visitDate;
-      else payload.date = visitDate;
+      if (isBmr) {
+        payload.want_to_visit = visitDate;
+      } else if (isKbr) {
+        payload.bhk = payload.bhk ? `${payload.bhk} (Visit: ${visitDate})` : `Site Visit: ${visitDate}`;
+      } else {
+        payload.date = visitDate;
+      }
+    }
+
+    if (isKbr) {
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, "0");
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const year = String(now.getFullYear()).slice(-2);
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+      const ampm = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12 || 12;
+      const strHours = String(hours).padStart(2, "0");
+
+      payload.local_time = `${day}-${month}-${year}, ${strHours}:${minutes} ${ampm}`;
     }
 
     try {
+      const { supabase } = await import("@/lib/supabase");
       const { error } = await supabase.from(tableName).insert([payload]);
 
       if (error) {
@@ -139,11 +159,10 @@ export default function EnquiryForm({
             suppressHydrationWarning
             type="submit"
             disabled={loading}
-            className={`mt-6 md:mt-8 px-8 md:px-10 py-2.5 md:py-3 rounded-lg shadow-md transition text-sm md:text-base font-semibold text-white ${
-              loading
+            className={`mt-6 md:mt-8 px-8 md:px-10 py-2.5 md:py-3 rounded-lg shadow-md transition text-sm md:text-base font-semibold text-white ${loading
                 ? "bg-gray-400 cursor-progress"
                 : "bg-[#5b3d2e] hover:shadow-xl hover:scale-105 cursor-pointer"
-            }`}
+              }`}
           >
             {loading ? "Submitting..." : "Schedule Visit"}
           </button>
@@ -347,7 +366,7 @@ export default function EnquiryForm({
           >
             {buttonText || "ENQUIRE NOW"}
           </button>
-          
+
           <p className="mt-3 text-center text-xs leading-relaxed text-[#7a5a45]">
             🔒 Your details are secure. Our sales executive will connect with you shortly to share the official brochure, plot layout & pricing.
           </p>

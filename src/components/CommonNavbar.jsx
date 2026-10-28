@@ -39,7 +39,9 @@ export default function Navbar({ variant = "home" }) {
     if (isHome) return;
 
     const sectionIds = ["hero", "amenities", "gallery", "location", "contact"];
-    const handleScroll = () => {
+    let ticking = false;
+
+    const updateScrollState = () => {
       setIsScrolled(window.scrollY > 20);
       const scrollPosition = window.scrollY + 200;
 
@@ -47,14 +49,23 @@ export default function Navbar({ variant = "home" }) {
         const el = document.getElementById(sectionIds[i]);
         if (el && el.offsetTop <= scrollPosition) {
           setActiveSection(sectionIds[i]);
+          ticking = false;
           return;
         }
       }
       setActiveSection("hero");
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollState);
+        ticking = true;
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
+    updateScrollState();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHome]);
 
@@ -356,7 +367,14 @@ export default function Navbar({ variant = "home" }) {
       )}
 
       {/* POPUP ENQUIRY FORM */}
-      {!isHome && <EnquiryForm open={open} setOpen={setOpen} variant="popup" />}
+      {!isHome && (
+        <EnquiryForm
+          open={open}
+          setOpen={setOpen}
+          variant="popup"
+          tableName={variant === "project" ? "bmr_enquiries" : "kbr-enquiries"}
+        />
+      )}
     </>
   );
 }

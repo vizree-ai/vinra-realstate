@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import {
   ShieldCheck,
   Building2,
@@ -17,7 +16,7 @@ import EnquiryForm from "../EnquiryForm";
 import MobileStickyContact from "../MobileStickyContact";
 import FloatingContactButtons from "../FloatingContactButtons";
 
-function HeroImage({ className = "" }) {
+function HeroImage({ className = "", priority = true }) {
   return (
     <div
       className={`relative overflow-hidden w-full
@@ -29,18 +28,12 @@ function HeroImage({ className = "" }) {
     >
       <Image
         src="/Vinra KBR Prime.webp"
-        alt="House construction services in Bangalore by Vinra Construction"
+        alt="Vinra KBR Prime Luxury Apartments in Hoskote Bangalore"
         fill
-        priority
-        fetchPriority="high"
+        priority={priority}
         quality={75}
-        className="
-      object-cover
-      object-center
-      sm:object-cover
-      sm:object-[center]
-    "
-        sizes="100vw"
+        className="object-cover object-center"
+        sizes="(max-width: 1024px) 100vw, 60vw"
       />
     </div>
   );
@@ -57,7 +50,7 @@ export default function Hero() {
       <div className="w-full max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-[60%_40%] h-auto lg:min-h-screen overflow-hidden">
         {/* RIGHT IMAGE DESKTOP */}
         <div className="hidden lg:block relative h-full">
-          <HeroImage className="h-full w-full" />
+          <HeroImage className="h-full w-full" priority={true} />
 
           <div className="absolute bottom-6 right-6 z-10">
             <a
@@ -68,23 +61,17 @@ export default function Hero() {
               <Phone className="w-5 h-5" />
               <span>Call Now: 6366699888</span>
             </a>
-
           </div>
         </div>
 
         {/* LEFT PANEL */}
         <div className="bg-[#F7F3EC] text-[#5b3d2e] p-5 sm:p-7 lg:p-8 pt-24 sm:pt-28 lg:pt-28 xl:pt-32 pb-8 sm:pb-10 flex flex-col justify-start relative">
           <div className="mt-2 text-center lg:text-left">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-[#1E3D34]"
-            >
+            <h1 className="animate-fadeInUp text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-[#1E3D34]">
               Own Your Dream Home <br /> at Vinra KBR Prime
-            </motion.h1>
+            </h1>
 
-            <p className="mt-4 text-base sm:text-lg md:text-lg lg:text-xl text-[#1E3D34] leading-relaxed max-w-xl mx-auto lg:mx-0">
+            <p className="animate-fadeInUp-delay-1 mt-4 text-base sm:text-lg md:text-lg lg:text-xl text-[#1E3D34] leading-relaxed max-w-xl mx-auto lg:mx-0">
               Spacious 2 & 3 BHK Apartments with Premium Amenities, Excellent
               Connectivity & Smart Investment Potential in
               <br />
@@ -94,15 +81,13 @@ export default function Hero() {
             </p>
 
             {/* SAME IMAGE MOBILE */}
-            <HeroImage className="block lg:hidden mt-5 w-full h-[34vh] sm:h-[38vh] md:h-[42vh] rounded-xl overflow-hidden shadow-2xl" />
+            <HeroImage
+              priority={false}
+              className="block lg:hidden mt-5 w-full h-[34vh] sm:h-[38vh] md:h-[42vh] rounded-xl overflow-hidden shadow-2xl"
+            />
 
             {/* BADGES */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mt-5 sm:mt-6 md:mt-7 lg:mt-8 flex flex-col gap-2 sm:gap-3 w-fit mx-auto lg:w-full lg:mx-0"
-            >
+            <div className="animate-fadeInUp-delay-2 mt-5 sm:mt-6 md:mt-7 lg:mt-8 flex flex-col gap-2 sm:gap-3 w-fit mx-auto lg:w-full lg:mx-0">
               {[
                 ["RERA Approved Project", ShieldCheck],
                 ["CC / OC Approved", Building2],
@@ -122,7 +107,7 @@ export default function Hero() {
                   </p>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
           {/* FEATURES */}

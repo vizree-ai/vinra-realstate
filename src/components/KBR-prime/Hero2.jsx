@@ -1,19 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import {
-  BedDouble,
-  IndianRupee,
-  MapPin,
-  ShieldCheck,
-  Building2,
-  Compass,
-  TrendingUp,
-  Home,
-  Phone,
-} from "lucide-react";
-
-import { motion } from "framer-motion";
+import { Home, Phone } from "lucide-react";
 import EnquiryForm from "../EnquiryForm";
 
 export default function Hero2() {
@@ -149,25 +137,22 @@ export default function Hero2() {
 
       <section className="w-full bg-[#1E3D34] py-12">
         <div className="flex flex-col-reverse lg:grid lg:grid-cols-[55%_45%] items-center gap-8 lg:gap-0">
-          <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+          <div
             className="relative w-[95%] lg:w-[88%] h-[300px] lg:h-[520px] overflow-hidden 
              rounded-r-[200px] lg:rounded-r-[300px]"
           >
             <Image
               src="/Vinra KBR Prime.webp"
-              alt="Project"
+              alt="Vinra KBR Prime Project Architecture and Features"
               fill
+              loading="lazy"
+              quality={75}
+              sizes="(max-width: 1024px) 95vw, 50vw"
               className="object-cover"
             />
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+          <div
             className="text-white px-6 lg:px-11"
           >
             <h2 className="text-3xl md:text-4xl font-semibold mb-6">
@@ -204,7 +189,7 @@ export default function Hero2() {
               </a>
               <span className="text-xs text-white/80">Instant site visit booking</span>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </>

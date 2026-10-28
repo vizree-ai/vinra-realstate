@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
 import EnquiryForm from "../EnquiryForm";
-import { motion } from "framer-motion";
 import {
-  Dumbbell,
   Waves,
   Gamepad2,
   Trees,
@@ -49,14 +47,9 @@ export default function Amenities() {
     <section id="amenities" className="bg-[#f4f4f4] py-10 scroll-mt-28">
       <div className="max-w-7xl mx-auto px-6 text-center">
         {/* TITLE */}
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-semibold text-[#5b3d2e] mb-10"
-        >
+        <h2 className="text-3xl md:text-4xl font-semibold text-[#5b3d2e] mb-10">
           Amenities
-        </motion.h2>
+        </h2>
 
         {/* GRID */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-8 gap-x-8">
@@ -64,12 +57,9 @@ export default function Amenities() {
             const Icon = item.icon;
 
             return (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className="flex flex-col items-center group cursor-pointer"
+                className="flex flex-col items-center group cursor-pointer transition-transform duration-300 hover:-translate-y-1"
               >
                 {/* ICON BOX */}
                 <div
@@ -88,7 +78,7 @@ export default function Amenities() {
                 >
                   {item.title}
                 </p>
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -114,13 +104,15 @@ export default function Amenities() {
         </a>
       </div>
 
-      <EnquiryForm
-        heading="Get the brochure on your whatsapp"
-        description="Fill your details to receive the complete brochure, pricing & availability on your WhatsApp."
-        buttonText="Get Brochure"
-        open={open}
-        setOpen={setOpen}
-      />
+      {open && (
+        <EnquiryForm
+          heading="Get the brochure on your whatsapp"
+          description="Fill your details to receive the complete brochure, pricing & availability on your ."
+          buttonText="Get Brochure"
+          open={open}
+          setOpen={setOpen}
+        />
+      )}
     </section>
   );
 }

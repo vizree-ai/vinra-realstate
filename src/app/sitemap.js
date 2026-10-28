@@ -9,7 +9,7 @@ export default function sitemap() {
       priority: 1,
     },
     {
-      url: `${siteUrl}/KBR_prime`,
+      url: `${siteUrl}/kbr-prime`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,

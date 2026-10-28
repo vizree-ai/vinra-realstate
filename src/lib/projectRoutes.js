@@ -1,5 +1,5 @@
 export const projectRoutes = {
-  "vinra kbr prime": "/KBR_prime",
+  "vinra kbr prime": "/kbr-prime",
   "vinra bmr velverde": "/BMR_velverde",
 };
 

@@ -13,7 +13,7 @@ export default function FloatingContactButtons() {
         <FaPhoneAlt className="text-lg md:text-xl" />
       </a>
       <a
-        href="https://wa.me/916366699888"
+        href="https://wa.me/919606044174"
         aria-label="Chat on WhatsApp"
         className="flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition hover:scale-105 md:h-14 md:w-14"
       >
