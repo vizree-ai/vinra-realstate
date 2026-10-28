@@ -6,6 +6,10 @@ import Navbar from "@/components/CommonNavbar";
 export default function NavbarWrapper() {
   const pathname = usePathname();
 
+  if (pathname.startsWith("/kbr-prime/thank-you")) {
+    return null;
+  }
+
   if (pathname.startsWith("/kbr-prime") || pathname.startsWith("/KBR_prime")) {
     return <Navbar variant="kbr" />;
   }

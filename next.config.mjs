@@ -20,6 +20,11 @@ const nextConfig = {
         destination: "/kbr-prime",
         permanent: true,
       },
+      {
+        source: "/thank-you",
+        destination: "/kbr-prime/thank-you",
+        permanent: false,
+      },
     ];
   },
 };

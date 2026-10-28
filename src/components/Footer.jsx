@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Instagram, Facebook, Youtube, Linkedin } from "lucide-react";
 
 const socialLinks = [
@@ -25,6 +28,12 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith("/kbr-prime/thank-you")) {
+    return null;
+  }
+
   return (
     <footer className="w-full bg-black text-white pt-12 pb-6 px-5 sm:px-0">
       <div className="max-w-7xl mx-auto px-4">

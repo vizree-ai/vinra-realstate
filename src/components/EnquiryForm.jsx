@@ -66,12 +66,24 @@ export default function EnquiryForm({
         throw error;
       }
 
-      alert("Submitted Successfully ✅ Our sales executive will connect with you shortly!");
+      if (typeof window !== "undefined" && typeof window.gtag === "function") {
+        window.gtag("event", "generate_lead", {
+          event_category: "form",
+          event_label: "KBR Prime Lead",
+        });
+      }
+
       setName("");
       setPhone("");
       setBhk("");
       setVisitDate("");
       if (setOpen) setOpen(false);
+
+      if (isKbr) {
+        window.location.href = "/kbr-prime/thank-you";
+      } else {
+        alert("Submitted Successfully ✅ Our sales executive will connect with you shortly!");
+      }
     } catch (error) {
       alert(`Error submitting ❌: ${error?.message || "Please try again"}`);
       console.error("Supabase submission error:", error);
