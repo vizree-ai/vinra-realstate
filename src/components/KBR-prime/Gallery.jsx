@@ -39,25 +39,38 @@ function LazyMap() {
     >
       {shouldLoad ? (
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.4942786703705!2d77.82032769999999!3d13.067830299999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae0f001629b9a3%3A0x4ae927a47d558812!2sVinra%20KBR%20Prime!5e0!3m2!1sen!2sin!4v1778146622983!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.482635781384!2d77.8182376!3d13.0685625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae050054fdda25%3A0x2682a8d94cefc38e!2sVinra%20KBR%20Prime!5e0!3m2!1sen!2sin!4v1716190000000!5m2!1sen!2sin"
           width="100%"
           height="100%"
           style={{ border: 0 }}
+          allowFullScreen=""
           loading="lazy"
-          title="Vinra KBR Prime Location Map"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Vinra KBR Prime Location Map - 3R9C+C8, Kolathur, Karnataka 562114"
         />
       ) : (
         <div className="flex flex-col items-center justify-center p-6 text-center text-stone-200">
           <MapPin className="w-10 h-10 text-[#d4af37] mb-3 animate-bounce" />
-          <p className="font-semibold text-lg text-white">Vinra KBR Prime, Hoskote</p>
-          <p className="text-xs text-stone-300 mt-1 mb-4">Click below to open interactive location map</p>
-          <button
-            type="button"
-            onClick={() => setShouldLoad(true)}
-            className="px-5 py-2.5 bg-[#d4af37] text-[#1E3D34] rounded-full text-xs font-bold shadow hover:bg-white transition cursor-pointer"
-          >
-            Load Interactive Map
-          </button>
+          <p className="font-semibold text-lg text-white">Vinra KBR Prime</p>
+          <p className="text-xs text-stone-300 mt-1">3R9C+C8, Kolathur, Karnataka 562114</p>
+          <p className="text-[11px] text-[#d4af37] mt-0.5 mb-4 font-mono">Plus Code: 3R9C+C8</p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => setShouldLoad(true)}
+              className="px-5 py-2.5 bg-[#d4af37] text-[#1E3D34] rounded-full text-xs font-bold shadow hover:bg-white transition cursor-pointer"
+            >
+              Load Interactive Map
+            </button>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=3R9C%2BC8+Vinra+KBR+Prime,+Kolathur,+Karnataka+562114"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-full text-xs font-medium border border-white/20 transition inline-flex items-center gap-1.5"
+            >
+              Open in Maps ↗
+            </a>
+          </div>
         </div>
       )}
     </div>
@@ -185,8 +198,35 @@ export default function Gallery() {
       </section>
       <section id="location" className="bg-[#5b3d2e] py-20 text-white scroll-mt-16">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-          {/* MAP */}
-          <LazyMap />
+          {/* MAP & ADDRESS */}
+          <div>
+            <div className="mb-4">
+              <span className="text-[#d4af37] text-xs uppercase tracking-widest font-semibold">
+                Strategic Location
+              </span>
+              <h2 className="text-3xl font-semibold mt-1">Project Location</h2>
+              <p className="text-white/90 text-sm mt-1.5 flex items-start gap-2">
+                <MapPin size={18} className="text-[#d4af37] shrink-0 mt-0.5" />
+                <span>3R9C+C8 Vinra KBR Prime, Kolathur, Karnataka 562114</span>
+              </p>
+            </div>
+
+            <LazyMap />
+
+            <div className="mt-3 flex items-center justify-between text-xs text-white/75 flex-wrap gap-2">
+              <span className="font-mono bg-black/25 px-2.5 py-1 rounded">
+                Plus Code: 3R9C+C8
+              </span>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=3R9C%2BC8+Vinra+KBR+Prime,+Kolathur,+Karnataka+562114"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#d4af37] hover:underline inline-flex items-center gap-1 font-semibold"
+              >
+                Get Directions on Google Maps ↗
+              </a>
+            </div>
+          </div>
 
           {/* PROXIMITIES */}
           <div className="px-6">
@@ -415,7 +455,11 @@ export default function Gallery() {
       </div>
 
       <section id="contact" className="w-full scroll-mt-24">
-        <EnquiryForm variant="visit" />
+        <EnquiryForm
+          variant="visit"
+          heading="Schedule a Site Visit"
+          description="Visit Vinra KBR Prime to explore 2 & 3 BHK luxury model homes."
+        />
 
         <div className="bg-[#5b3d2e] text-white text-center py-8 md:py-14 px-6">
           <h3 className="text-base md:text-xl font-medium mb-4 md:mb-6">
@@ -457,9 +501,9 @@ export default function Gallery() {
       </section>
       {open && (
         <EnquiryForm
-          heading="Get floor plans on your whatsapp"
-          description="Fill your details to receive complete floor plans, pricing & availability on your WhatsApp."
-          buttonText="Get Floor Plan"
+          heading="Get 2 & 3 BHK Floor Plans"
+          description="Receive detailed floor layouts & pricing on WhatsApp."
+          buttonText="Get Floor Plans"
           open={open}
           setOpen={setOpen}
         />

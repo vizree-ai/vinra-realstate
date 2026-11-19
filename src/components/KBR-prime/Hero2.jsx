@@ -52,7 +52,12 @@ export default function Hero2() {
             </div>
           </div>
 
-          <EnquiryForm variant="section" />
+          <EnquiryForm
+            variant="section"
+            heading="Enquire for 2 & 3 BHK Homes"
+            description="Get price details, floor plans & exclusive project offers."
+            buttonText="Enquire Now"
+          />
         </div>
       </section>
 
@@ -161,7 +166,7 @@ export default function Hero2() {
 
             <ul className="space-y-4 text-sm md:text-base text-white/90">
               {[
-                "Location – Hoskote, Bangalore",
+                "Location – Kolathur, Hoskote, Bangalore (562114)",
                 "RERA, CC / OC Approved",
                 "Structure – B+G+3 Floors",
                 "Total Units – 72 Units",

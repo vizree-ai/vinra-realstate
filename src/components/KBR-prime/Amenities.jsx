@@ -106,9 +106,9 @@ export default function Amenities() {
 
       {open && (
         <EnquiryForm
-          heading="Get the brochure on your whatsapp"
-          description="Fill your details to receive the complete brochure, pricing & availability on your ."
-          buttonText="Get Brochure"
+          heading="Download 2 & 3 BHK Brochure"
+          description="Get complete brochure, floor plans & pricing on WhatsApp."
+          buttonText="Download Brochure"
           open={open}
           setOpen={setOpen}
         />

@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { User, Phone, Building, CalendarDays } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function EnquiryForm({
   open,
@@ -11,23 +13,62 @@ export default function EnquiryForm({
   description,
   buttonText,
   tableName = "kbr-enquiries",
+  defaultBhk = "",
 }) {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [bhk, setBhk] = useState("");
+  const [bhk, setBhk] = useState(defaultBhk);
   const [visitDate, setVisitDate] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  // Synchronous lock refs to block rapid multi-clicks / double submissions
+  const submittingRef = useRef(false);
+  const submittedRef = useRef(false);
+  const lastSubmissionKeyRef = useRef("");
+
+  const isBmr = tableName === "bmr_enquiries";
+  const isKbr = tableName === "kbr-enquiries" || tableName === "kbr_enquiries";
+
+  useEffect(() => {
+    if (defaultBhk) {
+      setBhk(defaultBhk);
+    }
+  }, [defaultBhk, open]);
+
+  // Prefetch thank-you page for instant routing on submit
+  useEffect(() => {
+    if (isKbr) {
+      router.prefetch("/kbr-prime/thank-you");
+    }
+  }, [isKbr, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (loading) return;
+
+    // Synchronous immediate block against double-click / rapid tapping
+    if (submittingRef.current || submittedRef.current) {
+      return;
+    }
+
+    const cleanPhone = phone.trim();
+    const submissionKey = `${cleanPhone}_${tableName}`;
+
+    // Session duplicate guard: block repeated submission of same phone
+    if (lastSubmissionKeyRef.current === submissionKey) {
+      if (isKbr) {
+        router.push("/kbr-prime/thank-you");
+      }
+      return;
+    }
+
+    submittingRef.current = true;
     setLoading(true);
 
-    const isBmr = tableName === "bmr_enquiries";
-    const isKbr = tableName === "kbr-enquiries" || tableName === "kbr_enquiries";
     const payload = {};
-    if (name) payload.name = name;
-    if (phone) payload.phone = phone;
+    if (name.trim()) payload.name = name.trim();
+    if (cleanPhone) payload.phone = cleanPhone;
 
     if (bhk) {
       if (isBmr) payload.dimensions = bhk;
@@ -59,12 +100,16 @@ export default function EnquiryForm({
     }
 
     try {
-      const { supabase } = await import("@/lib/supabase");
       const { error } = await supabase.from(tableName).insert([payload]);
 
       if (error) {
         throw error;
       }
+
+      // Mark as permanently submitted for this action
+      submittedRef.current = true;
+      lastSubmissionKeyRef.current = submissionKey;
+      setIsSuccess(true);
 
       if (typeof window !== "undefined" && typeof window.gtag === "function") {
         window.gtag("event", "generate_lead", {
@@ -80,15 +125,19 @@ export default function EnquiryForm({
       if (setOpen) setOpen(false);
 
       if (isKbr) {
-        window.location.href = "/kbr-prime/thank-you";
+        // Fast instant client-side transition
+        router.push("/kbr-prime/thank-you");
       } else {
         alert("Submitted Successfully ✅ Our sales executive will connect with you shortly!");
+        submittingRef.current = false;
+        setLoading(false);
       }
     } catch (error) {
+      // Re-enable only upon actual error
+      submittingRef.current = false;
+      setLoading(false);
       alert(`Error submitting ❌: ${error?.message || "Please try again"}`);
       console.error("Supabase submission error:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -96,17 +145,23 @@ export default function EnquiryForm({
   if (variant === "popup" && !open) return null;
 
   if (variant === "visit") {
+    const visitHeading = heading || "Schedule a Site Visit";
+    const visitDescription =
+      description ||
+      (isKbr
+        ? "Visit Vinra KBR Prime to explore 2 & 3 BHK luxury model homes."
+        : "Visit the project site, explore floor plans & premium spaces.");
+
     return (
       <div className="bg-[#9c8c7f] py-8 md:py-10 text-center px-5">
-        <h2 className="text-2xl md:text-4xl text-white font-medium px-4">
-          Request For Site Visit
+        <h2 className="text-2xl md:text-4xl text-white font-bold px-4">
+          {visitHeading}
         </h2>
-        <p className="text-white text-base md:text-lg py-6 px-4">
-          Visit the project site, explore floor plans, amenities & premium
-          lifestyle spaces.
+        <p className="text-white/90 text-sm md:text-base py-3 md:py-4 px-4 max-w-2xl mx-auto">
+          {visitDescription}
         </p>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={loading ? "pointer-events-none opacity-85" : ""}>
           <div className="max-w-5xl mx-auto px-6 flex flex-col lg:flex-row gap-3 md:gap-6 justify-center items-center">
             {/* NAME */}
             <input
@@ -172,11 +227,11 @@ export default function EnquiryForm({
             type="submit"
             disabled={loading}
             className={`mt-6 md:mt-8 px-8 md:px-10 py-2.5 md:py-3 rounded-lg shadow-md transition text-sm md:text-base font-semibold text-white ${loading
-                ? "bg-gray-400 cursor-progress"
+                ? "bg-gray-400 cursor-not-allowed pointer-events-none"
                 : "bg-[#5b3d2e] hover:shadow-xl hover:scale-105 cursor-pointer"
               }`}
           >
-            {loading ? "Submitting..." : "Schedule Visit"}
+            {isSuccess ? "Redirecting..." : loading ? "Submitting..." : "Schedule Visit"}
           </button>
         </form>
       </div>
@@ -185,17 +240,37 @@ export default function EnquiryForm({
 
   // SECTION FORM
   if (variant === "section") {
+    const sectionHeading =
+      heading ||
+      (isKbr
+        ? "Enquire for 2 & 3 BHK Homes"
+        : isBmr
+        ? "Enquire for Villa Plots"
+        : "Interested? Let's talk!");
+    const sectionDescription =
+      description ||
+      (isKbr
+        ? "Get pricing, floor plans & brochure on WhatsApp."
+        : isBmr
+        ? "Get plot layout, price sheet & site visit details."
+        : "Connect with our property experts for quick assistance.");
+
     return (
       <div className="relative px-4 sm:px-0">
         <div className="hidden lg:block absolute -left-6 top-0 h-full w-[1px] bg-[#5b3d2e]/40"></div>
 
-        <h2 className="text-2xl md:text-4xl font-semibold text-[#1E3D34] leading-tight md:leading-snug">
-          Interested? Let&apos;s talk!
+        <h2 className="text-2xl md:text-3xl font-bold text-[#1E3D34] leading-tight md:leading-snug">
+          {sectionHeading}
         </h2>
-        <div className="w-26 md:w-20 h-[3px] bg-[#b78a31] rounded-full mt-2"></div>
+        <div className="w-16 md:w-20 h-[3px] bg-[#b78a31] rounded-full mt-2"></div>
+        {sectionDescription && (
+          <p className="mt-2 text-sm text-[#1E3D34]/80">
+            {sectionDescription}
+          </p>
+        )}
         <form
           onSubmit={handleSubmit}
-          className="mt-5 md:mt-8 space-y-3 md:space-y-4"
+          className={`mt-4 md:mt-6 space-y-3 md:space-y-4 ${loading ? "pointer-events-none opacity-85" : ""}`}
         >
           {/* NAME */}
           <div className="relative">
@@ -233,7 +308,14 @@ export default function EnquiryForm({
               type="tel"
               placeholder="Phone no*"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, "");
+                setPhone(value);
+              }}
+              pattern="[6-9]{1}[0-9]{9}"
+              maxLength={10}
+              minLength={10}
+              title="Enter a valid 10-digit mobile number."
               className="w-full pl-12 pr-5 py-3.5 md:py-3.5 rounded-xl md:rounded-2xl 
               border border-[#1E3D34] 
               text-[#1E3D34] placeholder-[#1E3D34]/70 
@@ -244,7 +326,7 @@ export default function EnquiryForm({
             />
           </div>
 
-          {/* SELECT */}
+          {/* SELECT BHK / CONFIGURATION */}
           <div className="relative">
             <Building
               size={20}
@@ -257,20 +339,33 @@ export default function EnquiryForm({
               suppressHydrationWarning
               value={bhk}
               onChange={(e) => setBhk(e.target.value)}
-              className="block w-full pl-12 pr-10 py-3.5 md:py-3.5 rounded-xl 
+              className={`block w-full pl-12 pr-10 py-3.5 md:py-3.5 rounded-xl 
                 border border-[#1E3D34]
-                  text-[#1E3D34]/70 
-                  outline-none 
-                  focus:border-[#C8A96A] focus:ring-2 focus:ring-[#C8A96A]/30 
-                  appearance-none cursor-pointer transition-all"
+                ${!bhk ? "text-[#1E3D34]/70" : "text-[#1E3D34] font-medium"} 
+                outline-none 
+                focus:border-[#C8A96A] focus:ring-2 focus:ring-[#C8A96A]/30 
+                appearance-none cursor-pointer transition-all`}
               required
             >
-              <option value="" disabled hidden>
-                Select Plot Dimensions*
-              </option>
-              <option value="30x40 Plot">30 x 40 Villa Plot (1,200 Sq Ft)</option>
-              <option value="30x50 Plot">30 x 50 Villa Plot (1,500 Sq Ft)</option>
-              <option value="Custom Plot">Custom / Odd Size Plot</option>
+              {isBmr ? (
+                <>
+                  <option value="" disabled hidden>
+                    Select Plot Dimensions*
+                  </option>
+                  <option value="30x40 Plot">30 x 40 Villa Plot (1,200 Sq Ft)</option>
+                  <option value="30x50 Plot">30 x 50 Villa Plot (1,500 Sq Ft)</option>
+                  <option value="Custom Plot">Custom / Odd Size Plot</option>
+                </>
+              ) : (
+                <>
+                  <option value="" disabled hidden>
+                    Select Configuration*
+                  </option>
+                  <option value="2 BHK">2 BHK Apartment</option>
+                  <option value="3 BHK">3 BHK Apartment</option>
+                  <option value="2 & 3 BHK">2 & 3 BHK (Both)</option>
+                </>
+              )}
             </select>
 
             <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#1E3D34]">
@@ -282,7 +377,8 @@ export default function EnquiryForm({
           <button
             suppressHydrationWarning
             type="submit"
-            className="w-full 
+            disabled={loading}
+            className={`w-full 
                    bg-gradient-to-r from-[#b07a1d] to-[#c69636] 
                    text-white py-3 md:py-4 
                    rounded-xl font-semibold tracking-wide 
@@ -290,9 +386,9 @@ export default function EnquiryForm({
                    hover:shadow-lg 
                    active:scale-95 md:hover:scale-[1.02] 
                    transition-all 
-                   relative overflow-hidden cursor-pointer"
+                   relative overflow-hidden ${loading ? "opacity-75 cursor-not-allowed pointer-events-none" : "cursor-pointer"}`}
           >
-            ENQUIRE NOW
+            {isSuccess ? "Redirecting..." : loading ? "Submitting..." : (buttonText || "ENQUIRE NOW")}
           </button>
         </form>
       </div>
@@ -300,43 +396,61 @@ export default function EnquiryForm({
   }
 
   // POPUP FORM
+  const popupHeading =
+    heading ||
+    (isKbr
+      ? "Enquire for 2 & 3 BHK Homes"
+      : isBmr
+      ? "Enquire for Villa Plots"
+      : "Discover Your Dream Property");
+
+  const popupDescription =
+    description ||
+    (isKbr
+      ? "Get instant pricing, floor plans & brochure."
+      : isBmr
+      ? "Get plot layout, price sheet & site visit details."
+      : "Connect with our sales expert for quick assistance.");
+
+  const brandTag = isKbr ? "Vinra KBR Prime" : isBmr ? "Vinra BMR Velverde" : "Vinra Real Estate";
+
   return (
     <div
       onClick={() => setOpen(false)}
-      className="fixed inset-0 backdrop-blur-md z-[999] flex items-center justify-center p-4"
+      className="fixed inset-0 backdrop-blur-md z-[999] flex items-center justify-center p-4 bg-black/40"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white w-full max-w-md rounded-3xl shadow-xl relative p-7 border border-[#e7d8c8]"
+        className="bg-white w-full max-w-md rounded-3xl shadow-xl relative p-6 sm:p-7 border border-[#e7d8c8]"
       >
         <button
           suppressHydrationWarning
           onClick={() => setOpen(false)}
-          className="absolute top-4 right-4 bg-[#5b3d2e] text-white w-9 h-9 rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition"
+          className="absolute top-4 right-4 bg-[#5b3d2e] text-white w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition"
         >
           ✕
         </button>
 
-        <p className="text-center text-sm font-semibold tracking-[3px] text-[#a06a44] uppercase">
-          Vinra Real Estate
+        <p className="text-center text-xs font-semibold tracking-[2.5px] text-[#a06a44] uppercase">
+          {brandTag}
         </p>
 
-        <h2 className="text-center text-2xl font-bold text-[#5b3d2e] mt-2">
-          {heading || "Discover Your Dream Property"}
+        <h2 className="text-center text-xl sm:text-2xl font-bold text-[#5b3d2e] mt-1.5 leading-snug">
+          {popupHeading}
         </h2>
 
-        <p className="text-center text-[#7a5a45] mt-2 mb-6 text-sm">
-          {description || "Connect with our sales expert for brochure, pricing & site visit assistance."}
+        <p className="text-center text-[#7a5a45] mt-1.5 mb-5 text-xs sm:text-sm">
+          {popupDescription}
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className={`space-y-3.5 ${loading ? "pointer-events-none opacity-85" : ""}`}>
           <input
             suppressHydrationWarning
             type="text"
             placeholder="Full Name*"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-4 py-3 rounded-2xl border border-[#d6b89f] text-black bg-[#faf7f4] placeholder-gray-500 outline-none focus:ring-1 focus:ring-[#5b3d2e]"
+            className="w-full px-4 py-3 rounded-xl border border-[#d6b89f] text-black bg-[#faf7f4] placeholder-gray-500 outline-none focus:ring-1 focus:ring-[#5b3d2e] text-sm sm:text-base"
             required
           />
 
@@ -345,8 +459,15 @@ export default function EnquiryForm({
             type="tel"
             placeholder="Whatsapp No.*"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="w-full px-4 py-3 rounded-2xl border border-[#d6b89f] text-black bg-[#faf7f4] placeholder-gray-500 outline-none focus:ring-1 focus:ring-[#5b3d2e]"
+            onChange={(e) => {
+              const value = e.target.value.replace(/\D/g, "");
+              setPhone(value);
+            }}
+            pattern="[6-9]{1}[0-9]{9}"
+            maxLength={10}
+            minLength={10}
+            title="Enter a valid 10-digit mobile number."
+            className="w-full px-4 py-3 rounded-xl border border-[#d6b89f] text-black bg-[#faf7f4] placeholder-gray-500 outline-none focus:ring-1 focus:ring-[#5b3d2e] text-sm sm:text-base"
             required
           />
 
@@ -355,15 +476,28 @@ export default function EnquiryForm({
               suppressHydrationWarning
               value={bhk}
               onChange={(e) => setBhk(e.target.value)}
-              className="block w-full px-4 py-3 rounded-xl border border-[#d6b89f] bg-[#faf7f4] text-gray-500 outline-none focus:ring-1 focus:ring-[#5b3d2e] appearance-none cursor-pointer"
+              className={`block w-full px-4 py-3 rounded-xl border border-[#d6b89f] bg-[#faf7f4] ${!bhk ? "text-gray-500" : "text-[#5b3d2e] font-medium"} outline-none focus:ring-1 focus:ring-[#5b3d2e] appearance-none cursor-pointer text-sm sm:text-base`}
               required
             >
-              <option value="" disabled hidden>
-                Select Plot Dimensions*
-              </option>
-              <option value="30x40 Plot">30 x 40 Villa Plot (1,200 Sq Ft)</option>
-              <option value="30x50 Plot">30 x 50 Villa Plot (1,500 Sq Ft)</option>
-              <option value="Custom Plot">Custom / Odd Size Plot</option>
+              {isBmr ? (
+                <>
+                  <option value="" disabled hidden>
+                    Select Plot Dimensions*
+                  </option>
+                  <option value="30x40 Plot">30 x 40 Villa Plot (1,200 Sq Ft)</option>
+                  <option value="30x50 Plot">30 x 50 Villa Plot (1,500 Sq Ft)</option>
+                  <option value="Custom Plot">Custom / Odd Size Plot</option>
+                </>
+              ) : (
+                <>
+                  <option value="" disabled hidden>
+                    Select Configuration*
+                  </option>
+                  <option value="2 BHK">2 BHK Apartment</option>
+                  <option value="3 BHK">3 BHK Apartment</option>
+                  <option value="2 & 3 BHK">2 & 3 BHK (Both)</option>
+                </>
+              )}
             </select>
 
             <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#5b3d2e]">
@@ -374,13 +508,18 @@ export default function EnquiryForm({
           <button
             suppressHydrationWarning
             type="submit"
-            className="w-full py-3.5 rounded-2xl text-white font-semibold bg-gradient-to-r from-[#5b3d2e] to-[#7a5239] hover:opacity-95 transition shadow-md cursor-pointer"
+            disabled={loading}
+            className={`w-full py-3.5 rounded-xl text-white font-semibold bg-gradient-to-r from-[#5b3d2e] to-[#7a5239] hover:opacity-95 transition shadow-md ${loading ? "opacity-75 cursor-not-allowed pointer-events-none" : "cursor-pointer"}`}
           >
-            {buttonText || "ENQUIRE NOW"}
+            {isSuccess ? "Redirecting..." : loading ? "Submitting..." : (buttonText || "ENQUIRE NOW")}
           </button>
 
-          <p className="mt-3 text-center text-xs leading-relaxed text-[#7a5a45]">
-            🔒 Your details are secure. Our sales executive will connect with you shortly to share the official brochure, plot layout & pricing.
+          <p className="mt-2 text-center text-[11px] leading-relaxed text-[#7a5a45]">
+            {isKbr
+              ? "🔒 100% Privacy. Instant response with price sheet & floor plans."
+              : isBmr
+              ? "🔒 100% Privacy. Instant response with official brochure & plot layout."
+              : "🔒 100% Privacy. Instant response from our sales team."}
           </p>
         </form>
       </div>

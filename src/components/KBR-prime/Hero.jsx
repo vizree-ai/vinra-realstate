@@ -149,7 +149,15 @@ export default function Hero() {
 
       <FloatingContactButtons />
 
-      {open && <EnquiryForm open={open} setOpen={setOpen} />}
+      {open && (
+        <EnquiryForm
+          open={open}
+          setOpen={setOpen}
+          heading="Enquire for 2 & 3 BHK Homes"
+          description="Get instant pricing, floor plans & brochure on WhatsApp."
+          buttonText="Enquire Now"
+        />
+      )}
       <MobileStickyContact setOpen={setOpen} />
     </section>
   );

@@ -373,6 +373,9 @@ export default function Navbar({ variant = "home" }) {
           setOpen={setOpen}
           variant="popup"
           tableName={variant === "project" ? "bmr_enquiries" : "kbr-enquiries"}
+          heading={variant === "kbr" ? "Enquire for 2 & 3 BHK Homes" : undefined}
+          description={variant === "kbr" ? "Get instant pricing, floor plans & brochure on WhatsApp." : undefined}
+          buttonText={variant === "kbr" ? "Enquire Now" : undefined}
         />
       )}
     </>

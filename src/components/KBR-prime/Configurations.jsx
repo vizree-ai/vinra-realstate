@@ -34,8 +34,9 @@ const ConfigCard = ({ item }) => {
           open={open}
           setOpen={setOpen}
           heading={`Unlock ${item.title} Price`}
-          description={`Fill your details to receive pricing, floor plans & offers for ${item.title}.`}
+          description={`Get instant pricing, floor plans & offers for ${item.title}.`}
           buttonText="Request Pricing"
+          defaultBhk={item.title}
         />
       )}
     </>
