@@ -161,54 +161,54 @@ export default function EnquiryForm({
           {visitDescription}
         </p>
 
-        <form onSubmit={handleSubmit} className={loading ? "pointer-events-none opacity-85" : ""}>
-          <div className="max-w-5xl mx-auto px-6 flex flex-col lg:flex-row gap-3 md:gap-6 justify-center items-center">
-            {/* NAME */}
-            <input
-              suppressHydrationWarning
-              type="text"
-              placeholder="Name*"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="flex-1 w-full px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base text-black"
-              required
-            />
-
-            {/* PHONE */}
-            <input
-              suppressHydrationWarning
-              type="tel"
-              placeholder="Whatsapp No.*"
-              value={phone}
-              onChange={(e) => {
-                const value = e.target.value.replace(/\D/g, "");
-                setPhone(value);
-              }}
-              pattern="[6-9]{1}[0-9]{9}"
-              maxLength={10}
-              minLength={10}
-              title="Enter a valid 10-digit mobile number."
-              className="flex-1 w-full px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base text-black"
-              required
-            />
-
-            {/* DATE */}
-            <div className="relative flex-1 w-full">
+          <form onSubmit={handleSubmit} className={loading ? "pointer-events-none opacity-85" : ""}>
+            <div className="max-w-5xl mx-auto px-6 flex flex-col lg:flex-row gap-3 md:gap-6 justify-center items-center">
+              {/* NAME */}
               <input
                 suppressHydrationWarning
-                type="date"
-                value={visitDate}
-                onChange={(e) => setVisitDate(e.target.value)}
-                className="w-full px-6 pr-12 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base text-black appearance-none"
+                type="text"
+                placeholder="Name*"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="flex-1 w-full px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base text-black"
                 required
               />
 
-              <CalendarDays
-                size={20}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-[#5b3d2e] pointer-events-none"
+              {/* PHONE */}
+              <input
+                suppressHydrationWarning
+                type="tel"
+                placeholder="Whatsapp No.*"
+                value={phone}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\D/g, "");
+                  setPhone(value);
+                }}
+                pattern="[6-9]{1}[0-9]{9}"
+                maxLength={10}
+                minLength={10}
+                title="Enter a valid 10-digit mobile number."
+                className="flex-1 w-full px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base text-black"
+                required
               />
 
-              <style jsx>{`
+              {/* DATE */}
+              <div className="relative flex-1 w-full">
+                <input
+                  suppressHydrationWarning
+                  type="date"
+                  value={visitDate}
+                  onChange={(e) => setVisitDate(e.target.value)}
+                  className="w-full px-6 pr-12 py-3 md:py-4 rounded-xl md:rounded-2xl border-2 border-[#5b3d2e] bg-white outline-none text-sm md:text-base text-black appearance-none"
+                  required
+                />
+
+                <CalendarDays
+                  size={20}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#5b3d2e] pointer-events-none"
+                />
+
+                <style jsx>{`
                 input[type="date"]::-webkit-calendar-picker-indicator {
                   opacity: 0;
                   position: absolute;
@@ -218,22 +218,22 @@ export default function EnquiryForm({
                   cursor: pointer;
                 }
               `}</style>
+              </div>
             </div>
-          </div>
 
-          {/* BUTTON */}
-          <button
-            suppressHydrationWarning
-            type="submit"
-            disabled={loading}
-            className={`mt-6 md:mt-8 px-8 md:px-10 py-2.5 md:py-3 rounded-lg shadow-md transition text-sm md:text-base font-semibold text-white ${loading
-                ? "bg-gray-400 cursor-not-allowed pointer-events-none"
-                : "bg-[#5b3d2e] hover:shadow-xl hover:scale-105 cursor-pointer"
+            {/* BUTTON */}
+            <button
+              suppressHydrationWarning
+              type="submit"
+              disabled={loading}
+              className={`mt-6 md:mt-8 px-8 md:px-10 py-2.5 md:py-3 rounded-lg shadow-md transition text-sm md:text-base font-semibold text-white ${loading
+                  ? "bg-gray-400 cursor-not-allowed pointer-events-none"
+                  : "bg-[#5b3d2e] hover:shadow-xl hover:scale-105 cursor-pointer"
               }`}
-          >
-            {isSuccess ? "Redirecting..." : loading ? "Submitting..." : "Schedule Visit"}
-          </button>
-        </form>
+            >
+              {isSuccess ? "Redirecting..." : loading ? "Submitting..." : "Schedule Visit"}
+            </button>
+          </form>
       </div>
     );
   }
@@ -245,15 +245,15 @@ export default function EnquiryForm({
       (isKbr
         ? "Enquire for 2 & 3 BHK Homes"
         : isBmr
-        ? "Enquire for Villa Plots"
-        : "Interested? Let's talk!");
+          ? "Enquire for Villa Plots"
+          : "Interested? Let's talk!");
     const sectionDescription =
       description ||
       (isKbr
         ? "Get pricing, floor plans & brochure on WhatsApp."
         : isBmr
-        ? "Get plot layout, price sheet & site visit details."
-        : "Connect with our property experts for quick assistance.");
+          ? "Get plot layout, price sheet & site visit details."
+          : "Connect with our property experts for quick assistance.");
 
     return (
       <div className="relative px-4 sm:px-0">
@@ -386,7 +386,7 @@ export default function EnquiryForm({
                    hover:shadow-lg 
                    active:scale-95 md:hover:scale-[1.02] 
                    transition-all 
-                   relative overflow-hidden ${loading ? "opacity-75 cursor-not-allowed pointer-events-none" : "cursor-pointer"}`}
+            relative overflow-hidden ${loading ? "opacity-75 cursor-not-allowed pointer-events-none" : "cursor-pointer"}`}
           >
             {isSuccess ? "Redirecting..." : loading ? "Submitting..." : (buttonText || "ENQUIRE NOW")}
           </button>
@@ -444,84 +444,84 @@ export default function EnquiryForm({
         </p>
 
         <form onSubmit={handleSubmit} className={`space-y-3.5 ${loading ? "pointer-events-none opacity-85" : ""}`}>
-          <input
-            suppressHydrationWarning
-            type="text"
-            placeholder="Full Name*"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-[#d6b89f] text-black bg-[#faf7f4] placeholder-gray-500 outline-none focus:ring-1 focus:ring-[#5b3d2e] text-sm sm:text-base"
-            required
-          />
-
-          <input
-            suppressHydrationWarning
-            type="tel"
-            placeholder="Whatsapp No.*"
-            value={phone}
-            onChange={(e) => {
-              const value = e.target.value.replace(/\D/g, "");
-              setPhone(value);
-            }}
-            pattern="[6-9]{1}[0-9]{9}"
-            maxLength={10}
-            minLength={10}
-            title="Enter a valid 10-digit mobile number."
-            className="w-full px-4 py-3 rounded-xl border border-[#d6b89f] text-black bg-[#faf7f4] placeholder-gray-500 outline-none focus:ring-1 focus:ring-[#5b3d2e] text-sm sm:text-base"
-            required
-          />
-
-          <div className="relative">
-            <select
+            <input
               suppressHydrationWarning
-              value={bhk}
-              onChange={(e) => setBhk(e.target.value)}
-              className={`block w-full px-4 py-3 rounded-xl border border-[#d6b89f] bg-[#faf7f4] ${!bhk ? "text-gray-500" : "text-[#5b3d2e] font-medium"} outline-none focus:ring-1 focus:ring-[#5b3d2e] appearance-none cursor-pointer text-sm sm:text-base`}
+              type="text"
+              placeholder="Full Name*"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl border border-[#d6b89f] text-black bg-[#faf7f4] placeholder-gray-500 outline-none focus:ring-1 focus:ring-[#5b3d2e] text-sm sm:text-base"
               required
+            />
+
+            <input
+              suppressHydrationWarning
+              type="tel"
+              placeholder="Whatsapp No.*"
+              value={phone}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, "");
+                setPhone(value);
+              }}
+              pattern="[6-9]{1}[0-9]{9}"
+              maxLength={10}
+              minLength={10}
+              title="Enter a valid 10-digit mobile number."
+              className="w-full px-4 py-3 rounded-xl border border-[#d6b89f] text-black bg-[#faf7f4] placeholder-gray-500 outline-none focus:ring-1 focus:ring-[#5b3d2e] text-sm sm:text-base"
+              required
+            />
+
+            <div className="relative">
+              <select
+                suppressHydrationWarning
+                value={bhk}
+                onChange={(e) => setBhk(e.target.value)}
+                className={`block w-full px-4 py-3 rounded-xl border border-[#d6b89f] bg-[#faf7f4] ${!bhk ? "text-gray-500" : "text-[#5b3d2e] font-medium"} outline-none focus:ring-1 focus:ring-[#5b3d2e] appearance-none cursor-pointer text-sm sm:text-base`}
+                required
+              >
+                {isBmr ? (
+                  <>
+                    <option value="" disabled hidden>
+                      Select Plot Dimensions*
+                    </option>
+                    <option value="30x40 Plot">30 x 40 Villa Plot (1,200 Sq Ft)</option>
+                    <option value="30x50 Plot">30 x 50 Villa Plot (1,500 Sq Ft)</option>
+                    <option value="Custom Plot">Custom / Odd Size Plot</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="" disabled hidden>
+                      Select Configuration*
+                    </option>
+                    <option value="2 BHK">2 BHK Apartment</option>
+                    <option value="3 BHK">3 BHK Apartment</option>
+                    <option value="2 & 3 BHK">2 & 3 BHK (Both)</option>
+                  </>
+                )}
+              </select>
+
+              <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#5b3d2e]">
+                ▼
+              </span>
+            </div>
+
+            <button
+              suppressHydrationWarning
+              type="submit"
+              disabled={loading}
+              className={`w-full py-3.5 rounded-xl text-white font-semibold bg-gradient-to-r from-[#5b3d2e] to-[#7a5239] hover:opacity-95 transition shadow-md ${loading ? "opacity-75 cursor-not-allowed pointer-events-none" : "cursor-pointer"}`}
             >
-              {isBmr ? (
-                <>
-                  <option value="" disabled hidden>
-                    Select Plot Dimensions*
-                  </option>
-                  <option value="30x40 Plot">30 x 40 Villa Plot (1,200 Sq Ft)</option>
-                  <option value="30x50 Plot">30 x 50 Villa Plot (1,500 Sq Ft)</option>
-                  <option value="Custom Plot">Custom / Odd Size Plot</option>
-                </>
-              ) : (
-                <>
-                  <option value="" disabled hidden>
-                    Select Configuration*
-                  </option>
-                  <option value="2 BHK">2 BHK Apartment</option>
-                  <option value="3 BHK">3 BHK Apartment</option>
-                  <option value="2 & 3 BHK">2 & 3 BHK (Both)</option>
-                </>
-              )}
-            </select>
+              {isSuccess ? "Redirecting..." : loading ? "Submitting..." : (buttonText || "ENQUIRE NOW")}
+            </button>
 
-            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#5b3d2e]">
-              ▼
-            </span>
-          </div>
-
-          <button
-            suppressHydrationWarning
-            type="submit"
-            disabled={loading}
-            className={`w-full py-3.5 rounded-xl text-white font-semibold bg-gradient-to-r from-[#5b3d2e] to-[#7a5239] hover:opacity-95 transition shadow-md ${loading ? "opacity-75 cursor-not-allowed pointer-events-none" : "cursor-pointer"}`}
-          >
-            {isSuccess ? "Redirecting..." : loading ? "Submitting..." : (buttonText || "ENQUIRE NOW")}
-          </button>
-
-          <p className="mt-2 text-center text-[11px] leading-relaxed text-[#7a5a45]">
-            {isKbr
-              ? "🔒 100% Privacy. Instant response with price sheet & floor plans."
-              : isBmr
-              ? "🔒 100% Privacy. Instant response with official brochure & plot layout."
-              : "🔒 100% Privacy. Instant response from our sales team."}
-          </p>
-        </form>
+            <p className="mt-2 text-center text-[11px] leading-relaxed text-[#7a5a45]">
+              {isKbr
+                ? "🔒 100% Privacy. Instant response with price sheet & floor plans."
+                : isBmr
+                  ? "🔒 100% Privacy. Instant response with official brochure & plot layout."
+                  : "🔒 100% Privacy. Instant response from our sales team."}
+            </p>
+          </form>
       </div>
     </div>
   );

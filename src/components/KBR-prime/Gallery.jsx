@@ -179,9 +179,8 @@ export default function Gallery() {
               <div
                 key={i}
                 onClick={() => setIndex(i)}
-                className={`h-2 w-2 rounded-full cursor-pointer transition ${
-                  i === index ? "bg-black w-3" : "bg-gray-400"
-                }`}
+                className={`h-2 w-2 rounded-full cursor-pointer transition ${i === index ? "bg-black w-3" : "bg-gray-400"
+                  }`}
               />
             ))}
           </div>
