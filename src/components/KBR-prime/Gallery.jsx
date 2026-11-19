@@ -200,14 +200,7 @@ export default function Gallery() {
           {/* MAP & ADDRESS */}
           <div>
             <div className="mb-4">
-              <span className="text-[#d4af37] text-xs uppercase tracking-widest font-semibold">
-                Strategic Location
-              </span>
               <h2 className="text-3xl font-semibold mt-1">Project Location</h2>
-              <p className="text-white/90 text-sm mt-1.5 flex items-start gap-2">
-                <MapPin size={18} className="text-[#d4af37] shrink-0 mt-0.5" />
-                <span>3R9C+C8 Vinra KBR Prime, Kolathur, Karnataka 562114</span>
-              </p>
             </div>
 
             <LazyMap />
